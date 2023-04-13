@@ -26,7 +26,7 @@ export const YoutubeEmbed = {
       url: 'https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/lite-yt-embed.js',
       strategy: 'idle',
       location: 'head',
-      action: 'append',
+        action: 'append',
     },
   ],
 };
