@@ -13,20 +13,20 @@
 // limitations under the License.
 
 export const YoutubeEmbed = {
-  id: "youtube-embed",
-  description: "Embed a YouTube embed on your webpage.",
-  website: "https://github.com/paulirish/lite-youtube-embed",
+  id: 'youtube-embed',
+  description: 'Embed a YouTube embed on your webpage.',
+  website: 'https://github.com/paulirish/lite-youtube-embed',
   content:
-    "<lite-youtube videoid=${args.videoid} playlabel=${args.playlabel}></lite-youtube>",
+    '<lite-youtube videoid=${args.videoid} playlabel=${args.playlabel}></lite-youtube>',
   stylesheets: [
-    "https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/lite-yt-embed.css",
+    'https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/lite-yt-embed.css',
   ],
   scripts: [
     {
-      url: "https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/lite-yt-embed.js",
-      strategy: "idle",
-      location: "head",
-      action: "append",
-    }
+      url: 'https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/lite-yt-embed.js',
+      strategy: 'idle',
+      location: 'head',
+      action: 'append',
+    },
   ],
 };

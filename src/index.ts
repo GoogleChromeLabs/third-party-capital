@@ -12,6 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export { GoogleAnalytics } from "./third-parties/google-analytics";
-export { GoogleMapsEmbed } from "./third-parties/google-maps-embed";
-export { YoutubeEmbed } from "./third-parties/youtube-embed";
+export { GoogleAnalytics } from './third-parties/google-analytics';
+export { GoogleMapsEmbed } from './third-parties/google-maps-embed';
+export { YoutubeEmbed } from './third-parties/youtube-embed';
