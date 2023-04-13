@@ -22,7 +22,6 @@ The loading recommendation for each third-party resource is defined with the fol
 {
   id: string;
   description: string;
-  recommendation: string;
   website?: string;
   content?: string;
   stylesheets?: Array<string>;
@@ -44,10 +43,11 @@ These properties provide a heuristic for consumers to decide how, when, and wher
 - **website** _(optional)_:  URL address of website
 - **content** _(optional<sup>*</sup>)_: HTML elements to be inserted where 3PC component is placed
 - **stylesheets** _(optional<sup>*</sup>)_: URLs of any stylesheets that need to be loaded
-- **scripts** _(optional<sup>*</sup>)_: URLs of any scripts that need to be loaded, either as an array of URLs or an object array that contains additional properties:
-- **strategy**: _(optional)_: String literal to denote loading strategy of third-party script (on the server, on the client, during browser idle time, or in a web worker)
-- **location**: _(optional)_: String literal to denote whether to inject the script in <head> or <body> (only useful if strategy=server is used)
-- **action**: _(optional)_: String literal to denote whether to prepend or append the script (only useful if strategy=server is used)
+- **scripts** _(optional<sup>*</sup>)_: URLs of any scripts that need to be loaded, either as an array of URLs or an object array that contains a list of the following properties:
+  - **url**: URL of script
+  - **strategy**: String literal to denote loading strategy of third-party script (on the server, on the client, during browser idle time, or in a web worker)
+  - **location**: String literal to denote whether to inject the script in <head> or <body> (only useful if strategy=server is used)
+  - **action**: String literal to denote whether to prepend or append the script (only useful if strategy=server is used)
 
 _* A value must be included for at least one of the main attributes (content, stylesheets, or scripts)_
 
@@ -60,6 +60,10 @@ The third-party resources that are currently provided in Third Party Capital, al
 - **Google Analytics**: Off-load to a web worker
 - **Google Maps (Embed)**: Use the `loading` attribute to lazy load the embed
 - **YouTube Embed**: Use [lite-youtube-embed](https://github.com/paulirish/lite-youtube-embed)
+
+Although the details are still being finalized, only a select number of third-parties that meet
+certain usage criteria will be included. Please do not submit any requests to include new
+third-parties.
 
 ## Limitations
 
