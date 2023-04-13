@@ -38,25 +38,25 @@ The loading recommendation for each third-party resource is defined with the fol
 
 These properties provide a heuristic for consumers to decide how, when, and where to load a particular third-party to minimize its impact on performance. Here are the details:
 
-- **id** _(required)_:  Identifier string
-- **description** _(required)_:  Short description of third-party entity
-- **website** _(optional)_:  URL address of website
-- **content** _(optional<sup>*</sup>)_: HTML elements to be inserted where 3PC component is placed
-- **stylesheets** _(optional<sup>*</sup>)_: URLs of any stylesheets that need to be loaded
-- **scripts** _(optional<sup>*</sup>)_: URLs of any scripts that need to be loaded, either as an array of URLs or an object array that contains a list of the following properties:
+- **id** _(required)_: Identifier string
+- **description** _(required)_: Short description of third-party entity
+- **website** _(optional)_: URL address of website
+- **content** _(optional<sup>\*</sup>)_: HTML elements to be inserted where 3PC component is placed
+- **stylesheets** _(optional<sup>\*</sup>)_: URLs of any stylesheets that need to be loaded
+- **scripts** _(optional<sup>\*</sup>)_: URLs of any scripts that need to be loaded, either as an array of URLs or an object array that contains a list of the following properties:
   - **url**: URL of script
   - **strategy**: String literal to denote loading strategy of third-party script (on the server, on the client, during browser idle time, or in a web worker)
   - **location**: String literal to denote whether to inject the script in <head> or <body> (only useful if strategy=server is used)
   - **action**: String literal to denote whether to prepend or append the script (only useful if strategy=server is used)
 
-_* A value must be included for at least one of the main attributes (content, stylesheets, or scripts)_
+_\* A value must be included for at least one of the main attributes (content, stylesheets, or scripts)_
 
 ## Supported Third Parties
 
 _Third Party Capital is an experimental library and the list of supported third parties is subject to change._
 
 The third-party resources that are currently provided in Third Party Capital, along with their suggested loading practices, are:
-  
+
 - **Google Analytics**: Off-load to a web worker
 - **Google Maps (Embed)**: Use the `loading` attribute to lazy load the embed
 - **YouTube Embed**: Use [lite-youtube-embed](https://github.com/paulirish/lite-youtube-embed)

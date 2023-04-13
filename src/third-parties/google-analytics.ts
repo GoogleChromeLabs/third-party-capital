@@ -13,21 +13,21 @@
 // limitations under the License.
 
 export const GoogleAnalytics = {
-  id: "google-analytics",
-  description: "Install a Google Analytics tag on your website",
-  website: "https://analytics.google.com/analytics/web/",
+  id: 'google-analytics',
+  description: 'Install a Google Analytics tag on your website',
+  website: 'https://analytics.google.com/analytics/web/',
   scripts: [
     {
-      url: "https://www.googletagmanager.com/gtag/js?id=${args.id}",
-      strategy: "worker",
-      location: "head",
-      action: "append",
+      url: 'https://www.googletagmanager.com/gtag/js?id=${args.id}',
+      strategy: 'worker',
+      location: 'head',
+      action: 'append',
     },
     {
       code: "window.dataLayer=window.dataLayer||[];window.gtag=function gtag(){window.dataLayer.push(arguments);};gtag('js',new Date());gtag('config','${args.id}')",
-      strategy: "worker",
-      location: "head",
-      action: "append",
-    }
+      strategy: 'worker',
+      location: 'head',
+      action: 'append',
+    },
   ],
 };
