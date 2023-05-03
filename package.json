@@ -25,7 +25,9 @@
     "build:esm": "tsc -p ./config/tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.js",
     "build:cjs": "tsc -p ./config/tsconfig.cjs.json",
     "prepack": "npm run build",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "format:check": "prettier --check '**/*.{ts,js}'",
+    "lint:check": "eslint '**/*.{ts,js}'"
   },
   "repository": {
     "type": "git",

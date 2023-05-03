@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
 
     steps:
       - uses: actions/checkout@v3
@@ -19,5 +19,5 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-      - run: prettier --check "**/*.{ts,js}"
-      - run: eslint "**/*.{ts,js}"
+      - run: npm run format:check
+      - run: npm run lint:check
