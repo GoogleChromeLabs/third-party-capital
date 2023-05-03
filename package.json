@@ -50,7 +50,7 @@
   "lint-staged": {
     "*.{js,ts}": [
       "eslint --fix",
-      "prettier --write"
+      "prettier --write --ignore-unknown"
     ]
   }
 }
