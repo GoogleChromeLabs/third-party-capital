@@ -8,7 +8,11 @@ jobs:
     name: Linting and Formatting
     runs-on: ubuntu-latest
     steps:
+<<<<<<< HEAD
       - uses: actions/checkout@v3
+=======
+      - uses: actions/checkout@v2
+>>>>>>> 67eae0b (specify node version in github action)
         with:
           node-version: '16'
       - name: Install packages
