@@ -16,6 +16,6 @@ import data from './data.json';
 import { formatData } from '../../utils';
 import type { Data, Inputs } from '../../types';
 
-export const YouTubeEmbed = ({ ...args }: Inputs) => {
+export const YoutubeEmbed = ({ ...args }: Inputs) => {
   return formatData(data as Data, args);
 };
