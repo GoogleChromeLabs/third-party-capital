@@ -1,4 +1,4 @@
-<img alt="Progressive Tooling" title="Progressive Tooling" src="https://user-images.githubusercontent.com/12476932/229881508-f9ef68db-8ee7-4795-8de8-80a50145bbd0.png" width="150">
+<img alt="Third Party Capital Logo" title="Third Party Capital Logo" src="https://user-images.githubusercontent.com/12476932/229881508-f9ef68db-8ee7-4795-8de8-80a50145bbd0.png" width="150">
 
 # Third Party Capital
 
@@ -23,16 +23,20 @@ The loading recommendation for each third-party resource is defined with the fol
   id: string;
   description: string;
   website?: string;
-  content?: string;
+  html?: {
+    element: string;
+    attributes: HtmlAttributes;
+  };
   stylesheets?: Array<string>;
-  scripts?: Array<string> | [
-    {
+  scripts?: Array<{
+    url: string | {
       url: string;
-      strategy: "server" | "client" | "idle" | "worker";
-      location: "head" | "body";
-      action: "append" | "prepend";
-    }
-  ];
+      params: Array<string> ;
+    };
+    strategy: "server" | "client" | "idle" | "worker";
+    location: "head" | "body";
+    action: "append" | "prepend";
+  };
 }
 ```
 
@@ -41,10 +45,10 @@ These properties provide a heuristic for consumers to decide how, when, and wher
 - **id** _(required)_: Identifier string
 - **description** _(required)_: Short description of third-party entity
 - **website** _(optional)_: URL address of website
-- **content** _(optional<sup>\*</sup>)_: HTML elements to be inserted where 3PC component is placed
+- **html** _(optional<sup>\*</sup>)_: HTML element to be inserted where 3PC component is placed. The `attributes` property allow you to include a list of default or user-required attributes and their values.
 - **stylesheets** _(optional<sup>\*</sup>)_: URLs of any stylesheets that need to be loaded
 - **scripts** _(optional<sup>\*</sup>)_: URLs of any scripts that need to be loaded, either as an array of URLs or an object array that contains a list of the following properties:
-  - **url**: URL of script
+  - **url**: URL of script with or without any user-required parameters
   - **strategy**: String literal to denote loading strategy of third-party script (on the server, on the client, during browser idle time, or in a web worker)
   - **location**: String literal to denote whether to inject the script in <head> or <body> (only useful if strategy=server is used)
   - **action**: String literal to denote whether to prepend or append the script (only useful if strategy=server is used)
