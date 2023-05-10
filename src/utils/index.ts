@@ -1,5 +1,6 @@
 import type { Data, Inputs, AttributeVal, HtmlAttributes } from '../types';
 
+// Add all required search params with user inputs as values
 function formatUrl(url: string, params: string[], args: Inputs) {
   if (!params || !args) return url;
 
@@ -12,6 +13,7 @@ function formatUrl(url: string, params: string[], args: Inputs) {
   return newUrl.toString();
 }
 
+// Construct HTML element and include all default attributes and user-inputted attributes
 function createHTML(element: string, attributes: HtmlAttributes, args: Inputs) {
   const formattedAttributes =
     attributes.src?.url && attributes.src?.params
@@ -38,6 +40,7 @@ function createHTML(element: string, attributes: HtmlAttributes, args: Inputs) {
   return `<${element}${htmlAttributes}></${element}>`;
 }
 
+// Format JSON by including all default and user-required parameters
 export function formatData(data: Data, args: Inputs) {
   return {
     ...data,
@@ -45,7 +48,7 @@ export function formatData(data: Data, args: Inputs) {
     html: data.html
       ? createHTML(data.html.element, data.html.attributes, args)
       : null,
-    // Pass any custom query params for relevant scripts
+    // Pass any required query params with user values for relevant scripts
     scripts: data.scripts
       ? data.scripts.map((script) => ({
           ...script,
