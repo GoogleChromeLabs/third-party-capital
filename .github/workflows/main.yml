@@ -1,4 +1,4 @@
-name: Linting and Formatting
+name: Linting, Formatting, and Testing
 
 on:
   pull_request:
@@ -21,3 +21,4 @@ jobs:
       - run: npm ci
       - run: npm run format:check
       - run: npm run lint:check
+      - run: npm test
