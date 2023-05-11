@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export const GoogleMapsEmbed = {
-  id: 'google-maps-embed',
-  description: 'Embed a Google Maps embed on your webpage',
-  website: 'https://developers.google.com/maps/documentation/embed/get-started',
-  content:
-    '<iframe loading="lazy" src="https://www.google.com/maps/embed/v1/${args.mapMode}?key=${args.apiKey}&${args.parameters}" width=${args.width} height=${args.height} style=${args.style} loading=${args.loading} allowfullscreen=${args.allowfullscreen} referrerpolicy="no-referrer-when-downgrade"></iframe>',
+import data from './data.json';
+import { formatData } from '../../utils';
+import type { Data, Inputs } from '../../types';
+
+export const GoogleAnalytics = ({ ...args }: Inputs) => {
+  return formatData(data as Data, args);
 };
