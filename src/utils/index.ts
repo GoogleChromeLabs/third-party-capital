@@ -1,10 +1,10 @@
 import type { Data, Inputs, AttributeVal, HtmlAttributes } from '../types';
 
 // Add all required search params with user inputs as values
-function formatUrl(url: string, params: string[], args: Inputs) {
+function formatUrl(url: string, params?: string[], args?: Inputs) {
   if (!params || !args) return url;
 
-  let newUrl = new URL(url);
+  const newUrl = new URL(url);
 
   params.forEach((param: string) => {
     if (args[param]) newUrl.searchParams.set(param, args[param]);
@@ -52,7 +52,7 @@ export function formatData(data: Data, args: Inputs) {
     scripts: data.scripts
       ? data.scripts.map((script) => ({
           ...script,
-          url: formatUrl(script.url, script.params!, args),
+          url: formatUrl(script.url, script.params, args),
         }))
       : null,
   };

@@ -45,7 +45,7 @@ These properties provide a heuristic for consumers to decide how, when, and wher
 - **id** _(required)_: Identifier string
 - **description** _(required)_: Short description of third-party entity
 - **website** _(optional)_: URL address of website
-- **html** _(optional<sup>\*</sup>)_: HTML element to be inserted where 3PC component is placed. The `attributes` property allow you to include a list of default or user-required attributes and their values.
+- **html** _(optional<sup>\*</sup>)_: HTML element to be inserted where 3PC component is placed. The `attributes` property allows you to include a list of default or user-required attributes and their values.
 - **stylesheets** _(optional<sup>\*</sup>)_: URLs of any stylesheets that need to be loaded
 - **scripts** _(optional<sup>\*</sup>)_: URLs of any scripts that need to be loaded, either as an array of URLs or an object array that contains a list of the following properties:
   - **url**: URL of script with or without any user-required parameters
