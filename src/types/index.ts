@@ -32,5 +32,5 @@ export interface Data {
 }
 
 export interface Inputs {
-  [key: string]: string;
+  [key: string]: any;
 }
