@@ -14,4 +14,4 @@
 
 export { GoogleAnalytics } from './third-parties/google-analytics';
 export { GoogleMapsEmbed } from './third-parties/google-maps-embed';
-export { YoutubeEmbed } from './third-parties/youtube-embed';
+export { YouTubeEmbed } from './third-parties/youtube-embed';
