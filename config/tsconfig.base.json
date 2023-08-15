@@ -9,7 +9,8 @@
     "allowJs": true,
     "declaration": true,
     "declarationMap": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true
   },
   "files": ["../src/index.ts"]
 }
