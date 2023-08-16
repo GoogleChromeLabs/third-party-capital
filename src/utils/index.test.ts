@@ -172,5 +172,61 @@ describe('Utils', () => {
       );
       expect(result.scripts).toEqual(null);
     });
+
+    it('should include the user inputted slug to the src URL if provided as a parameter', () => {
+      const data = {
+        id: 'third-party',
+        description: 'Description',
+        html: {
+          element: 'iframe',
+          attributes: {
+            loading: 'lazy',
+            src: {
+              url: 'https://www.example.com/',
+              slugParam: 'inputSlug',
+            },
+          },
+        },
+      };
+
+      const inputs = {
+        inputSlug: 'cool-slug',
+      };
+
+      const result = formatData(data, inputs);
+      expect(result.html).toEqual(
+        '<iframe loading="lazy" src="https://www.example.com/cool-slug"></iframe>',
+      );
+      expect(result.scripts).toEqual(null);
+    });
+
+    it('should replace the already existing slug if the user includes a slug parameter slug', () => {
+      const data = {
+        id: 'third-party',
+        description: 'Description',
+        html: {
+          element: 'iframe',
+          attributes: {
+            loading: 'lazy',
+            src: {
+              url: 'https://www.google.com/maps/embed/v1/place',
+              slugParam: 'mode',
+              params: ['key'],
+            },
+          },
+        },
+      };
+
+      const inputs = {
+        mode: 'view',
+        key: '123',
+      };
+
+      const result = formatData(data, inputs);
+      expect(result.html).toEqual(
+        '<iframe loading="lazy" src="https://www.google.com/maps/embed/v1/view?key=123"></iframe>',
+      );
+      expect(result.scripts).toEqual(null);
+    });
   });
 });

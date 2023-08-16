@@ -18,14 +18,22 @@ function filterArgs(
 }
 
 // Add all required search params with user inputs as values
-export function formatUrl(url: string, params?: string[], args?: Inputs) {
-  if (!params || !args) return url;
+export function formatUrl(
+  url: string,
+  params?: string[],
+  args?: Inputs,
+  slug?: Inputs,
+) {
+  const newUrl =
+    slug && Object.keys(slug).length > 0
+      ? new URL(Object.values(slug)[0], url) // If there's a user inputted param for the URL slug, replace the default existing slug or include it
+      : new URL(url);
 
-  const newUrl = new URL(url);
-
-  params.forEach((param: string) => {
-    if (args[param]) newUrl.searchParams.set(param, args[param]);
-  });
+  if (params && args) {
+    params.forEach((param: string) => {
+      if (args[param]) newUrl.searchParams.set(param, args[param]);
+    });
+  }
 
   return newUrl.toString();
 }
@@ -36,20 +44,21 @@ export function createHtml(
   attributes?: HtmlAttributes,
   htmlAttrArgs?: Inputs,
   urlQueryParamArgs?: Inputs,
+  slugParamArg?: Inputs,
 ) {
   if (!attributes) return `<${element}></${element}>`;
 
-  const formattedAttributes =
-    attributes.src?.url && attributes.src?.params
-      ? {
-          ...attributes,
-          src: formatUrl(
-            attributes.src.url,
-            attributes.src.params,
-            urlQueryParamArgs,
-          ),
-        }
-      : attributes;
+  const formattedAttributes = attributes.src?.url
+    ? {
+        ...attributes,
+        src: formatUrl(
+          attributes.src.url,
+          attributes.src.params,
+          urlQueryParamArgs,
+          slugParamArg,
+        ),
+      }
+    : attributes;
 
   const htmlAttributes = Object.keys({
     ...formattedAttributes,
@@ -87,10 +96,19 @@ export function formatData(data: Data, args: Inputs) {
     data.html?.attributes.src?.params,
   );
 
-  // Lastly, all remaining arguments are used as separate HTML attributes
+  // Third, find the input argument that maps to the slug parameter passed to the HTML src attribute if present
+  const htmlSlugParamInput = filterArgs(args, [
+    data.html?.attributes.src?.slugParam!,
+  ]);
+
+  // Lastly, all remaining arguments are forwarded as separate HTML attributes
   const htmlAttrInputs = filterArgs(
     args,
-    [...Object.keys(scriptUrlParamInputs), ...Object.keys(htmlUrlParamInputs)],
+    [
+      ...Object.keys(scriptUrlParamInputs),
+      ...Object.keys(htmlUrlParamInputs),
+      ...Object.keys(htmlSlugParamInput),
+    ],
     true,
   );
 
@@ -103,6 +121,7 @@ export function formatData(data: Data, args: Inputs) {
           data.html.attributes,
           htmlAttrInputs,
           htmlUrlParamInputs,
+          htmlSlugParamInput,
         )
       : null,
     // Pass any required query params with user values for relevant scripts

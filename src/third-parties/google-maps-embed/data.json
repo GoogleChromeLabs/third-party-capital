@@ -8,6 +8,7 @@
       "loading": "lazy",
       "src": {
         "url": "https://www.google.com/maps/embed/v1/place",
+        "slugParam": "mode",
         "params": [
           "key",
           "q",
