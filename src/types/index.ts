@@ -3,6 +3,7 @@ type ScriptLocation = 'head' | 'body';
 type ScriptAction = 'append' | 'prepend';
 export type SrcVal = {
   url: string;
+  slugParam?: string;
   params?: Array<string>;
 };
 

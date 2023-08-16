@@ -25,7 +25,14 @@ The loading recommendation for each third-party resource is defined with the fol
   website?: string;
   html?: {
     element: string;
-    attributes: HtmlAttributes;
+    attributes: {
+      [string]?: string,
+      src?: {
+        url: string;
+        slugParam: string;
+        params: Array<string>;  
+      }
+    };
   };
   stylesheets?: Array<string>;
   scripts?: Array<{
@@ -45,10 +52,14 @@ These properties provide a heuristic for consumers to decide how, when, and wher
 - **id** _(required)_: Identifier string
 - **description** _(required)_: Short description of third-party entity
 - **website** _(optional)_: URL address of website
-- **html** _(optional<sup>\*</sup>)_: HTML element to be inserted where 3PC component is placed. The `attributes` property allows you to include a list of default or user-required attributes and their values.
+- **html** _(optional<sup>\*</sup>)_: HTML element to be inserted where 3PC component is placed. The `attributes` property allows you to include a list of any default attributes and their values which will be overwritten if the user specifies a different value. The `src` attribute is the only property that needs to follow a specific structure:
+  - **url**: The URL of the resource
+  - **slugParam**: The name of the parameter that is used the user to either include or replace the slug of the URL
+  - **params**: An array of parameter names that when used as arguments by the user are assigned as query parameters to the URL
 - **stylesheets** _(optional<sup>\*</sup>)_: URLs of any stylesheets that need to be loaded
 - **scripts** _(optional<sup>\*</sup>)_: URLs of any scripts that need to be loaded, either as an array of URLs or an object array that contains a list of the following properties:
-  - **url**: URL of script with or without any user-required parameters
+  - **url**: The URL of script
+  - **params**: An array of parameter names that when used as arguments by the user are assigned as query parameters to the URL
   - **strategy**: String literal to denote loading strategy of third-party script (on the server, on the client, during browser idle time, or in a web worker)
   - **location**: String literal to denote whether to inject the script in <head> or <body> (only useful if strategy=server is used)
   - **action**: String literal to denote whether to prepend or append the script (only useful if strategy=server is used)
