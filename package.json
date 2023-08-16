@@ -1,6 +1,6 @@
 {
   "name": "third-party-capital",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "",
   "main": "./lib/cjs/index.js",
   "types": "./lib/cjs/types/index.d.ts",
