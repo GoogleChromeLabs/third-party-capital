@@ -102,14 +102,14 @@ describe('Utils', () => {
       };
 
       const inputs = {
-        id: '123',
+        id: 'props.id',
         loading: 'auto',
         width: '150',
       };
 
       const result = formatData(data, inputs);
       expect(result.html).toEqual(
-        '<iframe loading="auto" src="https://www.example.com/?id=123" width="150" height="100"></iframe>',
+        '<iframe loading="auto" src="https://www.example.com/?id=props.id" width="150" height="100"></iframe>',
       );
       expect(result.scripts).toEqual(null);
     });
@@ -136,14 +136,16 @@ describe('Utils', () => {
       };
 
       const inputs = {
-        id: '123',
+        id: 'userDefinedId',
       };
 
       const result = formatData(data as Data, inputs);
       expect(result.html).toEqual('<iframe loading="lazy"></iframe>');
       expect(result.scripts).not.toEqual(null);
       expect(result.scripts!.length).toEqual(1);
-      expect(result.scripts![0].url).toEqual('https://www.example.com/?id=123');
+      expect(result.scripts![0].url).toEqual(
+        'https://www.example.com/?id=userDefinedId',
+      );
     });
 
     it('should forward all additional inputs as html attributes if not used elsewhere', () => {
@@ -161,14 +163,14 @@ describe('Utils', () => {
       };
 
       const inputs = {
-        id: '123',
+        id: 'props.id',
         loading: 'auto',
         width: '150',
       };
 
       const result = formatData(data, inputs);
       expect(result.html).toEqual(
-        '<iframe loading="auto" width="150" height="100" id="123"></iframe>',
+        '<iframe loading="auto" width="150" height="100" id="props.id"></iframe>',
       );
       expect(result.scripts).toEqual(null);
     });
