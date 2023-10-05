@@ -126,10 +126,14 @@ export function formatData(data: Data, args: Inputs) {
       : null,
     // Pass any required query params with user values for relevant scripts
     scripts: data.scripts
-      ? data.scripts.map((script) => ({
-          ...script,
-          url: formatUrl(script.url, script.params, scriptUrlParamInputs),
-        }))
+      ? data.scripts.map((script) => {
+          return script.url
+            ? {
+                ...script,
+                url: formatUrl(script.url, script.params, scriptUrlParamInputs),
+              }
+            : script;
+        })
       : null,
   };
 }
