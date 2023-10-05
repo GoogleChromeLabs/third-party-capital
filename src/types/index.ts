@@ -14,6 +14,24 @@ export type HtmlAttributes = {
   [key: string]: AttributeVal;
 };
 
+type ScriptBase = {
+  params?: Array<string>;
+  strategy: ScriptStrategy;
+  location: ScriptLocation;
+  action: ScriptAction;
+};
+
+export type ExternalScript = ScriptBase & {
+  url: string;
+};
+
+export type CodeBlock = ScriptBase & {
+  code: string;
+};
+
+export type Script = ExternalScript | CodeBlock;
+export type Scripts = Script[];
+
 export interface Data {
   id: string;
   description: string;
@@ -23,15 +41,13 @@ export interface Data {
     attributes: HtmlAttributes;
   };
   stylesheets?: Array<string>;
-  scripts?: Array<{
-    url: string;
-    params?: Array<string>;
-    strategy: ScriptStrategy;
-    location: ScriptLocation;
-    action: ScriptAction;
-  }>;
+  scripts?: Scripts;
 }
 
 export interface Inputs {
   [key: string]: any;
+}
+
+export function isExternalScript(script: Script): script is ExternalScript {
+  return (script as ExternalScript).url !== undefined;
 }
