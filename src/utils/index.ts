@@ -39,6 +39,12 @@ export function formatUrl(
   return newUrl.toString();
 }
 
+export function formatCode(code: string, args?: Inputs) {
+  return code.replace(/{{(.*?)}}/g, (match) => {
+    return args?.[match.split(/{{|}}/).filter(Boolean)[0]];
+  });
+}
+
 // Construct HTML element and include all default attributes and user-inputted attributes
 export function createHtml(
   element: string,
@@ -133,7 +139,10 @@ export function formatData(data: Data, args: Inputs) {
                 ...script,
                 url: formatUrl(script.url, script.params, scriptUrlParamInputs),
               }
-            : script;
+            : {
+                ...script,
+                code: formatCode(script.code, scriptUrlParamInputs),
+              };
         })
       : null,
   };
