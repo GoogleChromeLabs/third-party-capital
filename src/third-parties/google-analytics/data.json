@@ -11,7 +11,8 @@
       "action": "append"
     },
     {
-      "code": "window.dataLayer=window.dataLayer||[];window.gtag=function gtag(){window.dataLayer.push(arguments);};gtag('js',new Date());gtag('config','{{id}}')",      "strategy": "worker",
+      "code": "window.dataLayer=window.dataLayer||[];window.gtag=function gtag(){window.dataLayer.push(arguments);};gtag('js',new Date());gtag('config','{{id}}')",
+      "strategy": "worker",
       "location": "head",
       "action": "append"
     }
