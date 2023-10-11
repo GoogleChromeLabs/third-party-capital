@@ -1,5 +1,5 @@
 import { formatUrl, createHtml, formatData } from '.';
-import type { Data } from '../types';
+import type { Data, ExternalScript } from '../types';
 
 describe('Utils', () => {
   describe('formatUrl', () => {
@@ -143,7 +143,7 @@ describe('Utils', () => {
       expect(result.html).toEqual('<iframe loading="lazy"></iframe>');
       expect(result.scripts).not.toEqual(null);
       expect(result.scripts!.length).toEqual(1);
-      expect(result.scripts![0].url).toEqual(
+      expect((result.scripts![0] as ExternalScript).url).toEqual(
         'https://www.example.com/?id=userDefinedId',
       );
     });

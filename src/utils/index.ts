@@ -1,4 +1,5 @@
 import type { Data, Inputs, AttributeVal, HtmlAttributes } from '../types';
+import { isExternalScript } from '../types';
 
 function filterArgs(
   args: Inputs,
@@ -36,6 +37,12 @@ export function formatUrl(
   }
 
   return newUrl.toString();
+}
+
+export function formatCode(code: string, args?: Inputs) {
+  return code.replace(/{{(.*?)}}/g, (match) => {
+    return args?.[match.split(/{{|}}/).filter(Boolean)[0]];
+  });
 }
 
 // Construct HTML element and include all default attributes and user-inputted attributes
@@ -127,12 +134,15 @@ export function formatData(data: Data, args: Inputs) {
     // Pass any required query params with user values for relevant scripts
     scripts: data.scripts
       ? data.scripts.map((script) => {
-          return script.url
+          return isExternalScript(script)
             ? {
                 ...script,
                 url: formatUrl(script.url, script.params, scriptUrlParamInputs),
               }
-            : script;
+            : {
+                ...script,
+                code: formatCode(script.code, scriptUrlParamInputs),
+              };
         })
       : null,
   };
