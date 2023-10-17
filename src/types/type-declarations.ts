@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 type ScriptStrategy = 'server' | 'client' | 'idle' | 'worker';
 type ScriptLocation = 'head' | 'body';
 type ScriptAction = 'append' | 'prepend';
@@ -46,4 +47,20 @@ export interface Data {
 
 export interface Inputs {
   [key: string]: any;
+}
+
+export interface GoogleAnalyticsApi {
+  gtag:
+    | ((fn: 'js', opt: Date) => void)
+    | ((fn: 'config', opt: string) => void)
+    | ((fn: 'event', opt: string, opt2: { [key: string]: string }) => void)
+    | ((fn: 'set', opt: { [key: string]: string }) => void)
+    | ((fn: 'get', opt: string) => void)
+    | ((fn: 'consent', opt: 'default', opt2: { [key: string]: string }) => void)
+    | ((fn: 'consent', opt: 'update', opt2: { [key: string]: string }) => void)
+    | ((fn: 'consent', opt: 'reset') => void);
+}
+
+export interface GoogleTagManagerApi {
+  dataLayer: Record<string, any>[];
 }
