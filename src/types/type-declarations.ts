@@ -49,6 +49,10 @@ export interface Inputs {
   [key: string]: any;
 }
 
+export interface GoogleAnalyticsOptions {
+  id: string;
+}
+
 export interface GoogleAnalyticsApi {
   gtag:
     | ((fn: 'js', opt: Date) => void)
@@ -59,6 +63,10 @@ export interface GoogleAnalyticsApi {
     | ((fn: 'consent', opt: 'default', opt2: { [key: string]: string }) => void)
     | ((fn: 'consent', opt: 'update', opt2: { [key: string]: string }) => void)
     | ((fn: 'consent', opt: 'reset') => void);
+}
+
+export interface GoogleTagManagerOptions {
+  id: string;
 }
 
 export interface GoogleTagManagerApi {
