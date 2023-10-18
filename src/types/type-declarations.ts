@@ -49,26 +49,55 @@ export interface Inputs {
   [key: string]: any;
 }
 
+/* Google Analytics */
 export interface GoogleAnalyticsOptions {
   id: string;
 }
 
-export interface GoogleAnalyticsApi {
-  gtag:
-    | ((fn: 'js', opt: Date) => void)
-    | ((fn: 'config', opt: string) => void)
-    | ((fn: 'event', opt: string, opt2: { [key: string]: string }) => void)
-    | ((fn: 'set', opt: { [key: string]: string }) => void)
-    | ((fn: 'get', opt: string) => void)
-    | ((fn: 'consent', opt: 'default', opt2: { [key: string]: string }) => void)
-    | ((fn: 'consent', opt: 'update', opt2: { [key: string]: string }) => void)
-    | ((fn: 'consent', opt: 'reset') => void);
+export interface GTag {
+  (fn: 'js', opt: Date): void;
+  (fn: 'config', opt: string): void;
+  (fn: 'event', opt: string, opt2: { [key: string]: any }): void;
+  (fn: 'set', opt: { [key: string]: string }): void;
+  (fn: 'get', opt: string): void;
+  (fn: 'consent', opt: 'default', opt2: { [key: string]: string }): void;
+  (fn: 'consent', opt: 'update', opt2: { [key: string]: string }): void;
+  (fn: 'config', opt: 'reset'): void;
 }
 
+export interface GoogleAnalyticsApi {
+  dataLayer: Record<string, any>[];
+  gtag: GTag;
+}
+
+/* Google Tag Manager */
 export interface GoogleTagManagerOptions {
   id: string;
 }
 
+interface GTMDataLayerApi {
+  name: 'dataLayer';
+  set: (opt: { [key: string]: string }) => void;
+  get: (key: string) => void;
+  reset: () => void;
+}
+
+type GTMDataLayerStatus = {
+  dataLayer: {
+    gtmDom: boolean;
+    gtmLoad: boolean;
+    subscribers: number;
+  };
+};
+
+export type GTM = GTMDataLayerStatus & {
+  [key: string]: {
+    callback: () => void;
+    dataLayer: GTMDataLayerApi;
+  };
+};
+
 export interface GoogleTagManagerApi {
   dataLayer: Record<string, any>[];
+  google_tag_manager: GTM;
 }
