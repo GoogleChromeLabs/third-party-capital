@@ -57,7 +57,7 @@ export interface GoogleAnalyticsOptions {
 export interface GTag {
   (fn: 'js', opt: Date): void;
   (fn: 'config', opt: string): void;
-  (fn: 'event', opt: string, opt2: { [key: string]: any }): void;
+  (fn: 'event', opt: string, opt2?: { [key: string]: any }): void;
   (fn: 'set', opt: { [key: string]: string }): void;
   (fn: 'get', opt: string): void;
   (fn: 'consent', opt: 'default', opt2: { [key: string]: string }): void;
@@ -75,14 +75,14 @@ export interface GoogleTagManagerOptions {
   id: string;
 }
 
-interface GTMDataLayerApi {
+interface GoogleTagManagerDataLayerApi {
   name: 'dataLayer';
   set: (opt: { [key: string]: string }) => void;
   get: (key: string) => void;
   reset: () => void;
 }
 
-type GTMDataLayerStatus = {
+type GoogleTagManagerDataLayerStatus = {
   dataLayer: {
     gtmDom: boolean;
     gtmLoad: boolean;
@@ -90,14 +90,14 @@ type GTMDataLayerStatus = {
   };
 };
 
-export type GTM = GTMDataLayerStatus & {
+export type GoogleTagManager = GoogleTagManagerDataLayerStatus & {
   [key: string]: {
     callback: () => void;
-    dataLayer: GTMDataLayerApi;
+    dataLayer: GoogleTagManagerDataLayerApi;
   };
 };
 
 export interface GoogleTagManagerApi {
   dataLayer: Record<string, any>[];
-  google_tag_manager: GTM;
+  google_tag_manager: GoogleTagManager;
 }
