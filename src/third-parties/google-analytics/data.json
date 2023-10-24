@@ -16,7 +16,7 @@
       "strategy": "worker",
       "location": "head",
       "action": "append",
-      "key": "gtag-setup"
+      "key": "setup"
     }
   ]
 }
