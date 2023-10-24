@@ -8,13 +8,15 @@
       "params": ["id"],
       "strategy": "worker",
       "location": "head",
-      "action": "append"
+      "action": "append",
+      "key": "gtag"
     },
     {
       "code": "window.dataLayer=window.dataLayer||[];window.gtag=function gtag(){window.dataLayer.push(arguments);};gtag('js',new Date());gtag('config','{{id}}')",
       "strategy": "worker",
       "location": "head",
-      "action": "append"
+      "action": "append",
+      "key": "gtag-setup"
     }
   ]
 }
