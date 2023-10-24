@@ -20,6 +20,7 @@ type ScriptBase = {
   strategy: ScriptStrategy;
   location: ScriptLocation;
   action: ScriptAction;
+  key?: string;
 };
 
 export type ExternalScript = ScriptBase & {
