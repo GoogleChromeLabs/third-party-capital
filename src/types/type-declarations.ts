@@ -50,6 +50,15 @@ export interface Inputs {
   [key: string]: any;
 }
 
+export interface Output {
+  id: string;
+  description: string;
+  website?: string;
+  html?: string;
+  stylesheets?: Array<string>;
+  scripts?: Scripts;
+}
+
 /* Google Analytics */
 export interface GoogleAnalyticsOptions {
   id: string;
