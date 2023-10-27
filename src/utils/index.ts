@@ -1,4 +1,10 @@
-import type { Data, Inputs, AttributeVal, HtmlAttributes } from '../types';
+import type {
+  Data,
+  Inputs,
+  AttributeVal,
+  HtmlAttributes,
+  Output,
+} from '../types';
 import { isExternalScript } from '../types';
 
 function filterArgs(
@@ -85,7 +91,7 @@ export function createHtml(
 }
 
 // Format JSON by including all default and user-required parameters
-export function formatData(data: Data, args: Inputs) {
+export function formatData(data: Data, args: Inputs): Output {
   const allScriptParams = data.scripts?.reduce(
     (acc, script) => [
       ...acc,
@@ -130,7 +136,7 @@ export function formatData(data: Data, args: Inputs) {
           htmlUrlParamInputs,
           htmlSlugParamInput,
         )
-      : null,
+      : undefined,
     // Pass any required query params with user values for relevant scripts
     scripts: data.scripts
       ? data.scripts.map((script) => {
@@ -144,6 +150,6 @@ export function formatData(data: Data, args: Inputs) {
                 code: formatCode(script.code, scriptUrlParamInputs),
               };
         })
-      : null,
+      : undefined,
   };
 }

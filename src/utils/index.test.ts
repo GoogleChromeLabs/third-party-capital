@@ -111,7 +111,7 @@ describe('Utils', () => {
       expect(result.html).toEqual(
         '<iframe loading="auto" src="https://www.example.com/?id=props.id" width="150" height="100"></iframe>',
       );
-      expect(result.scripts).toEqual(null);
+      expect(result.scripts).toEqual(undefined);
     });
 
     it('should pass scripts and correctly assign params if available', () => {
@@ -141,7 +141,7 @@ describe('Utils', () => {
 
       const result = formatData(data as Data, inputs);
       expect(result.html).toEqual('<iframe loading="lazy"></iframe>');
-      expect(result.scripts).not.toEqual(null);
+      expect(result.scripts).not.toEqual(undefined);
       expect(result.scripts!.length).toEqual(1);
       expect((result.scripts![0] as ExternalScript).url).toEqual(
         'https://www.example.com/?id=userDefinedId',
@@ -172,7 +172,7 @@ describe('Utils', () => {
       expect(result.html).toEqual(
         '<iframe loading="auto" width="150" height="100" id="props.id"></iframe>',
       );
-      expect(result.scripts).toEqual(null);
+      expect(result.scripts).toEqual(undefined);
     });
 
     it('should include the user inputted slug to the src URL if provided as a parameter', () => {
@@ -199,7 +199,7 @@ describe('Utils', () => {
       expect(result.html).toEqual(
         '<iframe loading="lazy" src="https://www.example.com/cool-slug"></iframe>',
       );
-      expect(result.scripts).toEqual(null);
+      expect(result.scripts).toEqual(undefined);
     });
 
     it('should replace the already existing slug if the user includes a slug parameter slug', () => {
@@ -228,7 +228,7 @@ describe('Utils', () => {
       expect(result.html).toEqual(
         '<iframe loading="lazy" src="https://www.google.com/maps/embed/v1/view?key=123"></iframe>',
       );
-      expect(result.scripts).toEqual(null);
+      expect(result.scripts).toEqual(undefined);
     });
   });
 });
