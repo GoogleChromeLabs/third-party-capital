@@ -36,6 +36,7 @@ The loading recommendation for each third-party resource is defined with the fol
   };
   stylesheets?: Array<string>;
   scripts?: Array<{
+    key?: string;
     url: string | {
       url: string;
       params: Array<string> ;
@@ -43,7 +44,13 @@ The loading recommendation for each third-party resource is defined with the fol
     strategy: "server" | "client" | "idle" | "worker";
     location: "head" | "body";
     action: "append" | "prepend";
-  };
+  } | {
+    key?: string;
+    code: string;
+    strategy: "server" | "client" | "idle" | "worker";
+    location: "head" | "body";
+    action: "append" | "prepend";
+  }>;
 }
 ```
 
@@ -57,8 +64,10 @@ These properties provide a heuristic for consumers to decide how, when, and wher
   - **slugParam**: The name of the parameter that is used the user to either include or replace the slug of the URL
   - **params**: An array of parameter names that when used as arguments by the user are assigned as query parameters to the URL
 - **stylesheets** _(optional<sup>\*</sup>)_: URLs of any stylesheets that need to be loaded
-- **scripts** _(optional<sup>\*</sup>)_: URLs of any scripts that need to be loaded, either as an array of URLs or an object array that contains a list of the following properties:
-  - **url**: The URL of script
+- **scripts** _(optional<sup>\*</sup>)_: Object array of external and inline scripts (code blocks) with the following properties:
+  - **url**: The URL of the script (only used for external scripts)
+  - **code**: String literal of the script to inject (only used for inline scripts)
+  - **key** _(optional<sup>\*</sup>)_: Key string
   - **params**: An array of parameter names that when used as arguments by the user are assigned as query parameters to the URL
   - **strategy**: String literal to denote loading strategy of third-party script (on the server, on the client, during browser idle time, or in a web worker)
   - **location**: String literal to denote whether to inject the script in <head> or <body> (only useful if strategy=server is used)
