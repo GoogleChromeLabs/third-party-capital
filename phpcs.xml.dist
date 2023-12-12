@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset name="PHPCS Rules">
+	<description>PHPCS rules for Third Party Capital.</description>
+
+	<rule ref="PSR2" />
+
+    <rule ref="PHPCompatibility"/>
+	<config name="testVersion" value="7.0-"/>
+
+	<arg value="ps"/>
+	<arg name="extensions" value="php"/>
+
+	<file>./inc</file>
+	<file>./tests/phpunit</file>
+</ruleset>

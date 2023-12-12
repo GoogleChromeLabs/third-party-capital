@@ -1,0 +1,164 @@
+<?php
+/**
+ * Class GoogleChromeLabs\ThirdPartyCapital\Data\ThirdPartyOutput
+ *
+ * @package   Third Party Capital
+ * @copyright 2023 Google LLC
+ * @license   https://www.apache.org/licenses/LICENSE-2.0 Apache License 2.0
+ */
+
+namespace GoogleChromeLabs\ThirdPartyCapital\Data;
+
+use GoogleChromeLabs\ThirdPartyCapital\Contracts\Arrayable;
+
+/**
+ * Class representing the output data for a third party.
+ */
+class ThirdPartyOutput implements Arrayable
+{
+
+    /**
+     * Third party identifier.
+     *
+     * @var string
+     */
+    private $id;
+
+    /**
+     * Third party description.
+     *
+     * @var string
+     */
+    private $description;
+
+    /**
+     * Third party website, if provided.
+     *
+     * @var string
+     */
+    private $website;
+
+    /**
+     * HTML needed for the third party.
+     *
+     * @var string
+     */
+    private $html;
+
+    /**
+     * Stylesheets needed for the third party.
+     *
+     * @var string[]
+     */
+    private $stylesheets;
+
+    /**
+     * Scripts needed for the third party.
+     *
+     * @var array[]
+     */
+    private $scripts;
+
+    /**
+     * Constructor.
+     *
+     * @param array $data Output data.
+     */
+    public function __construct(array $data)
+    {
+        $strFields = array( 'id', 'description', 'website', 'html' );
+        foreach ($strFields as $field) {
+            $this->$field = isset($data[ $field ]) ? (string) $data[ $field ] : '';
+        }
+
+        $this->stylesheets = isset($data['stylesheets']) ? array_map('strval', $data['stylesheets']) : array();
+        $this->scripts     = isset($data['scripts']) ? $data['scripts'] : array();
+    }
+
+    /**
+     * Gets the third party identifier.
+     *
+     * @return string Third party identifier.
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * Gets the third party description.
+     *
+     * @return string Third party description.
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * Gets the third party website.
+     *
+     * @return string Third party website, if provided.
+     */
+    public function getWebsite(): string
+    {
+        return $this->website;
+    }
+
+    /**
+     * Gets the HTML needed for the third party.
+     *
+     * @return string HTML needed for the third party.
+     */
+    public function getHtml(): string
+    {
+        return $this->html;
+    }
+
+    /**
+     * Gets the stylesheets needed for the third party.
+     *
+     * @return string[] Stylesheets needed for the third party.
+     */
+    public function getStylesheets(): array
+    {
+        return $this->stylesheets;
+    }
+
+    /**
+     * Gets the scripts needed for the third party.
+     *
+     * @return array[] Scripts needed for the third party.
+     */
+    public function getScripts(): array
+    {
+        return $this->scripts;
+    }
+
+    /**
+     * Returns an array representation of the data.
+     *
+     * @return array Associative array of data.
+     */
+    public function toArray(): array
+    {
+        $data = array(
+            'id'          => $this->id,
+            'description' => $this->description,
+        );
+        if ($this->website) {
+            $data['website'] = $this->website;
+        }
+        if ($this->html) {
+            $data['html'] = $this->html;
+        }
+        if ($this->stylesheets) {
+            $data['stylesheets'] = $this->stylesheets;
+        }
+        if ($this->scripts) {
+            $data['scripts'] = $this->scripts;
+        }
+
+        return $data;
+    }
+}
