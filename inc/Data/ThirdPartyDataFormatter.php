@@ -95,6 +95,7 @@ class ThirdPartyDataFormatter
                             $scriptUrlParamInputs
                         );
                     }
+                    unset($scriptData['params']); // Params are irrelevant for formatted output.
                     return $scriptData;
                 },
                 $newData['scripts']

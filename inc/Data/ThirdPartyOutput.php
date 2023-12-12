@@ -55,7 +55,7 @@ class ThirdPartyOutput implements Arrayable
     /**
      * Scripts needed for the third party.
      *
-     * @var array[]
+     * @var ThirdPartyScriptOutput[]
      */
     private $scripts;
 
@@ -71,8 +71,12 @@ class ThirdPartyOutput implements Arrayable
             $this->$field = isset($data[ $field ]) ? (string) $data[ $field ] : '';
         }
 
+        $to3pScript = static function ($scriptData) {
+            return new ThirdPartyScriptOutput($scriptData);
+        };
+
         $this->stylesheets = isset($data['stylesheets']) ? array_map('strval', $data['stylesheets']) : array();
-        $this->scripts     = isset($data['scripts']) ? $data['scripts'] : array();
+        $this->scripts     = isset($data['scripts']) ? array_map($to3pScript, $data['scripts']) : array();
     }
 
     /**
@@ -128,7 +132,7 @@ class ThirdPartyOutput implements Arrayable
     /**
      * Gets the scripts needed for the third party.
      *
-     * @return array[] Scripts needed for the third party.
+     * @return ThirdPartyScriptOutput[] Scripts needed for the third party.
      */
     public function getScripts(): array
     {
@@ -156,7 +160,12 @@ class ThirdPartyOutput implements Arrayable
             $data['stylesheets'] = $this->stylesheets;
         }
         if ($this->scripts) {
-            $data['scripts'] = $this->scripts;
+            $data['scripts'] = array_map(
+                static function (ThirdPartyScriptOutput $scriptData) {
+                    return $scriptData->toArray();
+                },
+                $this->scripts
+            );
         }
 
         return $data;
