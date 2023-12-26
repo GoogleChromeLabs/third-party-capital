@@ -12,9 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export { GoogleAnalytics } from './third-parties/google-analytics';
-export { GoogleTagManager } from './third-parties/google-tag-manager';
-export { GoogleMapsEmbed } from './third-parties/google-maps-embed';
-export { YouTubeEmbed } from './third-parties/youtube-embed';
+import data from './data.json';
+import { formatData } from '../../utils';
+import type { Data, Inputs } from '../../types';
 
-export * from './types';
+export const GoogleTagManager = ({ ...args }: Inputs) => {
+  return formatData(data as Data, args);
+};
