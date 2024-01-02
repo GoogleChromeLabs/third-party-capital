@@ -1,0 +1,22 @@
+{
+    "id": "google-tag-manager",
+    "description": "Install Google Tag Manager on your website",
+    "website": "https://developers.google.com/tag-platform/tag-manager/web",
+    "scripts": [
+      {
+        "url": "https://www.googletagmanager.com/gtm.js",
+        "params": ["id"],
+        "strategy": "worker",
+        "location": "head",
+        "action": "append",
+        "key": "gtm"
+      },
+      {
+        "code": "window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
+        "strategy": "worker",
+        "location": "head",
+        "action": "append",
+        "key": "setup"
+      }
+    ]
+}
