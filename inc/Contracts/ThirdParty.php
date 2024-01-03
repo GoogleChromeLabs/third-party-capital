@@ -2,7 +2,7 @@
 /**
  * Interface GoogleChromeLabs\ThirdPartyCapital\Contracts\ThirdParty
  *
- * @package   Third Party Capital
+ * @package   GoogleChromeLabs/ThirdPartyCapital
  * @copyright 2023 Google LLC
  * @license   https://www.apache.org/licenses/LICENSE-2.0 Apache License 2.0
  */
