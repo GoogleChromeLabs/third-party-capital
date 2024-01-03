@@ -3,7 +3,7 @@
  * Class GoogleChromeLabs\ThirdPartyCapital\Data\ThirdPartyHtmlData
  *
  * @package   GoogleChromeLabs/ThirdPartyCapital
- * @copyright 2023 Google LLC
+ * @copyright 2024 Google LLC
  * @license   https://www.apache.org/licenses/LICENSE-2.0 Apache License 2.0
  */
 
