@@ -26,6 +26,9 @@
       "phpstan/extension-installer": true
     }
   },
+  "archive": {
+    "exclude": [".husky", "config", "src/", "!src/third-parties/*/*.json"]
+  },
   "autoload": {
     "psr-4": {
       "GoogleChromeLabs\\ThirdPartyCapital\\": "inc/"
