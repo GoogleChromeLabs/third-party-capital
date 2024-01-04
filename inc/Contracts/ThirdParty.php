@@ -18,6 +18,13 @@ interface ThirdParty
 {
 
     /**
+     * Gets the third party identifier.
+     *
+     * @return string Third party identifier.
+     */
+    public function getId(): string;
+
+    /**
      * Sets input arguments for the integration.
      *
      * @param array $args Input arguments to set.

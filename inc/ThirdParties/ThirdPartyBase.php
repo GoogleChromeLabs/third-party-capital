@@ -61,6 +61,18 @@ abstract class ThirdPartyBase implements ThirdParty
     }
 
     /**
+     * Gets the third party identifier.
+     *
+     * @return string Third party identifier.
+     */
+    public function getId(): string
+    {
+        $this->lazilyInitialize();
+
+        return $this->output->getId();
+    }
+
+    /**
      * Sets input arguments for the integration.
      *
      * @param array $args Input arguments to set.
