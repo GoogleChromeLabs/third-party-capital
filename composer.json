@@ -27,7 +27,7 @@
     }
   },
   "archive": {
-    "exclude": [".husky", "config", "src/", "!src/third-parties/*/*.json"]
+    "exclude": ["/.husky", "/config", "/src", "!/*.json"]
   },
   "autoload": {
     "psr-4": {
