@@ -36,8 +36,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "GoogleChromeLabs\\ThirdPartyCapital\\Test_Data\\": "tests/phpunit/testdata",
-      "GoogleChromeLabs\\ThirdPartyCapital\\Test_Utils\\": "tests/phpunit/utils"
+      "GoogleChromeLabs\\ThirdPartyCapital\\TestData\\": "tests/phpunit/testdata",
+      "GoogleChromeLabs\\ThirdPartyCapital\\TestUtils\\": "tests/phpunit/utils"
     }
   }
 }
