@@ -22,7 +22,7 @@ class ThirdPartyDataFormatter
      *
      * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/0831b937a8468e0f74bd79edd5a59fa8b2e6e763/src/utils/index.ts#L94
      *
-     * @param ThirdPartyData $data Third party data to format.
+     * @param ThirdPartyData   $data Third party data to format.
      * @param array            $args Input arguments to format third party data with.
      * @return ThirdPartyOutput Third party output data.
      */
