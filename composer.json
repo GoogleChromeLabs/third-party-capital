@@ -11,6 +11,7 @@
     "phpcompatibility/php-compatibility": "^9.3",
     "phpmd/phpmd": "^2.9",
     "phpstan/phpstan": "^1.10",
+    "phpunit/phpunit": "^9",
     "slevomat/coding-standard": "^8.9"
   },
   "scripts": {
