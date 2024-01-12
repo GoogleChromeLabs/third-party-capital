@@ -39,13 +39,13 @@ class ThirdPartyDataFormatter
                 }
                 return $acc;
             },
-            array()
+            []
         );
 
         $scriptUrlParamInputs = self::intersectArgs($args, $allScriptParams);
 
-        $htmlUrlParamInputs = array();
-        $htmlSlugParamInput = array();
+        $htmlUrlParamInputs = [];
+        $htmlSlugParamInput = [];
         if ($htmlData) {
             if (isset($htmlData->getAttributes()['src'])
                 && $htmlData->getAttributes()['src'] instanceof ThirdPartySrcValue
@@ -56,7 +56,7 @@ class ThirdPartyDataFormatter
                 );
                 $htmlSlugParamInput = self::intersectArgs(
                     $args,
-                    array( $htmlData->getAttributes()['src']->getSlugParam() )
+                    [$htmlData->getAttributes()['src']->getSlugParam()]
                 );
             }
         }
@@ -123,7 +123,7 @@ class ThirdPartyDataFormatter
         array $attributes,
         array $htmlAttrArgs,
         array $urlQueryParamArgs,
-        array $slugParamArg = array()
+        array $slugParamArg = []
     ): string {
         if (! $attributes) {
             return "<{$element}></{$element}>";
@@ -132,7 +132,7 @@ class ThirdPartyDataFormatter
         if (isset($attributes['src']['url'])) {
             $attributes['src'] = self::formatUrl(
                 $attributes['src']['url'],
-                $attributes['src']['params'] ?? array(),
+                $attributes['src']['params'] ?? [],
                 $urlQueryParamArgs,
                 $slugParamArg
             );
@@ -159,7 +159,7 @@ class ThirdPartyDataFormatter
      *                               Default empty array.
      * @return string HTML string.
      */
-    public static function formatUrl(string $url, array $params, array $args, array $slugParamArg = array()): string
+    public static function formatUrl(string $url, array $params, array $args, array $slugParamArg = []): string
     {
         if ($slugParamArg) {
             $slug = array_values($slugParamArg)[0];

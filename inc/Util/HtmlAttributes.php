@@ -27,7 +27,7 @@ class HtmlAttributes implements Arrayable, ArrayAccess, IteratorAggregate
      *
      * @var array
      */
-    private $attr = array();
+    private $attr = [];
 
     /**
      * Constructor.
@@ -68,7 +68,7 @@ class HtmlAttributes implements Arrayable, ArrayAccess, IteratorAggregate
     #[\ReturnTypeWillChange]
     public function offsetGet($name)
     {
-        if (! isset($this->attr[ $name ])) {
+        if (!isset($this->attr[ $name ])) {
             throw new NotFoundException(
                 sprintf(
                     'Attribute with name %s not set.',

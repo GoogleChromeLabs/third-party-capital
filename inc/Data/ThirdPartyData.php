@@ -69,14 +69,14 @@ class ThirdPartyData implements Arrayable
      */
     public function __construct(array $data)
     {
-        if (! isset($data['id'])) {
+        if (!isset($data['id'])) {
             throw new InvalidThirdPartyDataException('Missing ID.');
         }
-        if (! isset($data['description'])) {
+        if (!isset($data['description'])) {
             throw new InvalidThirdPartyDataException('Missing description.');
         }
 
-        $strFields = array( 'id', 'description', 'website' );
+        $strFields = ['id', 'description', 'website'];
         foreach ($strFields as $field) {
             $this->$field = isset($data[ $field ]) ? (string) $data[ $field ] : '';
         }
@@ -86,8 +86,8 @@ class ThirdPartyData implements Arrayable
         };
 
         $this->html        = isset($data['html']) ? new ThirdPartyHtmlData($data['html']) : null;
-        $this->stylesheets = isset($data['stylesheets']) ? array_map('strval', $data['stylesheets']) : array();
-        $this->scripts     = isset($data['scripts']) ? array_map($to3pScript, $data['scripts']) : array();
+        $this->stylesheets = isset($data['stylesheets']) ? array_map('strval', $data['stylesheets']) : [];
+        $this->scripts     = isset($data['scripts']) ? array_map($to3pScript, $data['scripts']) : [];
     }
 
     /**
@@ -157,10 +157,10 @@ class ThirdPartyData implements Arrayable
      */
     public function toArray(): array
     {
-        $data = array(
+        $data = [
             'id'          => $this->id,
             'description' => $this->description,
-        );
+        ];
         if ($this->website) {
             $data['website'] = $this->website;
         }

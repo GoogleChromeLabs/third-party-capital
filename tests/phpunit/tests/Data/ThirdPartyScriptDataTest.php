@@ -15,11 +15,11 @@ use GoogleChromeLabs\ThirdPartyCapital\TestUtils\TestCase;
 
 class ThirdPartyScriptDataTest extends TestCase
 {
-    private $baseData = array(
+    private $baseData = [
         'strategy' => ThirdPartyScriptData::STRATEGY_CLIENT,
         'location' => ThirdPartyScriptData::LOCATION_HEAD,
         'action'   => ThirdPartyScriptData::ACTION_APPEND,
-    );
+    ];
 
     /**
      * @dataProvider dataGetMethods

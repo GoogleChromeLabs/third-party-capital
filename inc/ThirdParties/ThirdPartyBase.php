@@ -32,7 +32,7 @@ abstract class ThirdPartyBase implements ThirdParty
      *
      * @var array
      */
-    private $args = array();
+    private $args = [];
 
     /**
      * Third party data instance, lazily initialized.

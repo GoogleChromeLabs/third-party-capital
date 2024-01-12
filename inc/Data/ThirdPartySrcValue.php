@@ -48,13 +48,13 @@ class ThirdPartySrcValue implements Arrayable
      */
     public function __construct(array $srcData)
     {
-        if (! isset($srcData['url'])) {
+        if (!isset($srcData['url'])) {
             throw new InvalidThirdPartyDataException('Missing src url.');
         }
 
         $this->url = $srcData['url'];
         $this->slugParam = isset($srcData['slugParam']) ? (string) $srcData['slugParam'] : '';
-        $this->params = isset($srcData['params']) ? array_map('strval', $srcData['params']) : array();
+        $this->params = isset($srcData['params']) ? array_map('strval', $srcData['params']) : [];
     }
 
     /**
@@ -94,7 +94,7 @@ class ThirdPartySrcValue implements Arrayable
      */
     public function toArray(): array
     {
-        $data = array( 'url' => $this->url );
+        $data = ['url' => $this->url];
         if ($this->slugParam) {
             $data['slugParam'] = $this->slugParam;
         }

@@ -66,7 +66,7 @@ class ThirdPartyOutput implements Arrayable
      */
     public function __construct(array $data)
     {
-        $strFields = array( 'id', 'description', 'website', 'html' );
+        $strFields = ['id', 'description', 'website', 'html'];
         foreach ($strFields as $field) {
             $this->$field = isset($data[ $field ]) ? (string) $data[ $field ] : '';
         }
@@ -75,8 +75,8 @@ class ThirdPartyOutput implements Arrayable
             return new ThirdPartyScriptOutput($scriptData);
         };
 
-        $this->stylesheets = isset($data['stylesheets']) ? array_map('strval', $data['stylesheets']) : array();
-        $this->scripts     = isset($data['scripts']) ? array_map($to3pScript, $data['scripts']) : array();
+        $this->stylesheets = isset($data['stylesheets']) ? array_map('strval', $data['stylesheets']) : [];
+        $this->scripts     = isset($data['scripts']) ? array_map($to3pScript, $data['scripts']) : [];
     }
 
     /**
@@ -146,10 +146,10 @@ class ThirdPartyOutput implements Arrayable
      */
     public function toArray(): array
     {
-        $data = array(
+        $data = [
             'id'          => $this->id,
             'description' => $this->description,
-        );
+        ];
         if ($this->website) {
             $data['website'] = $this->website;
         }

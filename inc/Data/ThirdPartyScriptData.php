@@ -176,11 +176,11 @@ class ThirdPartyScriptData implements Arrayable
      */
     public function toArray(): array
     {
-        $data = array(
+        $data = [
             'strategy' => $this->strategy,
             'location' => $this->location,
             'action'   => $this->action,
-        );
+        ];
         if ($this->url) {
             $data['url'] = $this->url;
         } else {
@@ -205,22 +205,22 @@ class ThirdPartyScriptData implements Arrayable
      */
     private function validateData(array $scriptData)
     {
-        $enumFields = array( 'strategy', 'location', 'action' );
+        $enumFields = ['strategy', 'location', 'action'];
         foreach ($enumFields as $enumField) {
-            if (! isset($scriptData[ $enumField ])) {
+            if (!isset($scriptData[ $enumField ])) {
                 throw new InvalidThirdPartyDataException(
                     sprintf('Missing script %s.', $enumField)
                 );
             }
             $methodName = 'isValid' . ucfirst($enumField);
-            if (! call_user_func(array( $this, $methodName ), $scriptData[ $enumField ])) {
+            if (! call_user_func([$this, $methodName], $scriptData[ $enumField ])) {
                 throw new InvalidThirdPartyDataException(
                     sprintf('Invalid script %s.', $enumField)
                 );
             }
         }
 
-        if (! isset($scriptData['url']) && ! isset($scriptData['code'])) {
+        if (!isset($scriptData['url']) && !isset($scriptData['code'])) {
             throw new InvalidThirdPartyDataException(
                 'Missing both script URL and script code, one of which must be provided.'
             );
@@ -273,9 +273,9 @@ class ThirdPartyScriptData implements Arrayable
      */
     private function setData(array $scriptData)
     {
-        $this->params = isset($scriptData['params']) ? array_map('strval', $scriptData['params']) : array();
+        $this->params = isset($scriptData['params']) ? array_map('strval', $scriptData['params']) : [];
 
-        $strFields = array( 'strategy', 'location', 'action', 'key', 'url', 'code' );
+        $strFields = ['strategy', 'location', 'action', 'key', 'url', 'code'];
         foreach ($strFields as $field) {
             $this->$field = isset($scriptData[ $field ]) ? (string) $scriptData[ $field ] : '';
         }

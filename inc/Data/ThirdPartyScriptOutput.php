@@ -66,7 +66,7 @@ class ThirdPartyScriptOutput implements Arrayable
      */
     public function __construct(array $scriptData)
     {
-        $strFields = array( 'strategy', 'location', 'action', 'key', 'url', 'code' );
+        $strFields = ['strategy', 'location', 'action', 'key', 'url', 'code'];
         foreach ($strFields as $field) {
             $this->$field = isset($scriptData[ $field ]) ? (string) $scriptData[ $field ] : '';
         }
@@ -149,11 +149,11 @@ class ThirdPartyScriptOutput implements Arrayable
      */
     public function toArray(): array
     {
-        $data = array(
+        $data = [
             'strategy' => $this->strategy,
             'location' => $this->location,
             'action'   => $this->action,
-        );
+        ];
         if ($this->url) {
             $data['url'] = $this->url;
         } else {

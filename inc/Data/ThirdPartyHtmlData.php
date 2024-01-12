@@ -74,13 +74,13 @@ class ThirdPartyHtmlData implements Arrayable
      */
     private function validateData(array $htmlData)
     {
-        if (! isset($htmlData['element'])) {
+        if (!isset($htmlData['element'])) {
             throw new InvalidThirdPartyDataException('Missing HTML element.');
         }
-        if (! isset($htmlData['attributes'])) {
+        if (!isset($htmlData['attributes'])) {
             throw new InvalidThirdPartyDataException('Missing HTML attributes.');
         }
-        if (! isset($htmlData['attributes']['src'])) {
+        if (!isset($htmlData['attributes']['src'])) {
             throw new InvalidThirdPartyDataException('Missing HTML src attribute.');
         }
     }
@@ -103,9 +103,9 @@ class ThirdPartyHtmlData implements Arrayable
      */
     public function toArray(): array
     {
-        return array(
+        return [
             'element'    => $this->element,
             'attributes' => $this->attributes->toArray(),
-        );
+        ];
     }
 }
