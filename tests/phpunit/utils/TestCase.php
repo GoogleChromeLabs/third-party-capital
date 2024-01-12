@@ -30,6 +30,16 @@ abstract class TestCase extends PHPUnitTestCase
         $result = call_user_func([$instance, $getMethod]);
         if ($result instanceof Arrayable) {
             $result = $result->toArray();
+        } elseif (is_array($result)) {
+            $result = array_map(
+                static function ($entry) {
+                    if ($entry instanceof Arrayable) {
+                        return $entry->toArray();
+                    }
+                    return $entry;
+                },
+                $result
+            );
         }
         $this->assertSame($expected, $result);
     }
