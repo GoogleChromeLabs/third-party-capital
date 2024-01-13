@@ -63,15 +63,17 @@ class ThirdPartyDataFormatter
 
         $htmlAttrInputs = self::diffArgs(
             $args,
-            array_merge(
-                $scriptUrlParamInputs,
-                $htmlUrlParamInputs,
-                $htmlSlugParamInput
+            array_keys(
+                array_merge(
+                    $scriptUrlParamInputs,
+                    $htmlUrlParamInputs,
+                    $htmlSlugParamInput
+                )
             )
         );
 
         $newData = $data->toArray();
-        if ($newData['html']) {
+        if (isset($newData['html']) && $newData['html']) {
             $newData['html'] = self::formatHtml(
                 $newData['html']['element'],
                 $newData['html']['attributes'],
@@ -80,7 +82,7 @@ class ThirdPartyDataFormatter
                 $htmlSlugParamInput
             );
         }
-        if ($newData['scripts']) {
+        if (isset($newData['scripts']) && $newData['scripts']) {
             $newData['scripts'] = array_map(
                 static function ($scriptData) use ($scriptUrlParamInputs) {
                     if (isset($scriptData['url'])) {
@@ -166,7 +168,12 @@ class ThirdPartyDataFormatter
 
             $path = parse_url($url, PHP_URL_PATH);
             if ($path) {
-                $url = str_replace($path, substr($path, 0, - strlen(basename($path))) . $slug, $url);
+                $trailingSlash = str_ends_with($path, '/') ? '/' : '';
+                $url = str_replace(
+                    $path,
+                    substr($path, 0, - strlen(basename($path) . $trailingSlash)) . $slug . $trailingSlash,
+                    $url
+                );
             } else {
                 $url = rtrim($url, '/') . '/' . $slug;
             }
