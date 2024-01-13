@@ -4,6 +4,10 @@
 
 Third Party Capital is a resource that consolidates best practices for loading popular third-parties in a single place.
 
+The project provides implementations that can be used in the following languages:
+* JavaScript (see [`src` directory](./src))
+* PHP (see [`inc` directory](./inc))
+
 ## Rationale
 
 There is a large, cross-functional Chrome initiative that aims to improve third-party resource loading on the web. One part of this effort is to provide a default set of recommendations, or "components," to developers. These components will help developers sequence and fetch popular third-party resources at the right time to minimize their overall impact to page performance.
