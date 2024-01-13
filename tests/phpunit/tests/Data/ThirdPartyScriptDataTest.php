@@ -54,17 +54,17 @@ class ThirdPartyScriptDataTest extends TestCase
                 'required' => true,
             ],
             [
-                'field'    => 'key',
-                'getter'   => 'getKey',
-                'default'  => '',
-                'required' => false,
-            ],
-            [
                 'field'    => 'url',
                 'getter'   => 'getUrl',
                 'default'  => '',
                 'required' => true,
             ], // Don't cover 'code' here as it can only be provided if 'url' is not provided. See separate test below.
+            [
+                'field'    => 'key',
+                'getter'   => 'getKey',
+                'default'  => '',
+                'required' => false,
+            ],
             [
                 'field'    => 'params',
                 'getter'   => 'getParams',

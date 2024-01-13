@@ -39,13 +39,6 @@ class ThirdPartyScriptOutput implements Arrayable
     private $action;
 
     /**
-     * Script key, if provided.
-     *
-     * @var string
-     */
-    private $key;
-
-    /**
      * Script URL, only relevant if an external script.
      *
      * @var string
@@ -60,13 +53,20 @@ class ThirdPartyScriptOutput implements Arrayable
     private $code;
 
     /**
+     * Script key, if provided.
+     *
+     * @var string
+     */
+    private $key;
+
+    /**
      * Constructor.
      *
      * @param array $scriptData Script output data.
      */
     public function __construct(array $scriptData)
     {
-        $strFields = ['strategy', 'location', 'action', 'key', 'url', 'code'];
+        $strFields = ['strategy', 'location', 'action', 'url', 'code', 'key'];
         foreach ($strFields as $field) {
             $this->$field = isset($scriptData[ $field ]) ? (string) $scriptData[ $field ] : '';
         }
@@ -103,16 +103,6 @@ class ThirdPartyScriptOutput implements Arrayable
     }
 
     /**
-     * Gets the script key, if provided.
-     *
-     * @return string Script key, if provided.
-     */
-    public function getKey(): string
-    {
-        return $this->key;
-    }
-
-    /**
      * Gets the script URL, if an external script.
      *
      * @return string Script URL, if an external script.
@@ -130,6 +120,16 @@ class ThirdPartyScriptOutput implements Arrayable
     public function getCode(): string
     {
         return $this->code;
+    }
+
+    /**
+     * Gets the script key, if provided.
+     *
+     * @return string Script key, if provided.
+     */
+    public function getKey(): string
+    {
+        return $this->key;
     }
 
     /**

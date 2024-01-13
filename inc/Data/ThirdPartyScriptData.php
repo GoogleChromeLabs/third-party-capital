@@ -28,13 +28,6 @@ class ThirdPartyScriptData implements Arrayable
     const ACTION_PREPEND  = 'prepend';
 
     /**
-     * List of parameters for the script, if needed.
-     *
-     * @var string[]
-     */
-    private $params;
-
-    /**
      * Strategy for including the script.
      *
      * @var string
@@ -56,13 +49,6 @@ class ThirdPartyScriptData implements Arrayable
     private $action;
 
     /**
-     * Script key, if provided.
-     *
-     * @var string
-     */
-    private $key;
-
-    /**
      * Script URL, only relevant if an external script.
      *
      * @var string
@@ -77,6 +63,20 @@ class ThirdPartyScriptData implements Arrayable
     private $code;
 
     /**
+     * Script key, if provided.
+     *
+     * @var string
+     */
+    private $key;
+
+    /**
+     * List of parameters for the script, if needed.
+     *
+     * @var string[]
+     */
+    private $params;
+
+    /**
      * Constructor.
      *
      * @param array $scriptData Script data, e.g. from a third party JSON file.
@@ -87,16 +87,6 @@ class ThirdPartyScriptData implements Arrayable
     {
         $this->validateData($scriptData);
         $this->setData($scriptData);
-    }
-
-    /**
-     * Gets the list of parameters for the script, if needed.
-     *
-     * @return string[] List of parameters for the script, if needed.
-     */
-    public function getParams(): array
-    {
-        return $this->params;
     }
 
     /**
@@ -130,16 +120,6 @@ class ThirdPartyScriptData implements Arrayable
     }
 
     /**
-     * Gets the script key, if provided.
-     *
-     * @return string Script key, if provided.
-     */
-    public function getKey(): string
-    {
-        return $this->key;
-    }
-
-    /**
      * Gets the script URL, if an external script.
      *
      * @return string Script URL, if an external script.
@@ -157,6 +137,26 @@ class ThirdPartyScriptData implements Arrayable
     public function getCode(): string
     {
         return $this->code;
+    }
+
+    /**
+     * Gets the script key, if provided.
+     *
+     * @return string Script key, if provided.
+     */
+    public function getKey(): string
+    {
+        return $this->key;
+    }
+
+    /**
+     * Gets the list of parameters for the script, if needed.
+     *
+     * @return string[] List of parameters for the script, if needed.
+     */
+    public function getParams(): array
+    {
+        return $this->params;
     }
 
     /**
@@ -273,11 +273,11 @@ class ThirdPartyScriptData implements Arrayable
      */
     private function setData(array $scriptData)
     {
-        $this->params = isset($scriptData['params']) ? array_map('strval', $scriptData['params']) : [];
-
-        $strFields = ['strategy', 'location', 'action', 'key', 'url', 'code'];
+        $strFields = ['strategy', 'location', 'action', 'url', 'code', 'key'];
         foreach ($strFields as $field) {
             $this->$field = isset($scriptData[ $field ]) ? (string) $scriptData[ $field ] : '';
         }
+
+        $this->params = isset($scriptData['params']) ? array_map('strval', $scriptData['params']) : [];
     }
 }

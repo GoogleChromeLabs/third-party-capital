@@ -1,6 +1,6 @@
 <?php
 /**
- * Tests for GoogleChromeLabs\ThirdPartyCapital\Data\ThirdPartyData
+ * Tests for GoogleChromeLabs\ThirdPartyCapital\Data\ThirdPartyOutput
  *
  * @package   GoogleChromeLabs/ThirdPartyCapital
  * @copyright 2024 Google LLC
@@ -9,12 +9,11 @@
 
 namespace GoogleChromeLabs\ThirdPartyCapital\Tests;
 
-use GoogleChromeLabs\ThirdPartyCapital\Data\ThirdPartyData;
+use GoogleChromeLabs\ThirdPartyCapital\Data\ThirdPartyOutput;
 use GoogleChromeLabs\ThirdPartyCapital\Data\ThirdPartyScriptData;
-use GoogleChromeLabs\ThirdPartyCapital\Exception\InvalidThirdPartyDataException;
 use GoogleChromeLabs\ThirdPartyCapital\TestUtils\TestCase;
 
-class ThirdPartyDataTest extends TestCase
+class ThirdPartyOutputTest extends TestCase
 {
 
     /**
@@ -22,7 +21,7 @@ class ThirdPartyDataTest extends TestCase
      */
     public function testGetMethods(string $getMethod, array $args, $expected)
     {
-        $this->runGetterTestCase(ThirdPartyData::class, $getMethod, $args, $expected);
+        $this->runGetterTestCase(ThirdPartyOutput::class, $getMethod, $args, $expected);
     }
 
     public function dataGetMethods()
@@ -32,13 +31,13 @@ class ThirdPartyDataTest extends TestCase
                 'field'    => 'id',
                 'getter'   => 'getId',
                 'default'  => '',
-                'required' => true,
+                'required' => false,
             ],
             [
                 'field'    => 'description',
                 'getter'   => 'getDescription',
                 'default'  => '',
-                'required' => true,
+                'required' => false,
             ],
             [
                 'field'    => 'website',
@@ -49,18 +48,7 @@ class ThirdPartyDataTest extends TestCase
             [
                 'field'    => 'html',
                 'getter'   => 'getHtml',
-                'value'    => [
-                    'element'    => 'iframe',
-                    'attributes' => [
-                        'src'    => [
-                            'url'    => 'https://example.com/my-video/',
-                            'params' => ['v'],
-                        ],
-                        'width'  => '1920',
-                        'height' => '1080',
-                    ],
-                ],
-                'default'  => null,
+                'default'  => '',
                 'required' => false,
             ],
             [
@@ -78,9 +66,8 @@ class ThirdPartyDataTest extends TestCase
                         'strategy' => ThirdPartyScriptData::STRATEGY_CLIENT,
                         'location' => ThirdPartyScriptData::LOCATION_HEAD,
                         'action'   => ThirdPartyScriptData::ACTION_APPEND,
-                        'url'      => 'https://example.com/',
+                        'url'      => 'https://example.com/?id=12345789',
                         'key'      => 'my-analytics',
-                        'params'   => ['id'],
                     ],
                     [
                         'strategy' => ThirdPartyScriptData::STRATEGY_CLIENT,
@@ -92,7 +79,7 @@ class ThirdPartyDataTest extends TestCase
                 'default'  => [],
                 'required' => false,
             ],
-        ], InvalidThirdPartyDataException::class);
+        ]);
     }
 
     public function testToArray()
@@ -101,20 +88,10 @@ class ThirdPartyDataTest extends TestCase
             'id'          => 'my-service',
             'description' => 'A service that allows embedding something.',
             'website'     => 'https://my-service.com/',
-            'html'        => [
-                'element'    => 'iframe',
-                'attributes' => [
-                    'src'    => [
-                        'url'    => 'https://example.com/my-video/',
-                        'params' => ['v'],
-                    ],
-                    'width'  => '1920',
-                    'height' => '1080',
-                ],
-            ],
+            'html'        => '<iframe src="https://example.com/my-video/?v=13579" width="1920" height="1080"></iframe>',
             'stylesheets' => ['https://example.com/style.css', 'https://example.com/style-2.css'],
         ];
-        $data = new ThirdPartyData($input);
-        $this->assertSame($input, $data->toArray());
+        $output = new ThirdPartyOutput($input);
+        $this->assertSame($input, $output->toArray());
     }
 }
