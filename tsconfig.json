@@ -11,6 +11,5 @@
       "declarationMap": true,
       "allowSyntheticDefaultImports": true,
       "moduleResolution": "Node",
-    },
-    "files": ["../src/index.ts"]
+    }
   }
