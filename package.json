@@ -2,7 +2,7 @@
   "name": "third-party-capital",
   "version": "1.0.26",
   "description": "",
-  "type": "module",
+  "type": "commonjs",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
