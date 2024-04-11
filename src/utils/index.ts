@@ -21,7 +21,7 @@ function filterArgs(
     .reduce((obj, key) => {
       obj[key] = args[key];
       return obj;
-    }, {});
+    }, {} as Record<string, any>);
 }
 
 // Add all required search params with user inputs as values
@@ -61,7 +61,7 @@ export function createHtml(
 ) {
   if (!attributes) return `<${element}></${element}>`;
 
-  const formattedAttributes = attributes.src?.url
+  const formattedAttributes: any = attributes.src?.url
     ? {
         ...attributes,
         src: formatUrl(

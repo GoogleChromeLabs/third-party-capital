@@ -2,28 +2,21 @@
   "name": "third-party-capital",
   "version": "1.0.26",
   "description": "",
-  "main": "./lib/cjs/index.js",
-  "types": "./lib/cjs/types/index.d.ts",
-  "files": [
-    "lib/**/*"
-  ],
+  "type": "module",
   "exports": {
     ".": {
-      "import": {
-        "types": "./lib/esm/types/index.d.ts",
-        "default": "./lib/esm/index.js"
-      },
-      "require": {
-        "types": "./lib/cjs/types/index.d.ts",
-        "default": "./lib/cjs/index.js"
-      }
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.mts"
     }
   },
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "clean": "rm -rf ./lib",
-    "build": "npm run clean && npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc -p ./config/tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.js",
-    "build:cjs": "tsc -p ./config/tsconfig.cjs.json",
+    "build": "npx unbuild",
     "prepack": "npm run build",
     "prepare": "husky install",
     "format:check": "prettier --check '**/*.{ts,js}'",
@@ -53,7 +46,8 @@
     "prettier": "2.8.7",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
-    "typescript": "^4.7.4"
+    "typescript": "^5.4.4",
+    "unbuild": "^2.0.0"
   },
   "lint-staged": {
     "*.{js,ts}": [
