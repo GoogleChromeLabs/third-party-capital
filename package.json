@@ -2,20 +2,19 @@
   "name": "third-party-capital",
   "version": "1.0.26",
   "description": "",
-  "type": "commonjs",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "clean": "rm -rf ./lib",
     "build": "npx unbuild",
     "prepack": "npm run build",
     "prepare": "husky install",
