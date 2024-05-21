@@ -21,7 +21,10 @@
     "prepare": "husky install",
     "format:check": "prettier --check '**/*.{ts,js}'",
     "lint:check": "eslint '**/*.{ts,js}'",
-    "test": "jest"
+    "test": "jest",
+    "release:major": "npm run build && npm version $(semver $npm_package_version -i major) && npm publish --tag latest && git push",
+    "release:minor": "npm run build && npm version $(semver $npm_package_version -i minor) && npm publish --tag latest && git push",
+    "release:patch": "npm run build && npm version $(semver $npm_package_version -i patch) && npm publish --tag latest && git push"
   },
   "repository": {
     "type": "git",
