@@ -17,7 +17,7 @@ export { GoogleTagManager } from './third-parties/google-tag-manager';
 export { GoogleMapsEmbed } from './third-parties/google-maps-embed';
 export { YouTubeEmbed } from './third-parties/youtube-embed';
 
-export { formatData } from './utils';
+export * from './utils';
 
 export * from './types';
 
