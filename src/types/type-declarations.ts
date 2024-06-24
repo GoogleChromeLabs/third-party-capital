@@ -125,7 +125,7 @@ export interface GoogleMapsEmbedOptions {
 }
 
 /* Youtube Embed */
-export interface YoutubeEmbedOptions {
+export interface YoutubeEmbedAttributes {
   videoid: string;
   playlabel?: string;
 }
