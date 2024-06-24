@@ -60,7 +60,7 @@ export interface Output {
 }
 
 /* Google Analytics */
-export interface GoogleAnalyticsOptions {
+export interface GoogleAnalyticsParams {
   id: string;
 }
 
@@ -81,7 +81,7 @@ export interface GoogleAnalyticsApi {
 }
 
 /* Google Tag Manager */
-export interface GoogleTagManagerOptions {
+export interface GoogleTagManagerParams {
   id: string;
 }
 
@@ -113,7 +113,7 @@ export interface GoogleTagManagerApi {
 }
 
 /* Google Maps Embed */
-export interface GoogleMapsEmbedOptions {
+export interface GoogleMapsEmbedParams {
   key: string;
   mode: 'place' | 'view' | 'directions' | 'streetview' | 'search';
   q?: string;
