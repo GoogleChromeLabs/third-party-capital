@@ -111,3 +111,21 @@ export interface GoogleTagManagerApi {
   dataLayer: Record<string, any>[];
   google_tag_manager: GoogleTagManager;
 }
+
+/* Google Maps Embed */
+export interface GoogleMapsEmbedOptions {
+  key: string;
+  mode: 'place' | 'view' | 'directions' | 'streetview' | 'search';
+  q?: string;
+  center?: string;
+  zoom?: string;
+  maptype?: 'roadmap' | 'satellite';
+  language?: string;
+  region?: string;
+}
+
+/* Youtube Embed */
+export interface YoutubeEmbedOptions {
+  videoid: string;
+  playlabel?: string;
+}
