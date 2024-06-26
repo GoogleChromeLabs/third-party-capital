@@ -60,7 +60,7 @@ export interface Output {
 }
 
 /* Google Analytics */
-export interface GoogleAnalyticsOptions {
+export interface GoogleAnalyticsParams {
   id: string;
 }
 
@@ -81,7 +81,7 @@ export interface GoogleAnalyticsApi {
 }
 
 /* Google Tag Manager */
-export interface GoogleTagManagerOptions {
+export interface GoogleTagManagerParams {
   id: string;
 }
 
@@ -110,4 +110,22 @@ export type GoogleTagManager = GoogleTagManagerDataLayerStatus & {
 export interface GoogleTagManagerApi {
   dataLayer: Record<string, any>[];
   google_tag_manager: GoogleTagManager;
+}
+
+/* Google Maps Embed */
+export interface GoogleMapsEmbedParams {
+  key: string;
+  mode: 'place' | 'view' | 'directions' | 'streetview' | 'search';
+  q?: string;
+  center?: string;
+  zoom?: string;
+  maptype?: 'roadmap' | 'satellite';
+  language?: string;
+  region?: string;
+}
+
+/* Youtube Embed */
+export interface YoutubeEmbedAttributes {
+  videoid: string;
+  playlabel?: string;
 }
