@@ -12,7 +12,8 @@
         "key": "gtm"
       },
       {
-        "code": "window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
+        "code": "window['{{dataLayerName}}']=window['{{dataLayerName}}']||[];window['{{dataLayerName}}'].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
+        "params": ["dataLayerName"],
         "strategy": "worker",
         "location": "head",
         "action": "append",
