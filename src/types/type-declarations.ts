@@ -76,7 +76,7 @@ export interface GTag {
 }
 
 export interface GoogleAnalyticsApi {
-  dataLayer: Record<string, any>[];
+  dataLayers: Record<string, Record<string, any>[]>;
   gtag: GTag;
 }
 
@@ -108,7 +108,7 @@ export type GoogleTagManager = GoogleTagManagerDataLayerStatus & {
 };
 
 export interface GoogleTagManagerApi {
-  dataLayer: Record<string, any>[];
+  dataLayers: Record<string, Record<string, any>[]>;
   google_tag_manager: GoogleTagManager;
 }
 
