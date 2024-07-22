@@ -77,7 +77,6 @@ export interface GTag {
 
 export interface GoogleAnalyticsApi {
   dataLayers: Record<string, Record<string, any>[]>;
-  gtag: GTag;
 }
 
 /* Google Tag Manager */
