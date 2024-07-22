@@ -62,6 +62,10 @@ export interface Output {
 /* Google Analytics */
 export interface GoogleAnalyticsParams {
   id: string;
+  /**
+   * The name of the dataLayer object. Defaults to 'dataLayer'.
+   */
+  l?: string;
 }
 
 export interface GTag {
@@ -83,6 +87,10 @@ export interface GoogleAnalyticsApi {
 /* Google Tag Manager */
 export interface GoogleTagManagerParams {
   id: string;
+  /**
+   * The name of the dataLayer object. Defaults to 'dataLayer'.
+   */
+  l?: string;
 }
 
 interface GoogleTagManagerDataLayerApi {

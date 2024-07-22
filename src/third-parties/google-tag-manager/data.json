@@ -5,14 +5,14 @@
     "scripts": [
       {
         "url": "https://www.googletagmanager.com/gtm.js",
-        "params": ["id"],
+        "params": ["id", "l"],
         "strategy": "worker",
         "location": "head",
         "action": "append",
         "key": "gtm"
       },
       {
-        "code": "window.dataLayers=window.dataLayers||{};window.dataLayers['{{dataLayerName}}']=window.dataLayers['{{dataLayerName}}']||[];window.dataLayers['{{dataLayerName}}'].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
+        "code": "window.dataLayers=window.dataLayers||{};window.dataLayers['{{dataLayerName}}']=window.dataLayers['{{dataLayerName}}']||window.{{dataLayerName}}||[];window.dataLayers['{{dataLayerName}}'].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
         "params": ["dataLayerName"],
         "strategy": "worker",
         "location": "head",
