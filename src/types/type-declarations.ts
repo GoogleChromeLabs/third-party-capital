@@ -62,6 +62,10 @@ export interface Output {
 /* Google Analytics */
 export interface GoogleAnalyticsParams {
   id: string;
+  /**
+   * The name of the dataLayer object. Defaults to 'dataLayer'.
+   */
+  l?: string;
 }
 
 export interface GTag {
@@ -75,13 +79,20 @@ export interface GTag {
   (fn: 'config', opt: 'reset'): void;
 }
 
+export type DataLayer = Record<string, unknown>[];
+export type Maybe<T> = NonNullable<T> | undefined;
+
 export interface GoogleAnalyticsApi {
-  dataLayers: Record<string, Record<string, any>[]>;
+  [key: string]: Maybe<DataLayer>;
 }
 
 /* Google Tag Manager */
 export interface GoogleTagManagerParams {
   id: string;
+  /**
+   * The name of the dataLayer object. Defaults to 'dataLayer'.
+   */
+  l?: string;
 }
 
 interface GoogleTagManagerDataLayerApi {
@@ -107,8 +118,7 @@ export type GoogleTagManager = GoogleTagManagerDataLayerStatus & {
 };
 
 export interface GoogleTagManagerApi {
-  dataLayers: Record<string, Record<string, any>[]>;
-  google_tag_manager: GoogleTagManager;
+  [key: string]: Maybe<DataLayer> | Maybe<GoogleTagManager>;
 }
 
 /* Google Maps Embed */
