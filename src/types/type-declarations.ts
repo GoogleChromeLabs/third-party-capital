@@ -79,12 +79,7 @@ export interface GTag {
   (fn: 'config', opt: 'reset'): void;
 }
 
-export type DataLayer = Record<string, unknown>[];
-export type Maybe<T> = NonNullable<T> | undefined;
-
-export interface GoogleAnalyticsApi {
-  [key: string]: Maybe<DataLayer>;
-}
+export interface GoogleAnalyticsApi {}
 
 /* Google Tag Manager */
 export interface GoogleTagManagerParams {
@@ -118,7 +113,7 @@ export type GoogleTagManagerInstance = GoogleTagManagerDataLayerStatus & {
 };
 
 export interface GoogleTagManagerApi {
-  [key: string]: Maybe<DataLayer> | Maybe<GoogleTagManagerInstance>;
+  google_tag_manager: GoogleTagManagerInstance;
 }
 
 /* Google Maps Embed */
