@@ -110,7 +110,7 @@ type GoogleTagManagerDataLayerStatus = {
   };
 };
 
-export type GoogleTagManager = GoogleTagManagerDataLayerStatus & {
+export type GoogleTagManagerInstance = GoogleTagManagerDataLayerStatus & {
   [key: string]: {
     callback: () => void;
     dataLayer: GoogleTagManagerDataLayerApi;
@@ -118,7 +118,7 @@ export type GoogleTagManager = GoogleTagManagerDataLayerStatus & {
 };
 
 export interface GoogleTagManagerApi {
-  [key: string]: Maybe<DataLayer> | Maybe<GoogleTagManager>;
+  [key: string]: Maybe<DataLayer> | Maybe<GoogleTagManagerInstance>;
 }
 
 /* Google Maps Embed */
