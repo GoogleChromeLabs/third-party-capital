@@ -62,6 +62,10 @@ export interface Output {
 /* Google Analytics */
 export interface GoogleAnalyticsParams {
   id: string;
+  /**
+   * The name of the dataLayer object. Defaults to 'dataLayer'.
+   */
+  l?: string;
 }
 
 export interface GTag {
@@ -75,14 +79,15 @@ export interface GTag {
   (fn: 'config', opt: 'reset'): void;
 }
 
-export interface GoogleAnalyticsApi {
-  dataLayers: Record<string, Record<string, any>[]>;
-  gtag: GTag;
-}
+export type DataLayer = Record<string, unknown>[];
 
 /* Google Tag Manager */
 export interface GoogleTagManagerParams {
   id: string;
+  /**
+   * The name of the dataLayer object. Defaults to 'dataLayer'.
+   */
+  l?: string;
 }
 
 interface GoogleTagManagerDataLayerApi {
@@ -100,7 +105,7 @@ type GoogleTagManagerDataLayerStatus = {
   };
 };
 
-export type GoogleTagManager = GoogleTagManagerDataLayerStatus & {
+export type GoogleTagManagerInstance = GoogleTagManagerDataLayerStatus & {
   [key: string]: {
     callback: () => void;
     dataLayer: GoogleTagManagerDataLayerApi;
@@ -108,8 +113,7 @@ export type GoogleTagManager = GoogleTagManagerDataLayerStatus & {
 };
 
 export interface GoogleTagManagerApi {
-  dataLayers: Record<string, Record<string, any>[]>;
-  google_tag_manager: GoogleTagManager;
+  google_tag_manager: GoogleTagManagerInstance;
 }
 
 /* Google Maps Embed */
