@@ -81,8 +81,6 @@ export interface GTag {
 
 export type DataLayer = Record<string, unknown>[];
 
-export interface GoogleAnalyticsApi {}
-
 /* Google Tag Manager */
 export interface GoogleTagManagerParams {
   id: string;
