@@ -5,7 +5,7 @@
   "scripts": [
     {
       "url": "https://www.googletagmanager.com/gtag/js",
-      "params": ["id"],
+      "params": ["id", "l"],
       "optionalParam": ["l"],
       "strategy": "worker",
       "location": "head",
