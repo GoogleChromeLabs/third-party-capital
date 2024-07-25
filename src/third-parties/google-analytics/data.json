@@ -5,15 +5,17 @@
   "scripts": [
     {
       "url": "https://www.googletagmanager.com/gtag/js",
-      "params": ["id", "l"],
+      "params": ["id"],
+      "optionalParams": ["l"],
       "strategy": "worker",
       "location": "head",
       "action": "append",
       "key": "gtag"
     },
     {
-      "code": "window['{{l}}']=window['{{l}}']||[];window['{{l}}'].push({'js':new Date()});window['{{l}}'].push({'config':'{{id}}'})",
-      "params": ["id", "l"],
+      "code": "window['{{l}}'??'dataLayer']=window['{{l}}'??'dataLayer']||[];window['{{l}}'??'dataLayer'].push({'js':new Date()});window['{{l}}'??'dataLayer'].push({'config':'{{id}}'})",
+      "params": ["id"],
+      "optionalParams": ["l"],
       "strategy": "worker",
       "location": "head",
       "action": "append",
