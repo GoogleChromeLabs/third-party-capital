@@ -6,7 +6,7 @@
     {
       "url": "https://www.googletagmanager.com/gtag/js",
       "params": ["id"],
-      "optionalParams": ["l"],
+      "optionalParam": ["l"],
       "strategy": "worker",
       "location": "head",
       "action": "append",
@@ -15,7 +15,7 @@
     {
       "code": "window['{{l}}'??'dataLayer']=window['{{l}}'??'dataLayer']||[];window['{{l}}'??'dataLayer'].push({'js':new Date()});window['{{l}}'??'dataLayer'].push({'config':'{{id}}'})",
       "params": ["id"],
-      "optionalParams": ["l"],
+      "optionalParam": ["l"],
       "strategy": "worker",
       "location": "head",
       "action": "append",

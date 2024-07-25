@@ -17,6 +17,7 @@ export type HtmlAttributes = {
 
 type ScriptBase = {
   params?: Array<string>;
+  optionalParam?: Array<string>;
   strategy: ScriptStrategy;
   location: ScriptLocation;
   action: ScriptAction;

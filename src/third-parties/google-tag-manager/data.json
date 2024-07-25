@@ -6,7 +6,7 @@
       {
         "url": "https://www.googletagmanager.com/gtm.js",
         "params": ["id"],
-        "optionalParams": ["l"],
+        "optionalParam": ["l"],
         "strategy": "worker",
         "location": "head",
         "action": "append",
@@ -14,7 +14,7 @@
       },
       {
         "code": "window['{{l}}'??'dataLayer']=window['{{l}}'??'dataLayer']||[];window['{{l}}'??'dataLayer'].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
-        "optionalParams": ["l"],
+        "optionalParam": ["l"],
         "strategy": "worker",
         "location": "head",
         "action": "append",
