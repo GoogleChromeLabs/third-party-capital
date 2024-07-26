@@ -13,7 +13,7 @@
       "key": "gtag"
     },
     {
-      "code": "window['{{l}}'??'dataLayer']=window['{{l}}'??'dataLayer']||[];window['{{l}}'??'dataLayer'].push({'js':new Date()});window['{{l}}'??'dataLayer'].push({'config':'{{id}}'})",
+      "code": "window[{{l}}??'dataLayer']=window[{{l}}??'dataLayer']||[];window[{{l}}??'dataLayer'].push({'js':new Date()});window[{{l}}??'dataLayer'].push({'config':{{id}}})",
       "params": ["id"],
       "optionalParam": ["l"],
       "strategy": "worker",

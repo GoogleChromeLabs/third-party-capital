@@ -13,7 +13,7 @@
         "key": "gtm"
       },
       {
-        "code": "window['{{l}}'??'dataLayer']=window['{{l}}'??'dataLayer']||[];window['{{l}}'??'dataLayer'].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
+        "code": "window[{{l}}??'dataLayer']=window[{{l}}??'dataLayer']||[];window[{{l}}??'dataLayer'].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
         "optionalParam": ["l"],
         "strategy": "worker",
         "location": "head",

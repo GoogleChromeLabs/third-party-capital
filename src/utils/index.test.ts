@@ -1,4 +1,4 @@
-import { formatUrl, createHtml, formatData } from '.';
+import { formatUrl, createHtml, formatData, formatCode } from '.';
 import type { Data, ExternalScript } from '../types';
 
 describe('Utils', () => {
@@ -230,5 +230,51 @@ describe('Utils', () => {
       );
       expect(result.scripts).toEqual(undefined);
     });
+  });
+  describe('formatCode', () => {
+    it.each([
+      // string
+      {
+        input: "window[{{l}}??'dataLayer']=window[{{l}}??'dataLayer']||[];",
+        params: {
+          l: 'some-datalayer',
+        },
+        output: `window["some-datalayer"??'dataLayer']=window["some-datalayer"??'dataLayer']||[];`,
+      },
+      // number
+      {
+        input: '{{number}}+1',
+        params: {
+          number: 4,
+        },
+        output: `4+1`,
+      },
+      // boolean
+      {
+        input: '{{bool}}',
+        params: {
+          bool: false,
+        },
+        output: `false`,
+      },
+      // null
+      {
+        input: '{{val}}',
+        params: {
+          val: null,
+        },
+        output: `null`,
+      },
+      // undefined
+      {
+        input: "window[{{l}}??'dataLayer']=window[{{l}}??'dataLayer']||[];",
+        output: `window[undefined??'dataLayer']=window[undefined??'dataLayer']||[];`,
+      },
+    ])(
+      'should replace the input and stringify it',
+      ({ input, output, params }) => {
+        expect(formatCode(input, params)).toEqual(output);
+      },
+    );
   });
 });

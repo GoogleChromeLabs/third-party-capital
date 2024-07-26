@@ -47,7 +47,7 @@ export function formatUrl(
 
 export function formatCode(code: string, args?: Inputs) {
   return code.replace(/{{(.*?)}}/g, (match) => {
-    return args?.[match.split(/{{|}}/).filter(Boolean)[0]];
+    return JSON.stringify(args?.[match.split(/{{|}}/).filter(Boolean)[0]]);
   });
 }
 
