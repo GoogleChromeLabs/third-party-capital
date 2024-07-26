@@ -30,6 +30,7 @@ export function formatUrl(
   params?: string[],
   args?: Inputs,
   slug?: Inputs,
+  optionalParams?: Inputs,
 ) {
   const newUrl =
     slug && Object.keys(slug).length > 0
@@ -39,15 +40,23 @@ export function formatUrl(
   if (params && args) {
     params.forEach((param: string) => {
       if (args[param]) newUrl.searchParams.set(param, args[param]);
+      else if (optionalParams?.[param]) {
+        newUrl.searchParams.set(param, optionalParams?.[param]);
+      }
     });
   }
 
   return newUrl.toString();
 }
 
-export function formatCode(code: string, args?: Inputs) {
+export function formatCode(
+  code: string,
+  args?: Inputs,
+  optionalParams?: Inputs,
+) {
   return code.replace(/{{(.*?)}}/g, (match) => {
-    return JSON.stringify(args?.[match.split(/{{|}}/).filter(Boolean)[0]]);
+    const name = match.split(/{{|}}/).filter(Boolean)[0];
+    return JSON.stringify(args?.[name] ?? optionalParams?.[name]);
   });
 }
 

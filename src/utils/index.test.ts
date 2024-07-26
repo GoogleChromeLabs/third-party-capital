@@ -14,6 +14,26 @@ describe('Utils', () => {
       const newUrl = formatUrl(oldUrl, requiredParams, args);
       expect(newUrl).toEqual('https://example.com/?unit=imperial&type=main');
     });
+
+    it('should add default value', () => {
+      const oldUrl = 'https://example.com';
+      const requiredParams = ['unit', 'type'];
+      const args = {
+        unit: 'imperial',
+      };
+      const optionalParams = {
+        type: 'main',
+      };
+
+      const newUrl = formatUrl(
+        oldUrl,
+        requiredParams,
+        args,
+        undefined,
+        optionalParams,
+      );
+      expect(newUrl).toEqual('https://example.com/?unit=imperial&type=main');
+    });
   });
 
   describe('createHtml', () => {
@@ -231,15 +251,16 @@ describe('Utils', () => {
       expect(result.scripts).toEqual(undefined);
     });
   });
+
   describe('formatCode', () => {
-    it.each([
+    const inputs = [
       // string
       {
-        input: "window[{{l}}??'dataLayer']=window[{{l}}??'dataLayer']||[];",
+        input: 'window[{{l}}]=window[{{l}}]||[];',
         params: {
           l: 'some-datalayer',
         },
-        output: `window["some-datalayer"??'dataLayer']=window["some-datalayer"??'dataLayer']||[];`,
+        output: `window["some-datalayer"]=window["some-datalayer"]||[];`,
       },
       // number
       {
@@ -257,24 +278,33 @@ describe('Utils', () => {
         },
         output: `false`,
       },
-      // null
-      {
-        input: '{{val}}',
-        params: {
-          val: null,
-        },
-        output: `null`,
-      },
       // undefined
       {
-        input: "window[{{l}}??'dataLayer']=window[{{l}}??'dataLayer']||[];",
-        output: `window[undefined??'dataLayer']=window[undefined??'dataLayer']||[];`,
+        input: 'window[{{l}}]=window[{{l}}]||[];',
+        output: `window[undefined]=window[undefined]||[];`,
       },
-    ])(
+    ];
+
+    it.each(inputs)(
       'should replace the input and stringify it',
       ({ input, output, params }) => {
         expect(formatCode(input, params)).toEqual(output);
       },
     );
+
+    it.each(inputs)(
+      'should replace the input and stringify it with the default value',
+      ({ input, output, params }) => {
+        expect(formatCode(input, undefined, params)).toEqual(output);
+      },
+    );
+
+    it('should replace the input and stringify it with the default value', () => {
+      const input = 'window[{{l}}]=window[{{l}}]||[];';
+
+      expect(
+        formatCode(input, { l: 'test' }, { l: 'dataLayer' }),
+      ).toMatchInlineSnapshot(`"window["test"]=window["test"]||[];"`);
+    });
   });
 });
