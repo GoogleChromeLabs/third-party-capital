@@ -30,6 +30,7 @@ export function formatUrl(
   params?: string[],
   args?: Inputs,
   slug?: Inputs,
+  optionalParams?: Inputs,
 ) {
   const newUrl =
     slug && Object.keys(slug).length > 0
@@ -39,15 +40,25 @@ export function formatUrl(
   if (params && args) {
     params.forEach((param: string) => {
       if (args[param]) newUrl.searchParams.set(param, args[param]);
+      else if (optionalParams?.[param]) {
+        newUrl.searchParams.set(param, optionalParams?.[param]);
+      }
     });
   }
 
   return newUrl.toString();
 }
 
-export function formatCode(code: string, args?: Inputs) {
+export function formatCode(
+  code: string,
+  args?: Inputs,
+  optionalParams?: Inputs,
+) {
   return code.replace(/{{(.*?)}}/g, (match) => {
-    return args?.[match.split(/{{|}}/).filter(Boolean)[0]];
+    const name = match.split(/{{|}}/).filter(Boolean)[0];
+    return JSON.stringify(
+      args && name in args ? args?.[name] : optionalParams?.[name],
+    );
   });
 }
 
@@ -96,6 +107,7 @@ export function formatData(data: Data, args: Inputs): Output {
     (acc, script) => [
       ...acc,
       ...(Array.isArray(script.params) ? script.params : []),
+      ...(script.optionalParams ? Object.keys(script.optionalParams) : []),
     ],
     [] as string[],
   );
@@ -143,11 +155,21 @@ export function formatData(data: Data, args: Inputs): Output {
           return isExternalScript(script)
             ? {
                 ...script,
-                url: formatUrl(script.url, script.params, scriptUrlParamInputs),
+                url: formatUrl(
+                  script.url,
+                  allScriptParams,
+                  scriptUrlParamInputs,
+                  undefined,
+                  script.optionalParams,
+                ),
               }
             : {
                 ...script,
-                code: formatCode(script.code, scriptUrlParamInputs),
+                code: formatCode(
+                  script.code,
+                  scriptUrlParamInputs,
+                  script.optionalParams,
+                ),
               };
         })
       : undefined,
