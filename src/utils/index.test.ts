@@ -322,6 +322,14 @@ describe('Utils', () => {
         },
         output: `false`,
       },
+      // boolean
+      {
+        input: '{{val}}',
+        params: {
+          val: null,
+        },
+        output: `null`,
+      },
       // undefined
       {
         input: 'window[{{l}}]=window[{{l}}]||[];',
