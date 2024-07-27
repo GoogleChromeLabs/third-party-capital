@@ -105,6 +105,7 @@ export function formatData(data: Data, args: Inputs): Output {
     (acc, script) => [
       ...acc,
       ...(Array.isArray(script.params) ? script.params : []),
+      ...(script.optionalParams ? Object.keys(script.optionalParams) : []),
     ],
     [] as string[],
   );
@@ -152,11 +153,21 @@ export function formatData(data: Data, args: Inputs): Output {
           return isExternalScript(script)
             ? {
                 ...script,
-                url: formatUrl(script.url, script.params, scriptUrlParamInputs),
+                url: formatUrl(
+                  script.url,
+                  allScriptParams,
+                  scriptUrlParamInputs,
+                  undefined,
+                  script.optionalParams,
+                ),
               }
             : {
                 ...script,
-                code: formatCode(script.code, scriptUrlParamInputs),
+                code: formatCode(
+                  script.code,
+                  scriptUrlParamInputs,
+                  script.optionalParams,
+                ),
               };
         })
       : undefined,

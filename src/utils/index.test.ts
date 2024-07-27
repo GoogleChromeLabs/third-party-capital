@@ -1,5 +1,5 @@
 import { formatUrl, createHtml, formatData, formatCode } from '.';
-import type { Data, ExternalScript } from '../types';
+import type { CodeBlock, Data, ExternalScript } from '../types';
 
 describe('Utils', () => {
   describe('formatUrl', () => {
@@ -249,6 +249,50 @@ describe('Utils', () => {
         '<iframe loading="lazy" src="https://www.google.com/maps/embed/v1/view?key=123"></iframe>',
       );
       expect(result.scripts).toEqual(undefined);
+    });
+
+    it('should replace with default values when needed', () => {
+      const data = {
+        id: 'third-party',
+        description: 'Description',
+        html: {
+          element: 'iframe',
+          attributes: {
+            loading: 'lazy',
+            src: {
+              url: 'https://www.google.com/maps/embed/v1/place',
+              slugParam: 'mode',
+              params: ['key'],
+            },
+          },
+        },
+        scripts: [
+          {
+            code: 'window[{{hello}}]=window[{{hello}}]||[];console.log({{world}})',
+            optionalParams: {
+              hello: 'hoho',
+            },
+            params: ['world'],
+            strategy: 'worker',
+            location: 'head',
+            action: 'append',
+            key: 'setup',
+          } as CodeBlock,
+        ],
+      };
+
+      const result = formatData(data, {
+        test: 'hello',
+        world: 'earth',
+        key: 404,
+      });
+      const script = result.scripts![0] as CodeBlock;
+      expect(script.code).toEqual(
+        'window["hoho"]=window["hoho"]||[];console.log("earth")',
+      );
+      expect(result.html).toEqual(
+        '<iframe loading="lazy" src="https://www.google.com/maps/embed/v1/place?key=404" test="hello"></iframe>',
+      );
     });
   });
 
