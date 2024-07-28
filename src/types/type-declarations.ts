@@ -80,7 +80,7 @@ export interface GTag {
   (fn: 'config', opt: 'reset'): void;
 }
 
-export type DataLayer = Parameters<GTag>[];
+export type DataLayer = Array<Parameters<GTag> | Record<string, unknown>>;
 
 /* Google Tag Manager */
 export interface GoogleTagManagerParams {
