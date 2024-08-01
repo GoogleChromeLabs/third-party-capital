@@ -43,14 +43,17 @@ The loading recommendation for each third-party resource is defined with the fol
     key?: string;
     url: string | {
       url: string;
-      params: Array<string> ;
     };
+    params: Array<string> ;
+    optionalParams?: Record<string, string | number | undefined | null>;
     strategy: "server" | "client" | "idle" | "worker";
     location: "head" | "body";
     action: "append" | "prepend";
   } | {
     key?: string;
     code: string;
+    params: Array<string> ;
+    optionalParams?: Record<string, string | number | undefined | null>;
     strategy: "server" | "client" | "idle" | "worker";
     location: "head" | "body";
     action: "append" | "prepend";
@@ -73,6 +76,7 @@ These properties provide a heuristic for consumers to decide how, when, and wher
   - **code**: String literal of the script to inject (only used for inline scripts)
   - **key** _(optional<sup>\*</sup>)_: Key string
   - **params**: An array of parameter names that when used as arguments by the user are assigned as query parameters to the URL
+  - **optionalParams**: An object, where keys are optional parameters and values are default values.
   - **strategy**: String literal to denote loading strategy of third-party script (on the server, on the client, during browser idle time, or in a web worker)
   - **location**: String literal to denote whether to inject the script in <head> or <body> (only useful if strategy=server is used)
   - **action**: String literal to denote whether to prepend or append the script (only useful if strategy=server is used)
