@@ -15,7 +15,7 @@
       "key": "gtag"
     },
     {
-      "code": "window['{{l}}']=window['{{l}}']||[];window['gtag-{{l}}']=function (){window['{{l}}'].push(arguments);};window['gtag-{{l}}']('js',new Date());window['gtag-{{l}}']('config','{{id}}')",
+      "code": "window[{{l}}]=window[{{l}}]||[];window['gtag-'+{{l}}]=function (){window[{{l}}].push(arguments);};window['gtag-'+{{l}}]('js',new Date());window['gtag-'+{{l}}]('config',{{id}})",
       "params": ["id"],
       "optionalParams": {
         "l": "dataLayer"
