@@ -268,7 +268,7 @@ describe('Utils', () => {
         },
         scripts: [
           {
-            code: 'window[{{hello}}]=window[{{hello}}]||[];console.log({{world}})',
+            code: 'window["{{hello}}"]=window["{{hello}}"]||[];console.log("{{world}}")',
             optionalParams: {
               hello: 'hoho',
             },
@@ -300,7 +300,7 @@ describe('Utils', () => {
     const inputs = [
       // string
       {
-        input: 'window[{{l}}]=window[{{l}}]||[];',
+        input: 'window["{{l}}"]=window["{{l}}"]||[];',
         params: {
           l: 'some-datalayer',
         },
@@ -356,7 +356,7 @@ describe('Utils', () => {
 
       expect(
         formatCode(input, { l: 'test' }, { l: 'dataLayer' }),
-      ).toMatchInlineSnapshot(`"window["test"]=window["test"]||[];"`);
+      ).toMatchInlineSnapshot(`"window[test]=window[test]||[];"`);
     });
   });
 });

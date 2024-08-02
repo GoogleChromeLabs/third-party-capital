@@ -15,7 +15,7 @@
         "key": "gtm"
       },
       {
-        "code": "window[{{l}}]=window[{{l}}]||[];window[{{l}}].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
+        "code": "window['{{l}}']=window['{{l}}']||[];window['{{l}}'].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
         "optionalParams": {
           "l": "dataLayer"
         },
