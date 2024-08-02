@@ -56,9 +56,7 @@ export function formatCode(
 ) {
   return code.replace(/{{(.*?)}}/g, (match) => {
     const name = match.split(/{{|}}/).filter(Boolean)[0];
-    return JSON.stringify(
-      args?.[name] !== undefined ? args?.[name] : optionalParams?.[name],
-    );
+    return args?.[name] !== undefined ? args?.[name] : optionalParams?.[name];
   });
 }
 
