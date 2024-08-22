@@ -9,7 +9,7 @@
 
 namespace GoogleChromeLabs\ThirdPartyCapital\ThirdParties;
 
-use GoogleChromeLabs\ThirdPartyCapital\Util\ThirdPartiesDir;
+use GoogleChromeLabs\ThirdPartyCapital\Util\JsonDir;
 
 /**
  * Class representing the Google Analytics integration.
@@ -24,6 +24,6 @@ class GoogleAnalytics extends ThirdPartyBase
      */
     protected function getJsonFilePath(): string
     {
-        return ThirdPartiesDir::getFilePath('google-analytics/data.json');
+        return JsonDir::getFilePath('google-analytics.json');
     }
 }

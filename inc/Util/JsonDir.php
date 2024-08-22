@@ -1,6 +1,6 @@
 <?php
 /**
- * Class GoogleChromeLabs\ThirdPartyCapital\Util\ThirdPartiesDir
+ * Class GoogleChromeLabs\ThirdPartyCapital\Util\JsonDir
  *
  * @package   GoogleChromeLabs/ThirdPartyCapital
  * @copyright 2024 Google LLC
@@ -10,20 +10,20 @@
 namespace GoogleChromeLabs\ThirdPartyCapital\Util;
 
 /**
- * Static class providing the path to the 'third-parties' directory containing JSON files.
+ * Static class providing the path to the directory containing JSON files.
  */
-class ThirdPartiesDir
+class JsonDir
 {
 
     /**
-     * Gets the absolute path to a file within the 'third-parties' directory.
+     * Gets the absolute path to a file within the JSON directory.
      *
-     * @param string $relativePath Relative path to the file within the 'third-parties' directory.
+     * @param string $relativePath Relative path to the file within the JSON directory.
      * @return string Absolute path to the file.
      */
     public static function getFilePath(string $relativePath): string
     {
-        $dir = dirname(__DIR__, 2) . '/src/third-parties/';
+        $dir = dirname(__DIR__, 2) . '/data/';
 
         return $dir . ltrim($relativePath, '/');
     }

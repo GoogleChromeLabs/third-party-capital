@@ -9,7 +9,7 @@
 
 namespace GoogleChromeLabs\ThirdPartyCapital\ThirdParties;
 
-use GoogleChromeLabs\ThirdPartyCapital\Util\ThirdPartiesDir;
+use GoogleChromeLabs\ThirdPartyCapital\Util\JsonDir;
 
 /**
  * Class representing the YouTube Embed integration.
@@ -24,6 +24,6 @@ class YouTubeEmbed extends ThirdPartyBase
      */
     protected function getJsonFilePath(): string
     {
-        return ThirdPartiesDir::getFilePath('youtube-embed/data.json');
+        return JsonDir::getFilePath('youtube-embed.json');
     }
 }
