@@ -1,7 +1,7 @@
-import GooglaAnalyticsData from './google-analytics/data.json';
-import GoogleTagManagerData from './google-tag-manager/data.json';
-import GoogleMapsEmbedData from './google-maps-embed/data.json';
-import GoogleYoutubeEmbedData from './youtube-embed/data.json';
+import GooglaAnalyticsData from '../../data/google-analytics.json';
+import GoogleTagManagerData from '../../data/google-tag-manager.json';
+import GoogleMapsEmbedData from '../../data/google-maps-embed.json';
+import GoogleYoutubeEmbedData from '../../data/youtube-embed.json';
 
 export {
   GooglaAnalyticsData,

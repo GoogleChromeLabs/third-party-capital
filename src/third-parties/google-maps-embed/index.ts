@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import data from './data.json';
+import data from '../../../data/google-maps-embed.json';
 import { formatData } from '../../utils';
 import type { Data, Inputs } from '../../types';
 
