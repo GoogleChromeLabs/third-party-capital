@@ -9,7 +9,7 @@
 
 namespace GoogleChromeLabs\ThirdPartyCapital\ThirdParties;
 
-use GoogleChromeLabs\ThirdPartyCapital\Util\ThirdPartiesDir;
+use GoogleChromeLabs\ThirdPartyCapital\Util\JsonDir;
 
 /**
  * Class representing the Google Maps Embed integration.
@@ -24,6 +24,6 @@ class GoogleMapsEmbed extends ThirdPartyBase
      */
     protected function getJsonFilePath(): string
     {
-        return ThirdPartiesDir::getFilePath('google-maps-embed/data.json');
+        return JsonDir::getFilePath('google-maps-embed.json');
     }
 }
