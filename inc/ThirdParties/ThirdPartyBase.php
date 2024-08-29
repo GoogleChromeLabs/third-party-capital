@@ -53,7 +53,7 @@ abstract class ThirdPartyBase implements ThirdParty
      *
      * @param array<string, mixed> $args Input arguments to set.
      */
-    public function __construct(array $args)
+    final public function __construct(array $args)
     {
         $this->jsonFilePath = $this->getJsonFilePath();
 
@@ -65,7 +65,7 @@ abstract class ThirdPartyBase implements ThirdParty
      *
      * @return string Third party identifier.
      */
-    public function getId(): string
+    final public function getId(): string
     {
         $this->lazilyInitialize();
 
@@ -77,7 +77,7 @@ abstract class ThirdPartyBase implements ThirdParty
      *
      * @param array<string, mixed> $args Input arguments to set.
      */
-    public function setArgs(array $args): void
+    final public function setArgs(array $args): void
     {
         $this->args = $args;
 
@@ -92,7 +92,7 @@ abstract class ThirdPartyBase implements ThirdParty
      *
      * @return string HTML output, or empty string if not applicable.
      */
-    public function getHtml(): string
+    final public function getHtml(): string
     {
         $this->lazilyInitialize();
 
@@ -106,7 +106,7 @@ abstract class ThirdPartyBase implements ThirdParty
      *
      * @return string[] List of stylesheet URLs, or empty array if not applicable.
      */
-    public function getStylesheets(): array
+    final public function getStylesheets(): array
     {
         $this->lazilyInitialize();
 
@@ -120,7 +120,7 @@ abstract class ThirdPartyBase implements ThirdParty
      *
      * @return ThirdPartyScriptOutput[] List of script definition objects, or empty array if not applicable.
      */
-    public function getScripts(): array
+    final public function getScripts(): array
     {
         $this->lazilyInitialize();
 
