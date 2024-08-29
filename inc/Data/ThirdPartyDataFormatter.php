@@ -20,7 +20,7 @@ class ThirdPartyDataFormatter
     /**
      * Formats third party data for a given set of input arguments and returns the corresponding output.
      *
-     * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/0831b937a8468e0f74bd79edd5a59fa8b2e6e763/src/utils/index.ts#L94
+     * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/54cd44d1bd197a7809ab2f6ede4d13a973087c3d/src/utils/index.ts#L105
      *
      * @param ThirdPartyData       $data Third party data to format.
      * @param array<string, mixed> $args Input arguments to format third party data with.
@@ -119,7 +119,7 @@ class ThirdPartyDataFormatter
     /**
      * Formats the given HTML arguments into an HTML string.
      *
-     * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/0831b937a8468e0f74bd79edd5a59fa8b2e6e763/src/utils/index.ts#L55
+     * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/54cd44d1bd197a7809ab2f6ede4d13a973087c3d/src/utils/index.ts#L66
      *
      * @param string               $element           Element tag name for the HTML element.
      * @param array<string, mixed> $attributes        Attributes for the HTML element.
@@ -161,7 +161,7 @@ class ThirdPartyDataFormatter
     /**
      * Formats the given URL arguments into a URL string.
      *
-     * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/0831b937a8468e0f74bd79edd5a59fa8b2e6e763/src/utils/index.ts#L28
+     * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/54cd44d1bd197a7809ab2f6ede4d13a973087c3d/src/utils/index.ts#L28
      *
      * @param string               $url            Base URL.
      * @param string[]             $params         Parameter names.
@@ -216,7 +216,7 @@ class ThirdPartyDataFormatter
     /**
      * Formats the given code arguments into a code string.
      *
-     * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/0831b937a8468e0f74bd79edd5a59fa8b2e6e763/src/utils/index.ts#L48
+     * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/54cd44d1bd197a7809ab2f6ede4d13a973087c3d/src/utils/index.ts#L52
      *
      * @param string               $code           Code string with placeholders for URL query parameters.
      * @param array<string, mixed> $args           Input arguments for the src attribute query parameters.
