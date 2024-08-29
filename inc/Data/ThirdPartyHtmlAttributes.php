@@ -9,6 +9,7 @@
 
 namespace GoogleChromeLabs\ThirdPartyCapital\Data;
 
+use GoogleChromeLabs\ThirdPartyCapital\Contracts\Arrayable;
 use GoogleChromeLabs\ThirdPartyCapital\Util\HtmlAttributes;
 
 /**
@@ -22,7 +23,7 @@ class ThirdPartyHtmlAttributes extends HtmlAttributes
      *
      * @param string $name  Attribute name.
      * @param mixed  $value Attribute value.
-     * @return mixed Sanitized attribute value.
+     * @return string|bool|null|Arrayable Sanitized attribute value.
      */
     protected function sanitizeAttr(string $name, $value)
     {
@@ -36,8 +37,8 @@ class ThirdPartyHtmlAttributes extends HtmlAttributes
     /**
      * Returns the attribute string for the given attribute name and value.
      *
-     * @param string $name  Attribute name.
-     * @param mixed  $value Attribute value.
+     * @param string                     $name  Attribute name.
+     * @param string|bool|null|Arrayable $value Attribute value.
      * @return string HTML attribute string (starts with a space), or empty string to skip.
      */
     protected function toAttrString(string $name, $value): string
