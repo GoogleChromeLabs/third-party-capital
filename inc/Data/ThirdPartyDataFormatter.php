@@ -31,15 +31,20 @@ class ThirdPartyDataFormatter
         $htmlData = $data->getHtml();
         $scriptsData = $data->getScripts();
 
-        $allScriptParams = array_reduce(
-            $scriptsData,
-            static function ($acc, ThirdPartyScriptData $scriptData) {
-                foreach ($scriptData->getParams() as $param) {
-                    $acc[] = $param;
-                }
-                return $acc;
-            },
-            []
+        $allScriptParams = array_unique(
+            array_reduce(
+                $scriptsData,
+                static function ($acc, ThirdPartyScriptData $scriptData) {
+                    foreach ($scriptData->getParams() as $param) {
+                        $acc[] = $param;
+                    }
+                    foreach (array_keys($scriptData->getOptionalParams()) as $param) {
+                        $acc[] = $param;
+                    }
+                    return $acc;
+                },
+                []
+            )
         );
 
         $scriptUrlParamInputs = self::intersectArgs($args, $allScriptParams);
@@ -84,20 +89,24 @@ class ThirdPartyDataFormatter
         }
         if (isset($newData['scripts']) && $newData['scripts']) {
             $newData['scripts'] = array_map(
-                static function ($scriptData) use ($scriptUrlParamInputs) {
+                static function ($scriptData) use ($allScriptParams, $scriptUrlParamInputs) {
                     if (isset($scriptData['url'])) {
                         $scriptData['url'] = self::formatUrl(
                             $scriptData['url'],
-                            $scriptData['params'],
-                            $scriptUrlParamInputs
+                            $allScriptParams,
+                            $scriptUrlParamInputs,
+                            [],
+                            $scriptData['optionalParams'] ?? []
                         );
                     } else {
                         $scriptData['code'] = self::formatCode(
                             $scriptData['code'],
-                            $scriptUrlParamInputs
+                            $scriptUrlParamInputs,
+                            $scriptData['optionalParams'] ?? []
                         );
                     }
-                    unset($scriptData['params']); // Params are irrelevant for formatted output.
+                    // Params are irrelevant for formatted output.
+                    unset($scriptData['params'], $scriptData['optionalParams']);
                     return $scriptData;
                 },
                 $newData['scripts']
@@ -154,15 +163,22 @@ class ThirdPartyDataFormatter
      *
      * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/0831b937a8468e0f74bd79edd5a59fa8b2e6e763/src/utils/index.ts#L28
      *
-     * @param string               $url          Base URL.
-     * @param string[]             $params       Parameter names.
-     * @param array<string, mixed> $args         Input arguments for the src attribute query parameters.
-     * @param array<string, mixed> $slugParamArg Optional. Input argument for the src attribute slug query parameter.
-     *                                           Default empty array.
+     * @param string               $url            Base URL.
+     * @param string[]             $params         Parameter names.
+     * @param array<string, mixed> $args           Input arguments for the src attribute query parameters.
+     * @param array<string, mixed> $slugParamArg   Optional. Input argument for the src attribute slug query parameter.
+     *                                             Default empty array.
+     * @param array<string, mixed> $optionalParams Optional. Optional parameter names and their defaults.
+     *                                             Default empty array.
      * @return string HTML string.
      */
-    public static function formatUrl(string $url, array $params, array $args, array $slugParamArg = []): string
-    {
+    public static function formatUrl(
+        string $url,
+        array $params,
+        array $args,
+        array $slugParamArg = [],
+        array $optionalParams = []
+    ): string {
         if ($slugParamArg) {
             $slug = array_values($slugParamArg)[0];
 
@@ -181,6 +197,10 @@ class ThirdPartyDataFormatter
 
         if ($params && $args) {
             $queryArgs = self::intersectArgs($args, $params);
+            if ($optionalParams) {
+                $optionalArgs = self::intersectArgs($optionalParams, $params);
+                $queryArgs    = array_merge($optionalArgs, $queryArgs);
+            }
             if ($queryArgs) {
                 $url = self::setUrlQueryArgs($url, $queryArgs);
             }
@@ -194,17 +214,25 @@ class ThirdPartyDataFormatter
      *
      * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/0831b937a8468e0f74bd79edd5a59fa8b2e6e763/src/utils/index.ts#L48
      *
-     * @param string               $code Code string with placeholders for URL query parameters.
-     * @param array<string, mixed> $args Input arguments for the src attribute query parameters.
+     * @param string               $code           Code string with placeholders for URL query parameters.
+     * @param array<string, mixed> $args           Input arguments for the src attribute query parameters.
+     * @param array<string, mixed> $optionalParams Optional. Optional parameter names and their defaults.
+     *                                             Default empty array.
      * @return string HTML string.
      */
-    public static function formatCode(string $code, array $args): string
-    {
+    public static function formatCode(
+        string $code,
+        array $args,
+        array $optionalParams = []
+    ): string {
         return preg_replace_callback(
             '/{{([^}]+)}}/',
-            static function ($matches) use ($args) {
+            static function ($matches) use ($args, $optionalParams) {
                 if (isset($args[ $matches[1] ])) {
                     return $args[ $matches[1] ];
+                }
+                if (isset($optionalParams[ $matches[1] ])) {
+                    return $optionalParams[ $matches[1] ];
                 }
                 return '';
             },
