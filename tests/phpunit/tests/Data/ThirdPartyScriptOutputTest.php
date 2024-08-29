@@ -68,7 +68,7 @@ class ThirdPartyScriptOutputTest extends TestCase
 
     public function testToArray()
     {
-        $input = [
+        $input        = [
             'strategy' => ThirdPartyScriptData::STRATEGY_CLIENT,
             'location' => ThirdPartyScriptData::LOCATION_HEAD,
             'action'   => ThirdPartyScriptData::ACTION_APPEND,

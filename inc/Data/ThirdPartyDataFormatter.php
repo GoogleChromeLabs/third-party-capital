@@ -28,7 +28,7 @@ class ThirdPartyDataFormatter
      */
     public static function formatData(ThirdPartyData $data, array $args): ThirdPartyOutput
     {
-        $htmlData = $data->getHtml();
+        $htmlData    = $data->getHtml();
         $scriptsData = $data->getScripts();
 
         $allScriptParams = array_unique(
@@ -185,7 +185,7 @@ class ThirdPartyDataFormatter
             $path = parse_url($url, PHP_URL_PATH);
             if ($path) {
                 $trailingSlash = str_ends_with($path, '/') ? '/' : '';
-                $url = str_replace(
+                $url           = str_replace(
                     $path,
                     substr($path, 0, - strlen(basename($path) . $trailingSlash)) . $slug . $trailingSlash,
                     $url

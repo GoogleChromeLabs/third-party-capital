@@ -84,7 +84,7 @@ class ThirdPartyOutputTest extends TestCase
 
     public function testToArray()
     {
-        $input = [
+        $input  = [
             'id'          => 'my-service',
             'description' => 'A service that allows embedding something.',
             'website'     => 'https://my-service.com/',

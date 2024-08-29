@@ -114,7 +114,7 @@ class ThirdPartyDataTest extends TestCase
             ],
             'stylesheets' => ['https://example.com/style.css', 'https://example.com/style-2.css'],
         ];
-        $data = new ThirdPartyData($input);
+        $data  = new ThirdPartyData($input);
         $this->assertSame($input, $data->toArray());
     }
 }

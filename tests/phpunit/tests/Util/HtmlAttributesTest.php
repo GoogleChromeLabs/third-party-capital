@@ -77,7 +77,7 @@ class HtmlAttributesTest extends TestCase
 
     public function testGetIterator()
     {
-        $attrs = new HtmlAttributes([
+        $attrs  = new HtmlAttributes([
             'id'    => 'unique-id',
             'class' => 'test-class',
         ]);
