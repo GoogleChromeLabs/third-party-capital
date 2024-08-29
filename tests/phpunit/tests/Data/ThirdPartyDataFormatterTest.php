@@ -333,11 +333,11 @@ class ThirdPartyDataFormatterTest extends TestCase
     public function testFormatCodeWithoutArgs()
     {
         $code = ThirdPartyDataFormatter::formatCode(
-            'document.querySelector("{{selector}}").addEventListener(api.{{callback}});',
+            'document.querySelector({{selector}}).addEventListener(api[{{callback}}]);',
             []
         );
         $this->assertSame(
-            'document.querySelector("").addEventListener(api.);',
+            'document.querySelector("").addEventListener(api[""]);',
             $code
         );
     }
@@ -345,14 +345,14 @@ class ThirdPartyDataFormatterTest extends TestCase
     public function testFormatCodeWithArgs()
     {
         $code = ThirdPartyDataFormatter::formatCode(
-            'document.querySelector("{{selector}}").addEventListener(api.{{callback}});',
+            'document.querySelector({{selector}}).addEventListener(api[{{callback}}]);',
             [
                 'selector' => '.my-cta-button',
                 'callback' => 'addToCart',
             ]
         );
         $this->assertSame(
-            'document.querySelector(".my-cta-button").addEventListener(api.addToCart);',
+            'document.querySelector(".my-cta-button").addEventListener(api["addToCart"]);',
             $code
         );
     }
@@ -360,7 +360,7 @@ class ThirdPartyDataFormatterTest extends TestCase
     public function testFormatCodeWithArgsIncorrectOrderAndTooMany()
     {
         $code = ThirdPartyDataFormatter::formatCode(
-            'document.querySelector("{{selector}}").addEventListener(api.{{callback}});',
+            'document.querySelector({{selector}}).addEventListener(api[{{callback}}]);',
             [
                 'callback' => 'addToCart',
                 'device'   => 'phone',
@@ -368,7 +368,7 @@ class ThirdPartyDataFormatterTest extends TestCase
             ]
         );
         $this->assertSame(
-            'document.querySelector(".my-cta-button").addEventListener(api.addToCart);',
+            'document.querySelector(".my-cta-button").addEventListener(api["addToCart"]);',
             $code
         );
     }
