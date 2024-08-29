@@ -30,7 +30,7 @@ abstract class ThirdPartyBase implements ThirdParty
     /**
      * Input arguments.
      *
-     * @var array
+     * @var array<string, mixed>
      */
     private $args = [];
 
@@ -51,7 +51,7 @@ abstract class ThirdPartyBase implements ThirdParty
     /**
      * Constructor.
      *
-     * @param array $args Input arguments to set.
+     * @param array<string, mixed> $args Input arguments to set.
      */
     public function __construct(array $args)
     {
@@ -75,9 +75,9 @@ abstract class ThirdPartyBase implements ThirdParty
     /**
      * Sets input arguments for the integration.
      *
-     * @param array $args Input arguments to set.
+     * @param array<string, mixed> $args Input arguments to set.
      */
-    public function setArgs(array $args)
+    public function setArgs(array $args): void
     {
         $this->args = $args;
 
@@ -140,7 +140,7 @@ abstract class ThirdPartyBase implements ThirdParty
      * The data instance is only initialized once as it is agnostic to the input arguments.
      * The output instance needs to be reinitialized whenever the input arguments change.
      */
-    private function lazilyInitialize()
+    private function lazilyInitialize(): void
     {
         if (! $this->data) {
             $this->data = ThirdPartyData::fromJsonFile($this->jsonFilePath);

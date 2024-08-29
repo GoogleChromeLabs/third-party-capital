@@ -28,14 +28,14 @@ class ThirdPartyHtmlData implements Arrayable
     /**
      * Attributes for the HTML element.
      *
-     * @var ThirdPartyHtmlAttributes
+     * @var ThirdPartyHtmlAttributes<string, string|bool>
      */
     private $attributes;
 
     /**
      * Constructor.
      *
-     * @param array $htmlData HTML data, e.g. from a third party JSON file.
+     * @param array<string, mixed> $htmlData HTML data, e.g. from a third party JSON file.
      *
      * @throws InvalidThirdPartyDataException Thrown when provided HTML data is invalid.
      */
@@ -58,7 +58,7 @@ class ThirdPartyHtmlData implements Arrayable
     /**
      * Gets the attributes for the HTML element.
      *
-     * @return ThirdPartyHtmlAttributes Attributes for the HTML element.
+     * @return ThirdPartyHtmlAttributes<string, string|bool> Attributes for the HTML element.
      */
     public function getAttributes(): ThirdPartyHtmlAttributes
     {
@@ -68,11 +68,11 @@ class ThirdPartyHtmlData implements Arrayable
     /**
      * Validates the given HTML data.
      *
-     * @param array $htmlData HTML data, e.g. from a third party JSON file.
+     * @param array<string, mixed> $htmlData HTML data, e.g. from a third party JSON file.
      *
      * @throws InvalidThirdPartyDataException Thrown when provided HTML data is invalid.
      */
-    private function validateData(array $htmlData)
+    private function validateData(array $htmlData): void
     {
         if (!isset($htmlData['element'])) {
             throw new InvalidThirdPartyDataException('Missing HTML element.');
@@ -88,9 +88,9 @@ class ThirdPartyHtmlData implements Arrayable
     /**
      * Sets the given HTML data.
      *
-     * @param array $htmlData HTML data, e.g. from a third party JSON file.
+     * @param array<string, mixed> $htmlData HTML data, e.g. from a third party JSON file.
      */
-    private function setData(array $htmlData)
+    private function setData(array $htmlData): void
     {
         $this->element    = (string) $htmlData['element'];
         $this->attributes = new ThirdPartyHtmlAttributes($htmlData['attributes']);
@@ -99,7 +99,7 @@ class ThirdPartyHtmlData implements Arrayable
     /**
      * Returns an array representation of the data.
      *
-     * @return array Associative array of data.
+     * @return array<string, mixed> Associative array of data.
      */
     public function toArray(): array
     {

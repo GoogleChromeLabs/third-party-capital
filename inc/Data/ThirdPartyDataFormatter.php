@@ -22,8 +22,8 @@ class ThirdPartyDataFormatter
      *
      * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/0831b937a8468e0f74bd79edd5a59fa8b2e6e763/src/utils/index.ts#L94
      *
-     * @param ThirdPartyData   $data Third party data to format.
-     * @param array            $args Input arguments to format third party data with.
+     * @param ThirdPartyData       $data Third party data to format.
+     * @param array<string, mixed> $args Input arguments to format third party data with.
      * @return ThirdPartyOutput Third party output data.
      */
     public static function formatData(ThirdPartyData $data, array $args): ThirdPartyOutput
@@ -112,12 +112,12 @@ class ThirdPartyDataFormatter
      *
      * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/0831b937a8468e0f74bd79edd5a59fa8b2e6e763/src/utils/index.ts#L55
      *
-     * @param string $element           Element tag name for the HTML element.
-     * @param array  $attributes        Attributes for the HTML element.
-     * @param array  $htmlAttrArgs      Input arguments for the HTML element attributes.
-     * @param array  $urlQueryParamArgs Input arguments for the src attribute query parameters.
-     * @param array  $slugParamArg      Optional. Input argument for the src attribute slug query parameter.
-     *                                  Default empty array.
+     * @param string               $element           Element tag name for the HTML element.
+     * @param array<string, mixed> $attributes        Attributes for the HTML element.
+     * @param array<string, mixed> $htmlAttrArgs      Input arguments for the HTML element attributes.
+     * @param array<string, mixed> $urlQueryParamArgs Input arguments for the src attribute query parameters.
+     * @param array<string, mixed> $slugParamArg      Optional. Input argument for the src attribute slug query
+     *                                                parameter. Default empty array.
      * @return string HTML string.
      */
     public static function formatHtml(
@@ -154,11 +154,11 @@ class ThirdPartyDataFormatter
      *
      * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/0831b937a8468e0f74bd79edd5a59fa8b2e6e763/src/utils/index.ts#L28
      *
-     * @param string   $url          Base URL.
-     * @param string[] $params       Parameter names.
-     * @param array    $args         Input arguments for the src attribute query parameters.
-     * @param array    $slugParamArg Optional. Input argument for the src attribute slug query parameter.
-     *                               Default empty array.
+     * @param string               $url          Base URL.
+     * @param string[]             $params       Parameter names.
+     * @param array<string, mixed> $args         Input arguments for the src attribute query parameters.
+     * @param array<string, mixed> $slugParamArg Optional. Input argument for the src attribute slug query parameter.
+     *                                           Default empty array.
      * @return string HTML string.
      */
     public static function formatUrl(string $url, array $params, array $args, array $slugParamArg = []): string
@@ -194,8 +194,8 @@ class ThirdPartyDataFormatter
      *
      * @see https://github.com/GoogleChromeLabs/third-party-capital/blob/0831b937a8468e0f74bd79edd5a59fa8b2e6e763/src/utils/index.ts#L48
      *
-     * @param string $code Code string with placeholders for URL query parameters.
-     * @param array  $args Input arguments for the src attribute query parameters.
+     * @param string               $code Code string with placeholders for URL query parameters.
+     * @param array<string, mixed> $args Input arguments for the src attribute query parameters.
      * @return string HTML string.
      */
     public static function formatCode(string $code, array $args): string
@@ -215,9 +215,9 @@ class ThirdPartyDataFormatter
     /**
      * Returns the subset of the given $args that refers to parameter within the given $params.
      *
-     * @param array    $args   Input arguments.
-     * @param string[] $params Parameter names.
-     * @return array Intersection of $args based on $params.
+     * @param array<string, mixed> $args   Input arguments.
+     * @param string[]             $params Parameter names.
+     * @return array<string, mixed> Intersection of $args based on $params.
      */
     private static function intersectArgs(array $args, array $params): array
     {
@@ -227,9 +227,9 @@ class ThirdPartyDataFormatter
     /**
      * Returns the subset of the given $args that refers to parameter not within the given $params.
      *
-     * @param array    $args   Input arguments.
-     * @param string[] $params Parameter names.
-     * @return array Diff of $args based on $params.
+     * @param array<string, mixed> $args   Input arguments.
+     * @param string[]             $params Parameter names.
+     * @return array<string, mixed> Diff of $args based on $params.
      */
     private static function diffArgs(array $args, array $params): array
     {
@@ -239,8 +239,8 @@ class ThirdPartyDataFormatter
     /**
      * Sets the given query $args on the given URL.
      *
-     * @param string $url  URL.
-     * @param array  $args Input arguments for the URL query string.
+     * @param string               $url  URL.
+     * @param array<string, mixed> $args Input arguments for the URL query string.
      * @return string URL including query arguments.
      */
     private static function setUrlQueryArgs(string $url, array $args): string

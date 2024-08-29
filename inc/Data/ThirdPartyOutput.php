@@ -62,7 +62,7 @@ class ThirdPartyOutput implements Arrayable
     /**
      * Constructor.
      *
-     * @param array $data Output data.
+     * @param array<string, mixed> $data Output data.
      */
     public function __construct(array $data)
     {
@@ -142,7 +142,7 @@ class ThirdPartyOutput implements Arrayable
     /**
      * Returns an array representation of the data.
      *
-     * @return array Associative array of data.
+     * @return array<string, mixed> Associative array of data.
      */
     public function toArray(): array
     {

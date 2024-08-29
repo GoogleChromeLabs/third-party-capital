@@ -42,7 +42,7 @@ class ThirdPartySrcValue implements Arrayable
     /**
      * Constructor.
      *
-     * @param array $srcData Data for the src value.
+     * @param array<string, mixed> $srcData Data for the src value.
      *
      * @throws InvalidThirdPartyDataException Thrown when the mandatory 'url' field is missing.
      */
@@ -90,7 +90,7 @@ class ThirdPartySrcValue implements Arrayable
     /**
      * Returns an array representation of the data.
      *
-     * @return array Associative array of data.
+     * @return array<string, mixed> Associative array of data.
      */
     public function toArray(): array
     {
