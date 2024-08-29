@@ -199,7 +199,11 @@ class ThirdPartyDataFormatter
             $queryArgs = self::intersectArgs($args, $params);
             if ($optionalParams) {
                 $optionalArgs = self::intersectArgs($optionalParams, $params);
-                $queryArgs    = array_merge($optionalArgs, $queryArgs);
+                foreach ($optionalArgs as $k => $v) {
+                    if (!isset($queryArgs[$k])) {
+                        $queryArgs[$k] = $v;
+                    }
+                }
             }
             if ($queryArgs) {
                 $url = self::setUrlQueryArgs($url, $queryArgs);
@@ -229,12 +233,12 @@ class ThirdPartyDataFormatter
             '/{{([^}]+)}}/',
             static function ($matches) use ($args, $optionalParams) {
                 if (isset($args[ $matches[1] ])) {
-                    return $args[ $matches[1] ];
+                    return json_encode($args[ $matches[1] ]);
                 }
                 if (isset($optionalParams[ $matches[1] ])) {
-                    return $optionalParams[ $matches[1] ];
+                    return json_encode($optionalParams[ $matches[1] ]);
                 }
-                return '';
+                return '""';
             },
             $code
         );
