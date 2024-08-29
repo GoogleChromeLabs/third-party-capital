@@ -298,7 +298,7 @@ class ThirdPartyScriptData implements Arrayable
             $this->$field = isset($scriptData[ $field ]) ? (string) $scriptData[ $field ] : '';
         }
 
-        $this->params = isset($scriptData['params']) ? array_map('strval', $scriptData['params']) : [];
+        $this->params         = isset($scriptData['params']) ? array_map('strval', $scriptData['params']) : [];
         $this->optionalParams = isset($scriptData['optionalParams']) ? (array) $scriptData['optionalParams'] : [];
     }
 }
