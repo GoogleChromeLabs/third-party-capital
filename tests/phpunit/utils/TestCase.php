@@ -16,6 +16,28 @@ use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 abstract class TestCase extends PHPUnitTestCase
 {
 
+    /**
+     * Test helper to turn a HTML element name and attributes array into a string.
+     *
+     * @param string                     $element    HTML element name.
+     * @param array<string, string|bool> $attributes Associative array of HTML attributes.
+     * @return string The resulting HTML string.
+     */
+    protected function getHtmlString(string $element, array $attributes): string
+    {
+        $attr_string = '';
+        foreach ($attributes as $key => $value) {
+            if (is_bool($value)) {
+                if ($value) {
+                    $attr_string .= ' ' . $key;
+                }
+                continue;
+            }
+            $attr_string .= ' ' . $key . '="' . $value . '"';
+        }
+        return '<' . $element . $attr_string . '></' . $element . '>';
+    }
+
     protected function runGetterTestCase(string $className, string $getMethod, array $args, $expected)
     {
         if (is_subclass_of($expected, Exception::class)) {
