@@ -52,9 +52,9 @@ class ThirdPartySrcValue implements Arrayable
             throw new InvalidThirdPartyDataException('Missing src url.');
         }
 
-        $this->url = $srcData['url'];
+        $this->url       = $srcData['url'];
         $this->slugParam = isset($srcData['slugParam']) ? (string) $srcData['slugParam'] : '';
-        $this->params = isset($srcData['params']) ? array_map('strval', $srcData['params']) : [];
+        $this->params    = isset($srcData['params']) ? array_map('strval', $srcData['params']) : [];
     }
 
     /**

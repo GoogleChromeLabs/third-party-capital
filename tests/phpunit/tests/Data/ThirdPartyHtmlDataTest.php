@@ -45,7 +45,7 @@ class ThirdPartyHtmlDataTest extends TestCase
 
     public function testToArray()
     {
-        $input = [
+        $input    = [
             'element'    => 'iframe',
             'attributes' => [
                 'src'    => [

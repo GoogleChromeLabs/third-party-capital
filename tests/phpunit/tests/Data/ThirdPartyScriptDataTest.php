@@ -76,7 +76,7 @@ class ThirdPartyScriptDataTest extends TestCase
 
     public function testConstructorWithUrlAndNoCode()
     {
-        $data = ['url' => 'https://example.com/'];
+        $data       = ['url' => 'https://example.com/'];
         $scriptData = new ThirdPartyScriptData(array_merge($this->baseData, $data));
 
         $this->assertSame($data['url'], $scriptData->getUrl());
@@ -84,7 +84,7 @@ class ThirdPartyScriptDataTest extends TestCase
 
     public function testConstructorWithCodeAndNoUrl()
     {
-        $data = ['code' => 'window.dataLayer=window.dataLayer'];
+        $data       = ['code' => 'window.dataLayer=window.dataLayer'];
         $scriptData = new ThirdPartyScriptData(array_merge($this->baseData, $data));
 
         $this->assertSame($data['code'], $scriptData->getCode());
@@ -101,7 +101,7 @@ class ThirdPartyScriptDataTest extends TestCase
     {
         $this->expectException(InvalidThirdPartyDataException::class);
 
-        $data = [
+        $data       = [
             'url'  => 'https://example.com/',
             'code' => 'window.dataLayer=window.dataLayer',
         ];
@@ -137,7 +137,7 @@ class ThirdPartyScriptDataTest extends TestCase
 
     public function testToArray()
     {
-        $input = array_merge(
+        $input      = array_merge(
             $this->baseData,
             [
                 'url'    => 'https://example.com/',
