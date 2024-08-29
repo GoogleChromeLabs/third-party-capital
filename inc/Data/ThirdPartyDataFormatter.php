@@ -238,7 +238,7 @@ class ThirdPartyDataFormatter
                 if (isset($optionalParams[ $matches[1] ])) {
                     return json_encode($optionalParams[ $matches[1] ]);
                 }
-                return '""';
+                return '""'; // The same as `json_encode('')`.
             },
             $code
         );
