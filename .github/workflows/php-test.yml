@@ -36,19 +36,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.2'
 
       - name: Validate Composer configuration
         run: composer validate
 
-      - name: Install PHP dependencies
-        uses: ramsey/composer-install@83af392bf5f031813d25e6fe4cd626cdba9a2df6
-        with:
-          composer-options: '--prefer-dist --no-progress --no-interaction'
+      - name: Install Composer dependencies
+        run: composer update
 
       - name: PHPUnit Test
         run: composer test

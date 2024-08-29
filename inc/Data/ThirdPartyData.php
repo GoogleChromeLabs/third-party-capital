@@ -63,7 +63,7 @@ class ThirdPartyData implements Arrayable
     /**
      * Constructor.
      *
-     * @param array $data Data, e.g. from a third party JSON file.
+     * @param array<string, mixed> $data Data, e.g. from a third party JSON file.
      *
      * @throws InvalidThirdPartyDataException Thrown when provided data is invalid.
      */
@@ -153,7 +153,7 @@ class ThirdPartyData implements Arrayable
     /**
      * Returns an array representation of the data.
      *
-     * @return array Associative array of data.
+     * @return array<string, mixed> Associative array of data.
      */
     public function toArray(): array
     {

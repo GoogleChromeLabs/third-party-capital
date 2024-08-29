@@ -9,8 +9,8 @@
 
 namespace GoogleChromeLabs\ThirdPartyCapital\Tests;
 
-use GoogleChromeLabs\ThirdPartyCapital\Data\ThirdPartyDataFormatter;
 use GoogleChromeLabs\ThirdPartyCapital\Data\ThirdPartyData;
+use GoogleChromeLabs\ThirdPartyCapital\Data\ThirdPartyDataFormatter;
 use GoogleChromeLabs\ThirdPartyCapital\Data\ThirdPartyScriptData;
 use GoogleChromeLabs\ThirdPartyCapital\TestUtils\TestCase;
 

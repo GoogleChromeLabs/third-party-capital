@@ -27,7 +27,7 @@ abstract class TestCase extends PHPUnitTestCase
         }
 
         $instance = new $className($args);
-        $result = call_user_func([$instance, $getMethod]);
+        $result   = call_user_func([$instance, $getMethod]);
         if ($result instanceof Arrayable) {
             $result = $result->toArray();
         } elseif (is_array($result)) {
@@ -57,7 +57,7 @@ abstract class TestCase extends PHPUnitTestCase
             }
 
             if (!isset($getter['value'])) {
-                $type = isset($getter['default']) ? gettype($getter['default']) : 'string';
+                $type  = isset($getter['default']) ? gettype($getter['default']) : 'string';
                 $value = $this->createValueOfType($type);
             } else {
                 $value = $getter['value'];
@@ -68,12 +68,12 @@ abstract class TestCase extends PHPUnitTestCase
         $testCases = [];
         foreach ($getters as $getter) {
             if (!isset($getter['value'])) {
-                $type = isset($getter['default']) ? gettype($getter['default']) : 'string';
+                $type  = isset($getter['default']) ? gettype($getter['default']) : 'string';
                 $value = $this->createValueOfType($type);
             } else {
                 $value = $getter['value'];
             }
-            $args = $requiredFields;
+            $args                   = $requiredFields;
             $args[$getter['field']] = $value;
 
             $testCases["{$getter['getter']} with value"] = [

@@ -18,6 +18,9 @@ use Traversable;
 
 /**
  * Class representing a set of HTML Attributes.
+ *
+ * @implements ArrayAccess<string, string|bool|Arrayable>
+ * @implements IteratorAggregate<string, string|bool|Arrayable>
  */
 class HtmlAttributes implements Arrayable, ArrayAccess, IteratorAggregate
 {
@@ -25,14 +28,14 @@ class HtmlAttributes implements Arrayable, ArrayAccess, IteratorAggregate
     /**
      * Internal attributes storage.
      *
-     * @var array
+     * @var array<string, string|bool|Arrayable>
      */
     private $attr = [];
 
     /**
      * Constructor.
      *
-     * @param array $attr Map of attribute names and their values.
+     * @param array<string, mixed> $attr Map of attribute names and their values.
      */
     public function __construct(array $attr)
     {
@@ -112,7 +115,7 @@ class HtmlAttributes implements Arrayable, ArrayAccess, IteratorAggregate
      *
      * @since n.e.x.t
      *
-     * @return Traversable Attributes iterator.
+     * @return ArrayIterator<string, string|bool|Arrayable> Attributes iterator.
      */
     public function getIterator(): Traversable
     {
@@ -122,7 +125,7 @@ class HtmlAttributes implements Arrayable, ArrayAccess, IteratorAggregate
     /**
      * Returns an array representation of the data.
      *
-     * @return array Associative array of data.
+     * @return array<string, mixed> Associative array of data.
      */
     public function toArray(): array
     {

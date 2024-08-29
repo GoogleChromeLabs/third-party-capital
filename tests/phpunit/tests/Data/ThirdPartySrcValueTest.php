@@ -9,7 +9,6 @@
 
 namespace GoogleChromeLabs\ThirdPartyCapital\Tests;
 
-use Exception;
 use GoogleChromeLabs\ThirdPartyCapital\Data\ThirdPartySrcValue;
 use GoogleChromeLabs\ThirdPartyCapital\Exception\InvalidThirdPartyDataException;
 use GoogleChromeLabs\ThirdPartyCapital\TestUtils\TestCase;
@@ -51,7 +50,7 @@ class ThirdPartySrcValueTest extends TestCase
 
     public function testToArray()
     {
-        $input = [
+        $input    = [
             'url'       => 'https://my-embed.com',
             'slugParam' => 'type',
             'params'    => ['id', 'mode'],

@@ -27,9 +27,9 @@ interface ThirdParty
     /**
      * Sets input arguments for the integration.
      *
-     * @param array $args Input arguments to set.
+     * @param array<string, mixed> $args Input arguments to set.
      */
-    public function setArgs(array $args);
+    public function setArgs(array $args): void;
 
     /**
      * Gets the HTML output for the integration.

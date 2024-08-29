@@ -79,7 +79,7 @@ class ThirdPartyScriptData implements Arrayable
     /**
      * Constructor.
      *
-     * @param array $scriptData Script data, e.g. from a third party JSON file.
+     * @param array<string, mixed> $scriptData Script data, e.g. from a third party JSON file.
      *
      * @throws InvalidThirdPartyDataException Thrown when provided script data is invalid.
      */
@@ -172,7 +172,7 @@ class ThirdPartyScriptData implements Arrayable
     /**
      * Returns an array representation of the data.
      *
-     * @return array Associative array of data.
+     * @return array<string, mixed> Associative array of data.
      */
     public function toArray(): array
     {
@@ -199,11 +199,11 @@ class ThirdPartyScriptData implements Arrayable
     /**
      * Validates the given script data.
      *
-     * @param array $scriptData Script data, e.g. from a third party JSON file.
+     * @param array<string, mixed> $scriptData Script data, e.g. from a third party JSON file.
      *
      * @throws InvalidThirdPartyDataException Thrown when provided script data is invalid.
      */
-    private function validateData(array $scriptData)
+    private function validateData(array $scriptData): void
     {
         $enumFields = ['strategy', 'location', 'action'];
         foreach ($enumFields as $enumField) {
@@ -269,9 +269,9 @@ class ThirdPartyScriptData implements Arrayable
     /**
      * Sets the given script data.
      *
-     * @param array $scriptData Script data, e.g. from a third party JSON file.
+     * @param array<string, mixed> $scriptData Script data, e.g. from a third party JSON file.
      */
-    private function setData(array $scriptData)
+    private function setData(array $scriptData): void
     {
         $strFields = ['strategy', 'location', 'action', 'url', 'code', 'key'];
         foreach ($strFields as $field) {
