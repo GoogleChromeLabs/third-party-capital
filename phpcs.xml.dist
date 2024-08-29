@@ -7,6 +7,24 @@
     <rule ref="PHPCompatibility"/>
 	<config name="testVersion" value="7.2-"/>
 
+	<rule ref="SlevomatCodingStandard.Namespaces.DisallowGroupUse" />
+	<rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash" />
+	<rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses" />
+	<rule ref="SlevomatCodingStandard.Namespaces.UseFromSameNamespace" />
+	<rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+		<properties>
+			<property name="searchAnnotations" value="true" />
+		</properties>
+	</rule>
+
+	<rule ref="Generic.Files.LineLength">
+		<properties>
+			<property name="lineLimit" value="120"/>
+			<property name="absoluteLineLimit" value="0"/>
+		</properties>
+		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+
 	<arg value="ps"/>
 	<arg name="extensions" value="php"/>
 

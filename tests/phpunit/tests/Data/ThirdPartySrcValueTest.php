@@ -9,7 +9,6 @@
 
 namespace GoogleChromeLabs\ThirdPartyCapital\Tests;
 
-use Exception;
 use GoogleChromeLabs\ThirdPartyCapital\Data\ThirdPartySrcValue;
 use GoogleChromeLabs\ThirdPartyCapital\Exception\InvalidThirdPartyDataException;
 use GoogleChromeLabs\ThirdPartyCapital\TestUtils\TestCase;
