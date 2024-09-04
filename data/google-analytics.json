@@ -15,10 +15,18 @@
       "key": "gtag"
     },
     {
-      "code": "window[{{l}}]=window[{{l}}]||[];window['gtag-'+{{l}}]=function (){window[{{l}}].push(arguments);};window['gtag-'+{{l}}]('consent', 'default', {'ad_user_data': 'denied','ad_personalization': 'denied','ad_storage': 'denied','analytics_storage': 'denied','wait_for_update': 500,});window['gtag-'+{{l}}]('js',new Date());window['gtag-'+{{l}}]('config',{{id}})",
+      "code": "window[{{l}}]=window[{{l}}]||[];window['gtag-'+{{l}}]=function (){window[{{l}}].push(arguments);};window['gtag-'+{{l}}]('consent', {{consentType}}, {{consentValues}});window['gtag-'+{{l}}]('js',new Date());window['gtag-'+{{l}}]('config',{{id}})",
       "params": ["id"],
       "optionalParams": {
-        "l": "dataLayer"
+        "l": "dataLayer",
+        "consentType": "default",
+        "consentValues": {
+          "ad_user_data": "denied",
+          "ad_personalization": "denied",
+          "ad_storage": "denied",
+          "analytics_storage": "denied",
+          "wait_for_update": 500
+        }
       },
       "strategy": "worker",
       "location": "head",
