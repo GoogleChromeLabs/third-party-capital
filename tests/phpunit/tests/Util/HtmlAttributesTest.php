@@ -140,6 +140,15 @@ class HtmlAttributesTest extends TestCase
                 ],
                 ' id="unique-id" async class="demo-class"',
             ],
+            'with null'          => [
+                [
+                    'id'     => 'some-id',
+                    'width'  => null,
+                    'height' => null,
+                    'class'  => 'demo-class',
+                ],
+                ' id="some-id" class="demo-class"',
+            ],
         ];
     }
 }

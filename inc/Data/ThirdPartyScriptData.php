@@ -77,6 +77,13 @@ class ThirdPartyScriptData implements Arrayable
     private $params;
 
     /**
+     * Optional parameters for the script and their defaults, if needed.
+     *
+     * @var array<string, mixed>
+     */
+    private $optionalParams;
+
+    /**
      * Constructor.
      *
      * @param array<string, mixed> $scriptData Script data, e.g. from a third party JSON file.
@@ -160,6 +167,16 @@ class ThirdPartyScriptData implements Arrayable
     }
 
     /**
+     * Gets the optional parameters for the script with their defaults, if needed.
+     *
+     * @return array<string, mixed> Optional parameters for the script, if needed.
+     */
+    public function getOptionalParams(): array
+    {
+        return $this->optionalParams;
+    }
+
+    /**
      * Determines whether the script is an external script.
      *
      * @return bool True if an external script, false if an inline script.
@@ -191,6 +208,9 @@ class ThirdPartyScriptData implements Arrayable
         }
         if ($this->params) {
             $data['params'] = $this->params;
+        }
+        if ($this->optionalParams) {
+            $data['optionalParams'] = $this->optionalParams;
         }
 
         return $data;
@@ -278,6 +298,7 @@ class ThirdPartyScriptData implements Arrayable
             $this->$field = isset($scriptData[ $field ]) ? (string) $scriptData[ $field ] : '';
         }
 
-        $this->params = isset($scriptData['params']) ? array_map('strval', $scriptData['params']) : [];
+        $this->params         = isset($scriptData['params']) ? array_map('strval', $scriptData['params']) : [];
+        $this->optionalParams = isset($scriptData['optionalParams']) ? (array) $scriptData['optionalParams'] : [];
     }
 }
