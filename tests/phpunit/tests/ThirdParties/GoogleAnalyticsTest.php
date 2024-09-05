@@ -42,7 +42,6 @@ class GoogleAnalyticsTest extends TestCase
 
     public function dataOutput(): array
     {
-        $consentDefault = '{"ad_user_data":"denied","ad_personalization":"denied","ad_storage":"denied","analytics_storage":"denied","wait_for_update":500}';
         return [
             'basic example'          => [
                 [ 'id' => 'G-12345678' ],
@@ -58,7 +57,7 @@ class GoogleAnalyticsTest extends TestCase
                         'strategy' => ThirdPartyScriptData::STRATEGY_WORKER,
                         'location' => ThirdPartyScriptData::LOCATION_HEAD,
                         'action'   => ThirdPartyScriptData::ACTION_APPEND,
-                        'code'     => "window[\"dataLayer\"]=window[\"dataLayer\"]||[];window['gtag-'+\"dataLayer\"]=function (){window[\"dataLayer\"].push(arguments);};window['gtag-'+\"dataLayer\"]('consent', \"default\", {$consentDefault});window['gtag-'+\"dataLayer\"]('js',new Date());window['gtag-'+\"dataLayer\"]('config',\"G-12345678\")",
+                        'code'     => "window[\"dataLayer\"]=window[\"dataLayer\"]||[];window['gtag-'+\"dataLayer\"]=function (){window[\"dataLayer\"].push(arguments);};window['gtag-'+\"dataLayer\"]('js',new Date());window['gtag-'+\"dataLayer\"]('config',\"G-12345678\")",
                         'key'      => 'setup',
                     ],
                 ],
@@ -80,7 +79,63 @@ class GoogleAnalyticsTest extends TestCase
                         'strategy' => ThirdPartyScriptData::STRATEGY_WORKER,
                         'location' => ThirdPartyScriptData::LOCATION_HEAD,
                         'action'   => ThirdPartyScriptData::ACTION_APPEND,
-                        'code'     => "window[\"myDataLayer1\"]=window[\"myDataLayer1\"]||[];window['gtag-'+\"myDataLayer1\"]=function (){window[\"myDataLayer1\"].push(arguments);};window['gtag-'+\"myDataLayer1\"]('consent', \"default\", {$consentDefault});window['gtag-'+\"myDataLayer1\"]('js',new Date());window['gtag-'+\"myDataLayer1\"]('config',\"G-13579\")",
+                        'code'     => "window[\"myDataLayer1\"]=window[\"myDataLayer1\"]||[];window['gtag-'+\"myDataLayer1\"]=function (){window[\"myDataLayer1\"].push(arguments);};window['gtag-'+\"myDataLayer1\"]('js',new Date());window['gtag-'+\"myDataLayer1\"]('config',\"G-13579\")",
+                        'key'      => 'setup',
+                    ],
+                ],
+            ],
+            'with default consent'   => [
+                [
+                    'id'            => 'G-12345678',
+                    'consentValues' => [
+                        'ad_user_data'        => 'denied',
+                        'ad_personalization'  => 'denied',
+                        'ad_storage'          => 'denied',
+                        'analytics_storage'   => 'denied',
+                        'wait_for_update'     => 500,
+                    ],
+                ],
+                [
+                    [
+                        'strategy' => ThirdPartyScriptData::STRATEGY_WORKER,
+                        'location' => ThirdPartyScriptData::LOCATION_HEAD,
+                        'action'   => ThirdPartyScriptData::ACTION_APPEND,
+                        'url'      => 'https://www.googletagmanager.com/gtag/js?id=G-12345678',
+                        'key'      => 'gtag',
+                    ],
+                    [
+                        'strategy' => ThirdPartyScriptData::STRATEGY_WORKER,
+                        'location' => ThirdPartyScriptData::LOCATION_HEAD,
+                        'action'   => ThirdPartyScriptData::ACTION_APPEND,
+                        'code'     => "window[\"dataLayer\"]=window[\"dataLayer\"]||[];window['gtag-'+\"dataLayer\"]=function (){window[\"dataLayer\"].push(arguments);};window['gtag-'+\"dataLayer\"]('consent', \"default\", {\"ad_user_data\":\"denied\",\"ad_personalization\":\"denied\",\"ad_storage\":\"denied\",\"analytics_storage\":\"denied\",\"wait_for_update\":500});window['gtag-'+\"dataLayer\"]('js',new Date());window['gtag-'+\"dataLayer\"]('config',\"G-12345678\")",
+                        'key'      => 'setup',
+                    ],
+                ],
+            ],
+            'with consent update'    => [
+                [
+                    'id'            => 'G-12345678',
+                    'consentType'   => 'update',
+                    'consentValues' => [
+                        'ad_user_data'        => 'granted',
+                        'ad_personalization'  => 'granted',
+                        'ad_storage'          => 'granted',
+                        'analytics_storage'   => 'granted',
+                    ],
+                ],
+                [
+                    [
+                        'strategy' => ThirdPartyScriptData::STRATEGY_WORKER,
+                        'location' => ThirdPartyScriptData::LOCATION_HEAD,
+                        'action'   => ThirdPartyScriptData::ACTION_APPEND,
+                        'url'      => 'https://www.googletagmanager.com/gtag/js?id=G-12345678',
+                        'key'      => 'gtag',
+                    ],
+                    [
+                        'strategy' => ThirdPartyScriptData::STRATEGY_WORKER,
+                        'location' => ThirdPartyScriptData::LOCATION_HEAD,
+                        'action'   => ThirdPartyScriptData::ACTION_APPEND,
+                        'code'     => "window[\"dataLayer\"]=window[\"dataLayer\"]||[];window['gtag-'+\"dataLayer\"]=function (){window[\"dataLayer\"].push(arguments);};window['gtag-'+\"dataLayer\"]('consent', \"update\", {\"ad_user_data\":\"granted\",\"ad_personalization\":\"granted\",\"ad_storage\":\"granted\",\"analytics_storage\":\"granted\"});window['gtag-'+\"dataLayer\"]('js',new Date());window['gtag-'+\"dataLayer\"]('config',\"G-12345678\")",
                         'key'      => 'setup',
                     ],
                 ],
