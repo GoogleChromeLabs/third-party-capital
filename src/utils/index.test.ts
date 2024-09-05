@@ -365,7 +365,7 @@ describe('Utils', () => {
         params: {
           name: 'James',
         },
-        output: `window.func("setName", "James")`,
+        output: `window.func("setName", "James");`,
       },
       // conditional with false including variable
       {
