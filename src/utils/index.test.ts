@@ -322,7 +322,7 @@ describe('Utils', () => {
         },
         output: `false`,
       },
-      // boolean
+      // null
       {
         input: '{{val}}',
         params: {
@@ -334,6 +334,14 @@ describe('Utils', () => {
       {
         input: 'window[{{l}}]=window[{{l}}]||[];',
         output: `window[undefined]=window[undefined]||[];`,
+      },
+      // object
+      {
+        input: '{{obj}}',
+        params: {
+          obj: { key: 'value' },
+        },
+        output: `{"key":"value"}`,
       },
     ];
 

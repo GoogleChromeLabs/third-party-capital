@@ -67,6 +67,16 @@ export interface GoogleAnalyticsParams {
    * The name of the dataLayer object. Defaults to 'dataLayer'.
    */
   l?: string;
+  /**
+   * Consent type for Google Analytics.
+   * @default 'default'
+   */
+  consentType?: string;
+  /**
+   * Consent values for Google Analytics.
+   * @default {{"ad_user_data":"denied","ad_personalization":"denied","ad_storage":"denied","analytics_storage":"denied","wait_for_update":500}}
+   */
+  consentValues?: { [key: string]: string };
 }
 
 export interface GTag {
