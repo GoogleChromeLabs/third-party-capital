@@ -343,6 +343,38 @@ describe('Utils', () => {
         },
         output: `{"key":"value"}`,
       },
+      // conditional with true
+      {
+        input: 'Hello{{#name}} World{{/name}}',
+        params: {
+          name: 'World',
+        },
+        output: `Hello World`,
+      },
+      // conditional with false
+      {
+        input: 'Hello{{#name}} World{{/name}}',
+        params: {
+          name: null,
+        },
+        output: `Hello`,
+      },
+      // conditional with true including variable
+      {
+        input: 'Hello{{#name}} {{name}}{{/name}}, how are you?',
+        params: {
+          name: 'World',
+        },
+        output: `Hello World, how are you?`,
+      },
+      // conditional with false including variable
+      {
+        input: 'Hello{{#name}} {{name}}{{/name}}, how are you?',
+        params: {
+          name: null,
+        },
+        output: `Hello, how are you?`,
+      },
     ];
 
     it.each(inputs)(
