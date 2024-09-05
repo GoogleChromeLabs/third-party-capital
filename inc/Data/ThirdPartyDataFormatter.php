@@ -229,6 +229,20 @@ class ThirdPartyDataFormatter
         array $args,
         array $optionalParams = []
     ): string {
+        // Conditionals.
+        $code = preg_replace_callback(
+            '/{{#(.*?)}}(.*){{\/\1}}/',
+            static function ($matches) use ($args, $optionalParams) {
+                if ((isset($args[ $matches[1] ]) && $args[ $matches[1] ]) ||
+                    (isset($optionalParams[ $matches[1] ]) &&  $optionalParams[ $matches[1] ])) {
+                    return $matches[2];
+                }
+                return '';
+            },
+            $code
+        );
+
+        // Variables.
         return preg_replace_callback(
             '/{{([^}]+)}}/',
             static function ($matches) use ($args, $optionalParams) {

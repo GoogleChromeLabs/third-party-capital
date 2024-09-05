@@ -372,4 +372,39 @@ class ThirdPartyDataFormatterTest extends TestCase
             $code
         );
     }
+
+    /**
+     * @dataProvider dataFormatCodeWithConditionals
+     */
+    public function testFormatCodeWithConditionals(string $input, array $params, string $expected)
+    {
+        $code = ThirdPartyDataFormatter::formatCode($input, $params);
+        $this->assertSame($expected, $code);
+    }
+
+    public function dataFormatCodeWithConditionals(): array
+    {
+        return [
+            'true'                => [
+                '{{#enabled}}window.func("enable", true);{{/enabled}}',
+                [ 'enabled' => true ],
+                'window.func("enable", true);',
+            ],
+            'false'               => [
+                '{{#enabled}}window.func("enable", true);{{/enabled}}',
+                [ 'enabled' => false ],
+                '',
+            ],
+            'true with variable'  => [
+                '{{#name}}window.func("setName", {{name}});{{/name}}',
+                [ 'name' => 'James' ],
+                'window.func("setName", "James");',
+            ],
+            'false with variable' => [
+                '{{#name}}window.func("setName", {{name}});{{/name}}',
+                [ 'name' => null ],
+                '',
+            ],
+        ];
+    }
 }
