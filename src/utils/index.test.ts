@@ -345,35 +345,35 @@ describe('Utils', () => {
       },
       // conditional with true
       {
-        input: 'Hello{{#name}} World{{/name}}',
+        input: '{{#enabled}}window.func("enable", true);{{/enabled}}',
         params: {
-          name: 'World',
+          enabled: true,
         },
-        output: `Hello World`,
+        output: `window.func("enable", true);`,
       },
       // conditional with false
       {
-        input: 'Hello{{#name}} World{{/name}}',
+        input: '{{#enabled}}window.func("enable", true);{{/enabled}}',
         params: {
-          name: null,
+          enabled: false,
         },
-        output: `Hello`,
+        output: ``,
       },
       // conditional with true including variable
       {
-        input: 'Hello{{#name}} {{name}}{{/name}}, how are you?',
+        input: '{{#name}}window.func("setName", {{name}});{{/name}}',
         params: {
-          name: 'World',
+          name: 'James',
         },
-        output: `Hello World, how are you?`,
+        output: `window.func("setName", "James")`,
       },
       // conditional with false including variable
       {
-        input: 'Hello{{#name}} {{name}}{{/name}}, how are you?',
+        input: '{{#name}}window.func("setName", {{name}});{{/name}}',
         params: {
           name: null,
         },
-        output: `Hello, how are you?`,
+        output: ``,
       },
     ];
 
