@@ -27,22 +27,28 @@ function filterArgs(
 // Add all required search params with user inputs as values
 export function formatUrl(
   url: string,
-  params?: string[],
-  args?: Inputs,
+  paramKeys?: string[],
+  paramInputs?: Inputs,
   slug?: Inputs,
-  optionalParams?: Inputs,
+  optionalParamKeys?: string[],
+  optionalParamInputs?: Inputs,
 ) {
   const newUrl =
     slug && Object.keys(slug).length > 0
       ? new URL(Object.values(slug)[0], url) // If there's a user inputted param for the URL slug, replace the default existing slug or include it
       : new URL(url);
 
-  if (params && args) {
-    params.forEach((param: string) => {
-      if (args[param]) newUrl.searchParams.set(param, args[param]);
-      else if (optionalParams?.[param]) {
-        newUrl.searchParams.set(param, optionalParams?.[param]);
-      }
+  if (paramKeys && paramInputs) {
+    paramKeys.forEach((param: string) => {
+      if (paramInputs[param])
+        newUrl.searchParams.set(param, paramInputs[param]);
+    });
+  }
+
+  if (optionalParamKeys && optionalParamInputs) {
+    optionalParamKeys.forEach((param: string) => {
+      if (optionalParamInputs[param])
+        newUrl.searchParams.set(param, optionalParamInputs[param]);
     });
   }
 
@@ -51,13 +57,15 @@ export function formatUrl(
 
 export function formatCode(
   code: string,
-  args?: Inputs,
-  optionalParams?: Inputs,
+  paramInputs?: Inputs,
+  optionalParamInputs?: Inputs,
 ) {
   return code.replace(/{{(.*?)}}/g, (match) => {
     const name = match.split(/{{|}}/).filter(Boolean)[0];
     return JSON.stringify(
-      args?.[name] !== undefined ? args?.[name] : optionalParams?.[name],
+      paramInputs?.[name] !== undefined
+        ? paramInputs?.[name]
+        : optionalParamInputs?.[name],
     );
   });
 }
@@ -107,7 +115,6 @@ export function formatData(data: Data, args: Inputs): Output {
     (acc, script) => [
       ...acc,
       ...(Array.isArray(script.params) ? script.params : []),
-      ...(script.optionalParams ? Object.keys(script.optionalParams) : []),
     ],
     [] as string[],
   );
@@ -152,24 +159,28 @@ export function formatData(data: Data, args: Inputs): Output {
     // Pass any required query params with user values for relevant scripts
     scripts: data.scripts
       ? data.scripts.map((script) => {
+          const paramKeys = script.params;
+          const paramInputs = filterArgs(args, paramKeys);
+          const optionalParamKeys = script.optionalParams
+            ? Object.keys(script.optionalParams)
+            : [];
+          const optionalParamInputs = filterArgs(args, optionalParamKeys);
+
           return isExternalScript(script)
             ? {
                 ...script,
                 url: formatUrl(
                   script.url,
-                  allScriptParams,
-                  scriptUrlParamInputs,
+                  paramKeys,
+                  paramInputs,
                   undefined,
-                  script.optionalParams,
+                  optionalParamKeys,
+                  optionalParamInputs,
                 ),
               }
             : {
                 ...script,
-                code: formatCode(
-                  script.code,
-                  scriptUrlParamInputs,
-                  script.optionalParams,
-                ),
+                code: formatCode(script.code, paramInputs, optionalParamInputs),
               };
         })
       : undefined,
