@@ -116,6 +116,7 @@ export function formatData(data: Data, args: Inputs): Output {
     (acc, script) => [
       ...acc,
       ...(Array.isArray(script.params) ? script.params : []),
+      ...(script.optionalParams ? Object.keys(script.optionalParams) : []),
     ],
     [] as string[],
   );
