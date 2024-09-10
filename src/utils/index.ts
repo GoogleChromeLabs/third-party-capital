@@ -27,28 +27,28 @@ function filterArgs(
 // Add all required search params with user inputs as values
 export function formatUrl(
   url: string,
-  paramKeys?: string[],
-  paramInputs?: Inputs,
+  params?: string[],
+  args?: Inputs,
   slug?: Inputs,
-  optionalParamKeys?: string[],
-  optionalParamInputs?: Inputs,
+  optionalParams?: Inputs,
 ) {
   const newUrl =
     slug && Object.keys(slug).length > 0
       ? new URL(Object.values(slug)[0], url) // If there's a user inputted param for the URL slug, replace the default existing slug or include it
       : new URL(url);
 
-  if (paramKeys && paramInputs) {
-    paramKeys.forEach((param: string) => {
-      if (paramInputs[param])
-        newUrl.searchParams.set(param, paramInputs[param]);
+  if (params && args) {
+    params.forEach((param: string) => {
+      if (args[param]) newUrl.searchParams.set(param, args[param]);
     });
   }
 
-  if (optionalParamKeys && optionalParamInputs) {
-    optionalParamKeys.forEach((param: string) => {
-      if (optionalParamInputs[param])
-        newUrl.searchParams.set(param, optionalParamInputs[param]);
+  if (optionalParams) {
+    Object.keys(optionalParams).forEach((key: string) => {
+      if (args?.[key]) newUrl.searchParams.set(key, args[key]);
+      else if (optionalParams[key]) {
+        newUrl.searchParams.set(key, optionalParams[key]);
+      }
     });
   }
 
@@ -57,17 +57,13 @@ export function formatUrl(
 
 export function formatCode(
   code: string,
-  paramInputs?: Inputs,
-  optionalParamInputs?: Inputs,
+  args?: Inputs,
+  optionalParams?: Inputs,
 ) {
   return code.replace(/{{(.*?)}}/g, (match) => {
     const name = match.split(/{{|}}/).filter(Boolean)[0];
 
-    return JSON.stringify(
-      paramInputs?.[name] !== undefined
-        ? paramInputs?.[name]
-        : optionalParamInputs?.[name],
-    );
+    return JSON.stringify(args?.[name] ?? optionalParams?.[name] ?? undefined);
   });
 }
 
@@ -161,34 +157,20 @@ export function formatData(data: Data, args: Inputs): Output {
     // Pass any required query params with user values for relevant scripts
     scripts: data.scripts
       ? data.scripts.map((script) => {
-          const paramKeys = script.params;
-          const paramInputs = filterArgs(args, paramKeys);
-          const optionalParamKeys = script.optionalParams
-            ? Object.keys(script.optionalParams)
-            : [];
-
-          // if we're receiving undefined or null as an ar, we check the optionalParams
-          const newArgs: any = { ...script.optionalParams };
-          Object.keys(args).forEach((key) => {
-            if (args[key]) newArgs[key] = args[key];
-          });
-          const optionalParamInputs = filterArgs(newArgs, optionalParamKeys);
-
           return isExternalScript(script)
             ? {
                 ...script,
                 url: formatUrl(
                   script.url,
-                  paramKeys,
-                  paramInputs,
+                  script.params,
+                  args,
                   undefined,
-                  optionalParamKeys,
-                  optionalParamInputs,
+                  script.optionalParams,
                 ),
               }
             : {
                 ...script,
-                code: formatCode(script.code, paramInputs, optionalParamInputs),
+                code: formatCode(script.code, args, script.optionalParams),
               };
         })
       : undefined,

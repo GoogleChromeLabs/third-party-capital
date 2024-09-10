@@ -21,7 +21,6 @@ describe('Utils', () => {
       const args = {
         unit: 'imperial',
       };
-      const optionalParamKeys = ['type'];
       const optionalParams = {
         type: 'main',
       };
@@ -31,7 +30,6 @@ describe('Utils', () => {
         requiredParams,
         args,
         undefined,
-        optionalParamKeys,
         optionalParams,
       );
       expect(newUrl).toEqual('https://example.com/?unit=imperial&type=main');
@@ -330,7 +328,7 @@ describe('Utils', () => {
         params: {
           val: null,
         },
-        output: `null`,
+        output: `undefined`,
       },
       // undefined
       {
