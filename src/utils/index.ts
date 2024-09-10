@@ -61,12 +61,15 @@ export function formatCode(
   optionalParams?: Inputs,
 ) {
   // Conditionals.
-  code = code.replace(/{{#(.*?)}}(.*){{\/\1}}/g, (match, name, innerCode) => {
-    if (args?.[name] || optionalParams?.[name]) {
-      return innerCode;
-    }
-    return '';
-  });
+  code = code.replace(
+    /{{#([^}]*?)}}(.*){{\/\1}}/g,
+    (match, name, innerCode) => {
+      if (args?.[name] || optionalParams?.[name]) {
+        return innerCode;
+      }
+      return '';
+    },
+  );
 
   // Variable replacements.
   return code.replace(/{{[^#/](.*?)}}/g, (match) => {
