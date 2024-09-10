@@ -328,7 +328,7 @@ describe('Utils', () => {
         params: {
           val: null,
         },
-        output: `null`,
+        output: `undefined`,
       },
       // undefined
       {

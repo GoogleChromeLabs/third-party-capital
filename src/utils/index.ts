@@ -40,8 +40,14 @@ export function formatUrl(
   if (params && args) {
     params.forEach((param: string) => {
       if (args[param]) newUrl.searchParams.set(param, args[param]);
-      else if (optionalParams?.[param]) {
-        newUrl.searchParams.set(param, optionalParams?.[param]);
+    });
+  }
+
+  if (optionalParams) {
+    Object.keys(optionalParams).forEach((key: string) => {
+      if (args?.[key]) newUrl.searchParams.set(key, args[key]);
+      else if (optionalParams[key]) {
+        newUrl.searchParams.set(key, optionalParams[key]);
       }
     });
   }
@@ -56,9 +62,8 @@ export function formatCode(
 ) {
   return code.replace(/{{(.*?)}}/g, (match) => {
     const name = match.split(/{{|}}/).filter(Boolean)[0];
-    return JSON.stringify(
-      args?.[name] !== undefined ? args?.[name] : optionalParams?.[name],
-    );
+
+    return JSON.stringify(args?.[name] ?? optionalParams?.[name] ?? undefined);
   });
 }
 
@@ -157,19 +162,15 @@ export function formatData(data: Data, args: Inputs): Output {
                 ...script,
                 url: formatUrl(
                   script.url,
-                  allScriptParams,
-                  scriptUrlParamInputs,
+                  script.params,
+                  args,
                   undefined,
                   script.optionalParams,
                 ),
               }
             : {
                 ...script,
-                code: formatCode(
-                  script.code,
-                  scriptUrlParamInputs,
-                  script.optionalParams,
-                ),
+                code: formatCode(script.code, args, script.optionalParams),
               };
         })
       : undefined,
