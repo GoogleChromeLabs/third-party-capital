@@ -375,6 +375,14 @@ describe('Utils', () => {
         },
         output: ``,
       },
+      // conditional with too many braces (do not do that!)
+      {
+        input: '{{{#name}}}window.func("setName", {{name}});{{{/name}}}',
+        params: {
+          name: 'James',
+        },
+        output: `{}window.func("setName", "James");{}`,
+      },
     ];
 
     it.each(inputs)(

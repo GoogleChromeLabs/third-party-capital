@@ -405,6 +405,11 @@ class ThirdPartyDataFormatterTest extends TestCase
                 [ 'name' => null ],
                 '',
             ],
+            'too many braces' => [
+                '{{{#name}}}window.func("setName", {{name}});{{{/name}}}',
+                [ 'name' => 'James' ],
+                '{}window.func("setName", "James");{}',
+            ],
         ];
     }
 }
