@@ -62,7 +62,7 @@ export function formatCode(
 ) {
   // Conditionals.
   code = code.replace(
-    /{{#([^{}]+?)}}(.*){{\/\1}}/g,
+    /{{#([^{}]+)}}(.*){{\/\1}}/g,
     (match, name, innerCode) => {
       if (args?.[name] || optionalParams?.[name]) {
         return innerCode;
