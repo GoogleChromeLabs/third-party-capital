@@ -152,9 +152,9 @@ export function formatData(data: Data, args: Inputs): Output {
             : [];
 
           // if we're receiving undefined or null as an ar, we check the optionalParams
-          const newArgs: any = {};
+          const newArgs: any = { ...script.optionalParams };
           Object.keys(args).forEach((key) => {
-            newArgs[key] = args[key] || script.optionalParams?.[key];
+            if (args[key]) newArgs[key] = args[key];
           });
           const optionalParamInputs = filterArgs(newArgs, optionalParamKeys);
 
