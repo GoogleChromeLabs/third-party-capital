@@ -62,6 +62,7 @@ export function formatCode(
 ) {
   return code.replace(/{{(.*?)}}/g, (match) => {
     const name = match.split(/{{|}}/).filter(Boolean)[0];
+
     return JSON.stringify(
       paramInputs?.[name] !== undefined
         ? paramInputs?.[name]
@@ -149,7 +150,13 @@ export function formatData(data: Data, args: Inputs): Output {
           const optionalParamKeys = script.optionalParams
             ? Object.keys(script.optionalParams)
             : [];
-          const optionalParamInputs = filterArgs(args, optionalParamKeys);
+
+          // if we're receiving undefined or null as an ar, we check the optionalParams
+          const newArgs: any = {};
+          Object.keys(args).forEach((key) => {
+            newArgs[key] = args[key] || script.optionalParams?.[key];
+          });
+          const optionalParamInputs = filterArgs(newArgs, optionalParamKeys);
 
           return isExternalScript(script)
             ? {
