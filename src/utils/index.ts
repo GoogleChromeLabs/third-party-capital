@@ -112,6 +112,17 @@ export function createHtml(
 
 // Format JSON by including all default and user-required parameters
 export function formatData(data: Data, args: Inputs): Output {
+  const allScriptParams = data.scripts?.reduce(
+    (acc, script) => [
+      ...acc,
+      ...(Array.isArray(script.params) ? script.params : []),
+    ],
+    [] as string[],
+  );
+
+  // First, find all input arguments that map to parameters passed to script URLs
+  const scriptUrlParamInputs = filterArgs(args, allScriptParams);
+
   // Second, find all input arguments that map to parameters passed to the HTML src attribute
   const htmlUrlParamInputs = filterArgs(
     args,
@@ -126,7 +137,11 @@ export function formatData(data: Data, args: Inputs): Output {
   // Lastly, all remaining arguments are forwarded as separate HTML attributes
   const htmlAttrInputs = filterArgs(
     args,
-    [...Object.keys(htmlUrlParamInputs), ...Object.keys(htmlSlugParamInput)],
+    [
+      ...Object.keys(scriptUrlParamInputs),
+      ...Object.keys(htmlUrlParamInputs),
+      ...Object.keys(htmlSlugParamInput),
+    ],
     true,
   );
 
