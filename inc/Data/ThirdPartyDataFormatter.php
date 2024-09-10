@@ -89,19 +89,19 @@ class ThirdPartyDataFormatter
         }
         if (isset($newData['scripts']) && $newData['scripts']) {
             $newData['scripts'] = array_map(
-                static function ($scriptData) use ($allScriptParams, $scriptUrlParamInputs) {
+                static function ($scriptData) use ($args) {
                     if (isset($scriptData['url'])) {
                         $scriptData['url'] = self::formatUrl(
                             $scriptData['url'],
-                            $allScriptParams,
-                            $scriptUrlParamInputs,
+                            $scriptData['params'] ?? [],
+                            $args,
                             [],
                             $scriptData['optionalParams'] ?? []
                         );
                     } else {
                         $scriptData['code'] = self::formatCode(
                             $scriptData['code'],
-                            $scriptUrlParamInputs,
+                            $args,
                             $scriptData['optionalParams'] ?? []
                         );
                     }
@@ -195,19 +195,22 @@ class ThirdPartyDataFormatter
             }
         }
 
+        $queryArgs = [];
         if ($params && $args) {
             $queryArgs = self::intersectArgs($args, $params);
-            if ($optionalParams) {
-                $optionalArgs = self::intersectArgs($optionalParams, $params);
-                foreach ($optionalArgs as $k => $v) {
-                    if (!isset($queryArgs[$k])) {
-                        $queryArgs[$k] = $v;
-                    }
+        }
+        if ($optionalParams) {
+            foreach ($optionalParams as $k => $v) {
+                if (isset($args[$k])) {
+                    $queryArgs[$k] = $args[$k];
+                } elseif ($v) {
+                    $queryArgs[$k] = $v;
                 }
             }
-            if ($queryArgs) {
-                $url = self::setUrlQueryArgs($url, $queryArgs);
-            }
+        }
+
+        if ($queryArgs) {
+            $url = self::setUrlQueryArgs($url, $queryArgs);
         }
 
         return $url;
