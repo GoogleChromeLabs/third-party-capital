@@ -60,7 +60,19 @@ export function formatCode(
   args?: Inputs,
   optionalParams?: Inputs,
 ) {
-  return code.replace(/{{(.*?)}}/g, (match) => {
+  // Conditionals.
+  code = code.replace(
+    /{{#([^{}]+?)}}(.*){{\/\1}}/g,
+    (match, name, innerCode) => {
+      if (args?.[name] || optionalParams?.[name]) {
+        return innerCode;
+      }
+      return '';
+    },
+  );
+
+  // Variable replacements.
+  return code.replace(/{{[^#/](.*?)}}/g, (match) => {
     const name = match.split(/{{|}}/).filter(Boolean)[0];
 
     return JSON.stringify(args?.[name] ?? optionalParams?.[name] ?? undefined);

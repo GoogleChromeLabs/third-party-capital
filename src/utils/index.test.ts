@@ -343,6 +343,46 @@ describe('Utils', () => {
         },
         output: `{"key":"value"}`,
       },
+      // conditional with true
+      {
+        input: '{{#enabled}}window.func("enable", true);{{/enabled}}',
+        params: {
+          enabled: true,
+        },
+        output: `window.func("enable", true);`,
+      },
+      // conditional with false
+      {
+        input: '{{#enabled}}window.func("enable", true);{{/enabled}}',
+        params: {
+          enabled: false,
+        },
+        output: ``,
+      },
+      // conditional with true including variable
+      {
+        input: '{{#name}}window.func("setName", {{name}});{{/name}}',
+        params: {
+          name: 'James',
+        },
+        output: `window.func("setName", "James");`,
+      },
+      // conditional with false including variable
+      {
+        input: '{{#name}}window.func("setName", {{name}});{{/name}}',
+        params: {
+          name: null,
+        },
+        output: ``,
+      },
+      // conditional with too many braces (do not do that!)
+      {
+        input: '{{{#name}}}window.func("setName", {{name}});{{{/name}}}',
+        params: {
+          name: 'James',
+        },
+        output: `{}window.func("setName", "James");{}`,
+      },
     ];
 
     it.each(inputs)(
