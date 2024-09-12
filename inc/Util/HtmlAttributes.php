@@ -19,8 +19,8 @@ use Traversable;
 /**
  * Class representing a set of HTML Attributes.
  *
- * @implements ArrayAccess<string, string|bool|Arrayable>
- * @implements IteratorAggregate<string, string|bool|Arrayable>
+ * @implements ArrayAccess<string, string|bool|null|Arrayable>
+ * @implements IteratorAggregate<string, string|bool|null|Arrayable>
  */
 class HtmlAttributes implements Arrayable, ArrayAccess, IteratorAggregate
 {
@@ -28,7 +28,7 @@ class HtmlAttributes implements Arrayable, ArrayAccess, IteratorAggregate
     /**
      * Internal attributes storage.
      *
-     * @var array<string, string|bool|Arrayable>
+     * @var array<string, string|bool|null|Arrayable>
      */
     private $attr = [];
 
@@ -64,7 +64,7 @@ class HtmlAttributes implements Arrayable, ArrayAccess, IteratorAggregate
      * @since n.e.x.t
      *
      * @param string $name Attribute name.
-     * @return mixed Value for the given attribute.
+     * @return string|bool|null|Arrayable Value for the given attribute.
      *
      * @throws NotFoundException Thrown if the attribute is not set.
      */
@@ -115,7 +115,7 @@ class HtmlAttributes implements Arrayable, ArrayAccess, IteratorAggregate
      *
      * @since n.e.x.t
      *
-     * @return ArrayIterator<string, string|bool|Arrayable> Attributes iterator.
+     * @return ArrayIterator<string, string|bool|null|Arrayable> Attributes iterator.
      */
     public function getIterator(): Traversable
     {
@@ -159,11 +159,11 @@ class HtmlAttributes implements Arrayable, ArrayAccess, IteratorAggregate
      *
      * @param string $name  Attribute name.
      * @param mixed  $value Attribute value.
-     * @return mixed Sanitized attribute value.
+     * @return string|bool|null|Arrayable Sanitized attribute value.
      */
     protected function sanitizeAttr(string $name, $value)
     {
-        if (is_bool($value)) {
+        if (is_bool($value) || is_null($value)) {
             return $value;
         }
         return (string) $value;
@@ -172,12 +172,16 @@ class HtmlAttributes implements Arrayable, ArrayAccess, IteratorAggregate
     /**
      * Returns the attribute string for the given attribute name and value.
      *
-     * @param string $name  Attribute name.
-     * @param mixed  $value Attribute value.
+     * @param string                     $name  Attribute name.
+     * @param string|bool|null|Arrayable $value Attribute value.
      * @return string HTML attribute string (starts with a space), or empty string to skip.
      */
     protected function toAttrString(string $name, $value): string
     {
+        if (is_null($value)) {
+            return '';
+        }
+
         if (is_bool($value)) {
             return $value ? ' ' . $name : '';
         }

@@ -80,9 +80,6 @@ class ThirdPartyHtmlData implements Arrayable
         if (!isset($htmlData['attributes'])) {
             throw new InvalidThirdPartyDataException('Missing HTML attributes.');
         }
-        if (!isset($htmlData['attributes']['src'])) {
-            throw new InvalidThirdPartyDataException('Missing HTML src attribute.');
-        }
     }
 
     /**

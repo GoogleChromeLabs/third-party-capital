@@ -333,11 +333,11 @@ class ThirdPartyDataFormatterTest extends TestCase
     public function testFormatCodeWithoutArgs()
     {
         $code = ThirdPartyDataFormatter::formatCode(
-            'document.querySelector("{{selector}}").addEventListener(api.{{callback}});',
+            'document.querySelector({{selector}}).addEventListener(api[{{callback}}]);',
             []
         );
         $this->assertSame(
-            'document.querySelector("").addEventListener(api.);',
+            'document.querySelector("").addEventListener(api[""]);',
             $code
         );
     }
@@ -345,14 +345,14 @@ class ThirdPartyDataFormatterTest extends TestCase
     public function testFormatCodeWithArgs()
     {
         $code = ThirdPartyDataFormatter::formatCode(
-            'document.querySelector("{{selector}}").addEventListener(api.{{callback}});',
+            'document.querySelector({{selector}}).addEventListener(api[{{callback}}]);',
             [
                 'selector' => '.my-cta-button',
                 'callback' => 'addToCart',
             ]
         );
         $this->assertSame(
-            'document.querySelector(".my-cta-button").addEventListener(api.addToCart);',
+            'document.querySelector(".my-cta-button").addEventListener(api["addToCart"]);',
             $code
         );
     }
@@ -360,7 +360,7 @@ class ThirdPartyDataFormatterTest extends TestCase
     public function testFormatCodeWithArgsIncorrectOrderAndTooMany()
     {
         $code = ThirdPartyDataFormatter::formatCode(
-            'document.querySelector("{{selector}}").addEventListener(api.{{callback}});',
+            'document.querySelector({{selector}}).addEventListener(api[{{callback}}]);',
             [
                 'callback' => 'addToCart',
                 'device'   => 'phone',
@@ -368,8 +368,48 @@ class ThirdPartyDataFormatterTest extends TestCase
             ]
         );
         $this->assertSame(
-            'document.querySelector(".my-cta-button").addEventListener(api.addToCart);',
+            'document.querySelector(".my-cta-button").addEventListener(api["addToCart"]);',
             $code
         );
+    }
+
+    /**
+     * @dataProvider dataFormatCodeWithConditionals
+     */
+    public function testFormatCodeWithConditionals(string $input, array $params, string $expected)
+    {
+        $code = ThirdPartyDataFormatter::formatCode($input, $params);
+        $this->assertSame($expected, $code);
+    }
+
+    public function dataFormatCodeWithConditionals(): array
+    {
+        return [
+            'true'                => [
+                '{{#enabled}}window.func("enable", true);{{/enabled}}',
+                [ 'enabled' => true ],
+                'window.func("enable", true);',
+            ],
+            'false'               => [
+                '{{#enabled}}window.func("enable", true);{{/enabled}}',
+                [ 'enabled' => false ],
+                '',
+            ],
+            'true with variable'  => [
+                '{{#name}}window.func("setName", {{name}});{{/name}}',
+                [ 'name' => 'James' ],
+                'window.func("setName", "James");',
+            ],
+            'false with variable' => [
+                '{{#name}}window.func("setName", {{name}});{{/name}}',
+                [ 'name' => null ],
+                '',
+            ],
+            'too many braces' => [
+                '{{{#name}}}window.func("setName", {{name}});{{{/name}}}',
+                [ 'name' => 'James' ],
+                '{}window.func("setName", "James");{}',
+            ],
+        ];
     }
 }
