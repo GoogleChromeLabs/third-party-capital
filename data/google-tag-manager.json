@@ -15,17 +15,10 @@
         "key": "gtm"
       },
       {
-        "code": "window[{{l}}]=window[{{l}}]||[];(function () {window[{{l}}].push(arguments)})('consent', {{consentType}},{{consentValues}});window[{{l}}].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
+        "code": "window[{{l}}]=window[{{l}}]||[];{{#consentValues}}(function () {window[{{l}}].push(arguments)})('consent', {{consentType}},{{consentValues}});{{/consentValues}}window[{{l}}].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
         "optionalParams": {
           "l": "dataLayer",
-          "consentType": "default",
-          "consentValues": {
-            "ad_user_data": "denied",
-            "ad_personalization": "denied",
-            "ad_storage": "denied",
-            "analytics_storage": "denied",
-            "wait_for_update": 500
-          }
+          "consentType": "default"
         },
         "strategy": "worker",
         "location": "head",
