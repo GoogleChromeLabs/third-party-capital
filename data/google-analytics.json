@@ -19,8 +19,7 @@
       "params": ["id"],
       "optionalParams": {
         "l": "dataLayer",
-        "consentType": "default",
-        "consentValues": null
+        "consentType": "default"
       },
       "strategy": "worker",
       "location": "head",
