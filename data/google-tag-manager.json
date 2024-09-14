@@ -18,7 +18,8 @@
         "code": "window[{{l}}]=window[{{l}}]||[];{{#consentValues}}(function () {window[{{l}}].push(arguments)})('consent', {{consentType}},{{consentValues}});{{/consentValues}}window[{{l}}].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
         "optionalParams": {
           "l": "dataLayer",
-          "consentType": "default"
+          "consentType": "default",
+          "consentValues": null
         },
         "strategy": "worker",
         "location": "head",
