@@ -84,6 +84,62 @@ class GoogleTagManagerTest extends TestCase
                     ],
                 ],
             ],
+            'with default consent'   => [
+                [
+                    'id'            => 'GTM-12345678',
+                    'consentValues' => [
+                        'ad_user_data'        => 'denied',
+                        'ad_personalization'  => 'denied',
+                        'ad_storage'          => 'denied',
+                        'analytics_storage'   => 'denied',
+                        'wait_for_update'     => 500,
+                    ],
+                ],
+                [
+                    [
+                        'strategy' => ThirdPartyScriptData::STRATEGY_WORKER,
+                        'location' => ThirdPartyScriptData::LOCATION_HEAD,
+                        'action'   => ThirdPartyScriptData::ACTION_APPEND,
+                        'url'      => 'https://www.googletagmanager.com/gtm.js?id=GTM-12345678',
+                        'key'      => 'gtm',
+                    ],
+                    [
+                        'strategy' => ThirdPartyScriptData::STRATEGY_WORKER,
+                        'location' => ThirdPartyScriptData::LOCATION_HEAD,
+                        'action'   => ThirdPartyScriptData::ACTION_APPEND,
+                        'code'     => "window[\"dataLayer\"]=window[\"dataLayer\"]||[];(function () {window[\"dataLayer\"].push(arguments)})('consent', \"default\", {\"ad_user_data\":\"denied\",\"ad_personalization\":\"denied\",\"ad_storage\":\"denied\",\"analytics_storage\":\"denied\",\"wait_for_update\":500});window[\"dataLayer\"].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
+                        'key'      => 'setup',
+                    ],
+                ],
+            ],
+            'with consent update'    => [
+                [
+                    'id'            => 'GTM-12345678',
+                    'consentType'   => 'update',
+                    'consentValues' => [
+                        'ad_user_data'        => 'granted',
+                        'ad_personalization'  => 'granted',
+                        'ad_storage'          => 'granted',
+                        'analytics_storage'   => 'granted',
+                    ],
+                ],
+                [
+                    [
+                        'strategy' => ThirdPartyScriptData::STRATEGY_WORKER,
+                        'location' => ThirdPartyScriptData::LOCATION_HEAD,
+                        'action'   => ThirdPartyScriptData::ACTION_APPEND,
+                        'url'      => 'https://www.googletagmanager.com/gtm.js?id=GTM-12345678',
+                        'key'      => 'gtm',
+                    ],
+                    [
+                        'strategy' => ThirdPartyScriptData::STRATEGY_WORKER,
+                        'location' => ThirdPartyScriptData::LOCATION_HEAD,
+                        'action'   => ThirdPartyScriptData::ACTION_APPEND,
+                        'code'     => "window[\"dataLayer\"]=window[\"dataLayer\"]||[];(function () {window[\"dataLayer\"].push(arguments)})('consent', \"update\", {\"ad_user_data\":\"granted\",\"ad_personalization\":\"granted\",\"ad_storage\":\"granted\",\"analytics_storage\":\"granted\"});window[\"dataLayer\"].push({'gtm.start':new Date().getTime(),event:'gtm.js'});",
+                        'key'      => 'setup',
+                    ],
+                ],
+            ],
         ];
     }
 }
