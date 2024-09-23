@@ -99,6 +99,15 @@ export interface GoogleTagManagerParams {
    * The name of the dataLayer object. Defaults to 'dataLayer'.
    */
   l?: string;
+  /**
+   * Consent type for Google Tag Manager.
+   * @default 'default'
+   */
+  consentType?: string;
+  /**
+   * Consent values for Google Tag Manager.
+   */
+  consentValues?: { [key: string]: string };
 }
 
 interface GoogleTagManagerDataLayerApi {
