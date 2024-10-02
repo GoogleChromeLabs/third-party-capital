@@ -60,6 +60,16 @@ export interface Output {
   scripts?: Scripts;
 }
 
+export type ConsentValues = {
+  ad_user_data?: 'granted' | 'denied';
+  ad_personalization?: 'granted' | 'denied';
+  ad_storage?: 'granted' | 'denied';
+  analytics_storage?: 'granted' | 'denied';
+  wait_for_update?: number;
+};
+
+export type ConsentType = 'default' | 'update';
+
 /* Google Analytics */
 export interface GoogleAnalyticsParams {
   id: string;
@@ -71,11 +81,11 @@ export interface GoogleAnalyticsParams {
    * Consent type for Google Analytics.
    * @default 'default'
    */
-  consentType?: string;
+  consentType?: ConsentType;
   /**
    * Consent values for Google Analytics.
    */
-  consentValues?: { [key: string]: string };
+  consentValues?: ConsentValues;
 }
 
 export interface GTag {
@@ -102,11 +112,11 @@ export interface GoogleTagManagerParams {
    * Consent type for Google Tag Manager.
    * @default 'default'
    */
-  consentType?: string;
+  consentType?: ConsentType;
   /**
    * Consent values for Google Tag Manager.
    */
-  consentValues?: { [key: string]: string };
+  consentValues?: ConsentValues;
 }
 
 interface GoogleTagManagerDataLayerApi {
