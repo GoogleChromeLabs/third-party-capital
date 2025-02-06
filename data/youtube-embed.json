@@ -10,11 +10,11 @@
     }
   },
   "stylesheets": [
-    "https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/lite-yt-embed.css"
+    "https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/lite-yt-embed.min.css"
   ],
   "scripts": [
     {
-      "url": "https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/lite-yt-embed.js",
+      "url": "https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/lite-yt-embed.min.js",
       "strategy": "idle",
       "location": "head",
       "action": "append",
