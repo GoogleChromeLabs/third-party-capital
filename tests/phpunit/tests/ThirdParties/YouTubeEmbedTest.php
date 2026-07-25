@@ -29,7 +29,7 @@ class YouTubeEmbedTest extends TestCase
         $this->assertSame('youtube-embed', $yte->getId());
         $this->assertSame($expectedHtml, $yte->getHtml());
         $this->assertSame(
-            ['https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/lite-yt-embed.css'],
+            ['https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/lite-yt-embed.min.css'],
             $yte->getStylesheets()
         );
         $this->assertSame(
@@ -38,7 +38,7 @@ class YouTubeEmbedTest extends TestCase
                     'strategy' => ThirdPartyScriptData::STRATEGY_IDLE,
                     'location' => ThirdPartyScriptData::LOCATION_HEAD,
                     'action'   => ThirdPartyScriptData::ACTION_APPEND,
-                    'url'      => 'https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/lite-yt-embed.js',
+                    'url'      => 'https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/lite-yt-embed.min.js',
                     'key'      => 'lite-yt-embed',
                 ],
             ],
